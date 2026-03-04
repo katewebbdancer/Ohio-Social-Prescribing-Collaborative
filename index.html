@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ohio Social Prescribing Collaborative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #D9611E;
+    --accent-dark: #B84E14;
+    --forest: #2D5016;
+    --sage: #6B8F47;
+    --cream: #F9F5EE;
+    --warm-white: #FFFDF9;
+    --charcoal: #1C1C1E;
+    --mid: #5A5A5A;
+    --light-border: #E8E0D0;
+    --gold: #D4A017;
+    --sky: #3A7CA5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--charcoal); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,253,249,0.96); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-border);
+    display: flex; align-items: center; padding: 0 2rem; height: 60px;
+  }
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--accent); white-space: nowrap; margin-right: auto; letter-spacing: -0.01em; }
+  .nav-brand span { color: var(--forest); }
+  .nav-tabs { display: flex; list-style: none; overflow-x: auto; scrollbar-width: none; }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tabs li button { display: block; padding: 0 1rem; line-height: 60px; font-size: 0.8rem; font-weight: 500; color: var(--mid); background: none; border: none; border-bottom: 2px solid transparent; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: color 0.2s, border-bottom 0.2s; white-space: nowrap; }
+  .nav-tabs li button:hover, .nav-tabs li button.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .page { display: none; min-height: 100vh; padding-top: 60px; }
+  .page.active { display: block; }
+
+  .hero { background: linear-gradient(135deg, var(--charcoal) 0%, #2C3E2D 60%, var(--forest) 100%); color: white; padding: 5rem 2rem 4rem; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .hero-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 1rem; font-weight: 500; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero-subtitle { font-size: 1.15rem; line-height: 1.7; max-width: 700px; color: rgba(255,255,255,0.95); margin-bottom: 1.25rem; font-weight: 400; }
+  .hero p { font-size: 1rem; line-height: 1.7; max-width: 650px; color: rgba(255,255,255,0.72); margin-bottom: 2rem; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: white; padding: 0.85rem 2rem; border-radius: 4px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; letter-spacing: 0.02em; font-family: 'DM Sans', sans-serif; transition: transform 0.2s, box-shadow 0.2s; }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,97,30,0.5); }
+
+  .section { padding: 4rem 2rem; }
+  .section-inner { max-width: 900px; margin: 0 auto; }
+  .section-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 600; margin-bottom: 0.75rem; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; color: var(--charcoal); margin-bottom: 1.5rem; line-height: 1.2; }
+  .lead { font-size: 1.1rem; line-height: 1.8; color: var(--mid); margin-bottom: 1.5rem; }
+  p.body { line-height: 1.8; color: var(--mid); margin-bottom: 1rem; }
+  .divider { border: none; border-top: 1px solid var(--light-border); margin: 3rem 0; }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .card { background: var(--cream); border: 1px solid var(--light-border); border-radius: 8px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.9rem; line-height: 1.6; color: var(--mid); }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin: 2.5rem 0; }
+  .stat { background: var(--charcoal); color: white; padding: 1.5rem; border-radius: 8px; text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold); font-weight: 700; }
+  .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-top: 0.3rem; }
+  .citation { font-size: 0.78rem; color: var(--mid); font-style: italic; background: var(--cream); border-left: 3px solid var(--gold); padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+
+  .mission-block { background: linear-gradient(135deg, var(--forest), #1A3A0A); color: white; padding: 3rem; border-radius: 12px; margin: 2rem 0; }
+  .mission-block h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 1rem; color: var(--gold); }
+  .mission-block p { line-height: 1.8; color: rgba(255,255,255,0.85); }
+  .mission-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .pillar { border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1.25rem; }
+  .pillar h4 { color: var(--gold); font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .pillar p { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+  .project-card { background: var(--cream); border: 1px solid var(--light-border); border-radius: 10px; padding: 2rem; margin-bottom: 1.5rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start; }
+  .project-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--light-border); font-weight: 900; line-height: 1; }
+  .project-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .project-card p { color: var(--mid); line-height: 1.7; font-size: 0.95rem; }
+  .tag { display: inline-block; background: var(--accent); color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 20px; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tag.green { background: var(--forest); }
+  .tag.gold { background: var(--gold); color: var(--charcoal); }
+
+  .event-card { background: var(--cream); border: 1px solid var(--light-border); border-radius: 8px; padding: 1.5rem 2rem; display: grid; grid-template-columns: 80px 1fr auto; gap: 1.5rem; align-items: center; margin-bottom: 1rem; transition: box-shadow 0.2s; }
+  .event-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  .event-date-box { background: var(--accent); color: white; text-align: center; padding: 0.75rem; border-radius: 6px; }
+  .event-month { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .event-day { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+  .event-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .event-card p { font-size: 0.88rem; color: var(--mid); }
+  .event-badge { background: var(--sage); color: white; font-size: 0.72rem; padding: 0.3rem 0.8rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+  .past-meeting { border: 1px solid var(--light-border); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; background: white; }
+  .past-meeting h4 { font-size: 0.95rem; font-weight: 600; }
+  .past-meeting p { font-size: 0.82rem; color: var(--mid); margin-top: 0.2rem; }
+  .past-links { display: flex; gap: 0.5rem; flex-shrink: 0; }
+  .btn-sm { padding: 0.35rem 0.8rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+  .btn-sm:hover { opacity: 0.8; }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-outline { background: transparent; color: var(--charcoal); border: 1px solid var(--light-border); }
+  .btn-outline:hover { border-color: var(--charcoal); }
+  .zoom-notice { background: linear-gradient(135deg, #2D5016, #3A7CA5); color: white; border-radius: 10px; padding: 1.5rem 2rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 1.5rem; }
+  .zoom-notice .zoom-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .zoom-notice h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .zoom-notice p { font-size: 0.88rem; color: rgba(255,255,255,0.82); }
+
+  .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1.5rem; }
+  .resource-card { background: white; border: 1px solid var(--light-border); border-radius: 8px; padding: 1.25rem 1.5rem; transition: box-shadow 0.2s, transform 0.2s; }
+  .resource-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.09); }
+  .resource-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: white; background: var(--sky); padding: 0.2rem 0.6rem; border-radius: 20px; display: inline-block; margin-bottom: 0.6rem; }
+  .resource-tag.arts { background: var(--sage); }
+  .resource-tag.sp { background: var(--accent); }
+  .resource-tag.research { background: var(--gold); color: var(--charcoal); }
+  .resource-tag.artsrx { background: #7B4F9E; }
+  .resource-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.3; }
+  .resource-card p { font-size: 0.82rem; color: var(--mid); line-height: 1.5; margin-bottom: 0.75rem; }
+  .resource-card a { font-size: 0.8rem; color: var(--accent); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .resource-card a:hover { border-bottom-color: var(--accent); }
+
+  .plug-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .plug-card { background: var(--cream); border: 1px solid var(--light-border); border-radius: 8px; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .plug-card h4 { font-size: 0.9rem; font-weight: 600; }
+  .plug-card p { font-size: 0.8rem; color: var(--mid); }
+
+  /* MAP */
+  #map-container { background: var(--cream); border: 1px solid var(--light-border); border-radius: 10px; overflow: hidden; margin: 1.5rem 0; }
+  .map-controls { padding: 1rem 1.5rem; background: white; border-bottom: 1px solid var(--light-border); display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+  .map-controls label { font-size: 0.82rem; font-weight: 500; }
+  .filter-btn { padding: 0.35rem 0.9rem; border-radius: 20px; border: 1px solid var(--light-border); background: white; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 500; }
+  .filter-btn.active { background: var(--charcoal); color: white; border-color: var(--charcoal); }
+
+  #ohio-svg-wrap { position: relative; width: 100%; }
+  #ohio-svg-wrap svg { display: block; width: 100%; height: auto; }
+
+  .pin-wrap { position: absolute; transform: translate(-50%, -100%); z-index: 5; pointer-events: none; }
+  .pin-dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.35); margin: 0 auto; transition: transform 0.15s; pointer-events: auto; cursor: pointer; }
+  .pin-dot:hover { transform: scale(1.3); }
+  .pin-dot.artsrx { background: #D9611E; }
+  .pin-dot.health  { background: #5B8DB8; }
+  .pin-dot.arts    { background: #2D7A4F; }
+  .pin-dot.nature  { background: #6AAB6E; }
+  .pin-label { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: white; border: 1px solid var(--light-border); border-radius: 7px; padding: 0.55rem 0.8rem; font-size: 0.78rem; pointer-events: auto; box-shadow: 0 4px 18px rgba(0,0,0,0.14); min-width: 190px; max-width: 270px; white-space: normal; z-index: 30; }
+  .pin-wrap.tapped { z-index: 20; pointer-events: auto; }
+  .pin-wrap.tapped .pin-label { display: block; }
+  .pin-label strong { display: block; font-weight: 600; margin-bottom: 0.15rem; color: var(--charcoal); }
+  .pin-label span { color: var(--mid); font-size: 0.72rem; line-height: 1.45; display: block; }
+  .pin-label a { display: inline-block; margin-top: 0.3rem; font-size: 0.72rem; color: var(--accent); font-weight: 600; text-decoration: none; pointer-events: all; }
+  .map-legend { display: flex; gap: 1.5rem; padding: 1rem 1.5rem; background: white; border-top: 1px solid var(--light-border); flex-wrap: wrap; align-items: center; }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+  /* CONTACT */
+  .contact-form { background: var(--cream); border: 1px solid var(--light-border); border-radius: 10px; padding: 2rem; }
+  .form-row { margin-bottom: 1.25rem; }
+  .form-row label { display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .form-row input, .form-row select, .form-row textarea { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--light-border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; background: white; transition: border-color 0.2s; color: var(--charcoal); }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,97,30,0.1); }
+  .form-row textarea { min-height: 100px; resize: vertical; }
+  .checkbox-group { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem; }
+  .checkbox-group label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 400; text-transform: none; letter-spacing: 0; cursor: pointer; }
+  .checkbox-group input { width: auto; }
+  .submit-btn { background: var(--accent); color: white; border: none; padding: 0.85rem 2.5rem; border-radius: 6px; font-size: 0.95rem; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; width: 100%; }
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(217,97,30,0.4); }
+  .success-msg { background: #E8F5E9; border: 1px solid #A5D6A7; border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.9rem; color: #2E7D32; display: none; margin-bottom: 1rem; }
+  .success-msg.visible { display: block; }
+
+  footer { background: var(--charcoal); color: rgba(255,255,255,0.6); text-align: center; padding: 2rem; font-size: 0.82rem; }
+  footer strong { color: white; }
+
+  /* ── PARTNER LOGO STRIP ── */
+  .partners-strip { background: white; border-top: 1px solid var(--light-border); border-bottom: 1px solid var(--light-border); padding: 2rem 0; }
+  .partners-strip-inner { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  .partners-label { text-align: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 1.5rem; }
+  .partners-grid { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: center; align-items: center; }
+  .partner-logo { display: flex; align-items: center; justify-content: center; padding: 0.6rem 1.1rem; border-radius: 8px; border: 1px solid transparent; text-decoration: none; transition: all 0.25s ease; filter: grayscale(100%) opacity(0.45); }
+  .partner-logo:hover { filter: grayscale(0%) opacity(1); border-color: var(--light-border); background: #f8f8f6; transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.07); }
+  .partner-logo img { height: 38px; width: auto; max-width: 130px; object-fit: contain; display: block; }
+  .partner-logo-text { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--charcoal); white-space: nowrap; text-align: center; line-height: 1.3; }
+
+  /* Hamburger button — hidden on desktop, shown on mobile */
+  .nav-hamburger {
+    display: none; flex-direction: column; justify-content: center;
+    gap: 5px; background: none; border: none; cursor: pointer;
+    padding: 4px; margin-left: 1rem;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--charcoal); border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 640px) {
+    .project-card { grid-template-columns: 1fr; }
+    .event-card { grid-template-columns: 60px 1fr; }
+    .event-badge { display: none; }
+    .past-meeting { flex-direction: column; align-items: flex-start; }
+    .connect-grid { grid-template-columns: 1fr !important; }
+
+    /* Show hamburger, hide desktop tab row */
+    .nav-hamburger { display: flex; }
+    .nav-tabs {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(255,253,249,0.98); backdrop-filter: blur(12px);
+      flex-direction: column; border-bottom: 2px solid var(--light-border);
+      z-index: 999; padding: 0.5rem 0;
+    }
+    .nav-tabs.open { display: flex; }
+    .nav-tabs li button {
+      width: 100%; text-align: left; padding: 0.9rem 2rem; line-height: 1.4; font-size: 0.9rem;
+      border-bottom: none; border-left: 3px solid transparent;
+    }
+    .nav-tabs li button:hover, .nav-tabs li button.active {
+      border-bottom: none; border-left-color: var(--accent);
+      background: var(--cream);
+    }
+
+    .pin-dot { width: 14px; height: 14px; }
+  }
+  .prog-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .prog-list-item { display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem 1rem; background: white; border: 1px solid var(--light-border); border-radius: 8px; }
+  .prog-tag { flex-shrink: 0; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; margin-top: 2px; }
+  .prog-info { display: flex; flex-direction: column; gap: 0.15rem; }
+  .prog-info strong a { color: var(--charcoal); text-decoration: none; font-size: 0.9rem; }
+  .prog-info strong a:hover { color: var(--accent); }
+  .prog-info span { color: var(--mid); font-size: 0.78rem; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Ohio <span>SP</span> Collaborative</div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-tabs" id="nav-tabs">
+    <li><button onclick="showPage('welcome')" id="tab-welcome" class="active">Welcome</button></li>
+    <li><button onclick="showPage('mission')" id="tab-mission">Mission</button></li>
+    <li><button onclick="showPage('projects')" id="tab-projects">Projects</button></li>
+    <li><button onclick="showPage('map')" id="tab-map">Asset Map</button></li>
+    <li><button onclick="showPage('events')" id="tab-events">Events</button></li>
+    <li><button onclick="showPage('resources')" id="tab-resources">Resources</button></li>
+    <li><button onclick="showPage('connect')" id="tab-connect">Connect</button></li>
+  </ul>
+</nav>
+
+<!-- WELCOME -->
+<div id="page-welcome" class="page active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">🌻 Ohio Social Prescribing Collaborative</div>
+      <h1>Bridging <em>Community</em> and Healthcare across the Buckeye State</h1>
+      <p class="hero-subtitle">Let's connect Ohioans to arts, nature, movement, and social activities as a pathway to better health — working alongside healthcare providers, community organizations, and the people we serve.</p>
+      <button onclick="showPage('connect')" class="hero-cta">Join Our Network →</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">What We Do</div>
+      <h2>What is Social Prescribing?</h2>
+      <p class="lead">Social prescribing is a model of care delivery that enables health professionals to formally prescribe non-clinical community activities — including the arts, movement, nature, and volunteering — to improve patient health and wellbeing, often at minimal patient cost.</p>
+      <p class="body">Rather than relying solely on medication or clinical interventions, social prescribing recognizes that many factors affecting health are social in nature: loneliness, lack of purpose, financial stress, and disconnection from community. A trained link worker or social prescriber helps connect individuals to the right activities and organizations in their local area.</p>
+      <p class="body">The model originated in the United Kingdom, where over 3,000 social prescribing link workers now operate within the NHS. It has since spread globally, with growing adoption across the United States — and Ohio is poised to lead the way.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">44%</div><div class="stat-label">of patients who receive social prescribing report improved wellbeing (Dayson &amp; Bashir, 2014)</div></div>
+        <div class="stat"><div class="stat-num">28%</div><div class="stat-label">reduction in GP visits after social prescribing programs (NHS England, 2019)</div></div>
+        <div class="stat"><div class="stat-num">3,000+</div><div class="stat-label">link workers now active across NHS England</div></div>
+        <div class="stat"><div class="stat-num">11.7M</div><div class="stat-label">Ohioans who could benefit from expanded social prescribing access</div></div>
+      </div>
+      <div class="section-label" style="margin-top:2rem">The Six Pillars of Social Prescribing</div>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🎨</div><h3>Arts and Creativity</h3><p>Known as "Arts on Prescription," this includes painting, singing in choirs, attending theater, or taking craft classes to improve mood and reduce anxiety.</p></div>
+        <div class="card"><div class="card-icon">🏃</div><h3>Movement and Physical Activity</h3><p>Connecting people to exercise groups, walking clubs, or dance classes to improve physical health and reduce the risk of chronic conditions.</p></div>
+        <div class="card"><div class="card-icon">🌿</div><h3>Nature-Based Activities</h3><p>"Green social prescribing" involves gardening, conservation volunteering, or nature walks to boost mental health and increase connection to the environment.</p></div>
+        <div class="card"><div class="card-icon">🤝</div><h3>Belonging and Social Connection</h3><p>A core tenant that fosters community by connecting people to lunch clubs, support groups, or community centers to reduce isolation and loneliness.</p></div>
+        <div class="card"><div class="card-icon">🌱</div><h3>Service and Volunteering</h3><p>Enabling people to contribute to their community, which improves self-esteem, sense of purpose, and mental health outcomes.</p></div>
+        <div class="card"><div class="card-icon">🏠</div><h3>Practical Advice and Support</h3><p>Assisting with non-medical needs like housing, debt, or unemployment that are major drivers of poor health outcomes.</p></div>
+      </div>
+      <hr class="divider">
+      <div class="section-label">How It Works</div>
+      <h2>The Social Prescribing Pathway</h2>
+      <p class="body">A typical social prescribing journey begins when a healthcare provider identifies that a patient's health concerns have significant social or lifestyle components. Rather than (or in addition to) a clinical referral, the provider connects the patient with a link worker — a trained community navigator who takes time to understand the person's needs, goals, and interests.</p>
+      <p class="body">The link worker then connects the patient to appropriate community activities: an art class at a local museum, a community garden, a singing group, a men's shed, or a walking group. Follow-up support ensures the individual is settling in and benefiting from the activity. The result is a more holistic model of health that treats the whole person.</p>
+      <div class="citation">Source: World Health Organization. (2021). <em>Social prescribing: a key component of primary health care.</em> WHO Regional Office for Europe.</div>
+    </div>
+  </div>
+  <!-- WORKING GROUP AFFILIATES STRIP -->
+  <div class="partners-strip">
+    <div class="partners-strip-inner">
+      <div class="partners-label">OSPC Working Group includes members affiliated with the following organizations</div>
+      <div class="partners-grid">
+
+        <a href="https://my.clevelandclinic.org/departments/arts-medicine" target="_blank" class="partner-logo" title="Cleveland Clinic Arts & Medicine">
+          <span class="partner-logo-text">Cleveland<br>Clinic</span>
+        </a>
+
+        <a href="https://www.playhousesquare.org/arts-minds" target="_blank" class="partner-logo" title="Playhouse Square Arts & Minds">
+          <span class="partner-logo-text">Playhouse<br>Square</span>
+        </a>
+
+        <a href="https://www.ohio.edu/fine-arts/arts-health" target="_blank" class="partner-logo" title="Ohio University Arts in Health">
+          <span class="partner-logo-text">Ohio<br>University</span>
+        </a>
+
+        <a href="https://www.csuohio.edu" target="_blank" class="partner-logo" title="Cleveland State University">
+          <span class="partner-logo-text">Cleveland State<br>University</span>
+        </a>
+
+        <a href="https://www.lakelandcc.edu" target="_blank" class="partner-logo" title="Lakeland Community College">
+          <span class="partner-logo-text">Lakeland<br>Community College</span>
+        </a>
+
+
+        <a href="https://www.holdenarb.org" target="_blank" class="partner-logo" title="Holden Forests & Arboretum">
+          <span class="partner-logo-text">Holden Forests<br>&amp; Arboretum</span>
+        </a>
+
+
+        <a href="https://ocballet.org" target="_blank" class="partner-logo" title="Ohio Contemporary Ballet">
+          <span class="partner-logo-text">Ohio Contemporary<br>Ballet</span>
+        </a>
+
+        <a href="https://www.artpharmacy.co" target="_blank" class="partner-logo" title="Art Pharmacy">
+          <span class="partner-logo-text">Art<br>Pharmacy</span>
+        </a>
+
+        <a href="https://case.edu" target="_blank" class="partner-logo" title="Case Western Reserve University">
+          <span class="partner-logo-text">Case Western<br>Reserve University</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<div id="page-mission" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Our Purpose</div>
+      <h2>Mission &amp; Goals</h2>
+      <p class="lead">Our mission is to enhance social prescribing across Ohio — scaling a model that connects healthcare with community to address loneliness, chronic disease, and the social determinants of health.</p>
+      <div class="mission-block">
+        <h3>Mission Statement</h3>
+        <p>The Ohio Social Prescribing Collaborative exists to advance and scale social prescribing practices across the state of Ohio by educating healthcare professionals, mapping community assets, building referral infrastructure, and convening stakeholders from health, arts, community development, and policy sectors. We believe that health is shaped by where and how people live — and that community is medicine.</p>
+        <div class="mission-pillars">
+          <div class="pillar"><h4>🎯 Educate</h4><p>Train healthcare workers, social workers, and community navigators in social prescribing principles and referral practices.</p></div>
+          <div class="pillar"><h4>🗺️ Map</h4><p>Build a comprehensive asset map of Ohio's arts, wellness, nature, and social programs available for prescription.</p></div>
+          <div class="pillar"><h4>🔗 Connect</h4><p>Create referral pathways and link workers who bridge clinical care and community resources.</p></div>
+          <div class="pillar"><h4>📣 Advocate</h4><p>Champion policy changes that support social prescribing reimbursement and infrastructure at state and national levels.</p></div>
+          <div class="pillar"><h4>📊 Measure</h4><p>Collect and share data on outcomes so the evidence base for Ohio social prescribing continues to grow.</p></div>
+          <div class="pillar"><h4>🌱 Scale</h4><p>Develop replicable models that can spread across all 88 Ohio counties, from urban centers to rural communities.</p></div>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="section-label">The Evidence</div>
+      <h2>Why Social Prescribing? What Does the Research Say?</h2>
+      <p class="body">The evidence base for social prescribing has grown substantially over the past two decades, with robust findings from the UK, Canada, Australia, and increasingly the United States.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">58%</div><div class="stat-label">of adults in the US report feeling lonely "always" or "sometimes" (Cigna, 2020)</div></div>
+        <div class="stat"><div class="stat-num">80%</div><div class="stat-label">of health outcomes driven by social, economic &amp; environmental factors (WHO, 2008)</div></div>
+        <div class="stat"><div class="stat-num">$78B</div><div class="stat-label">annual cost of social isolation to Medicare (AARP, 2017)</div></div>
+        <div class="stat"><div class="stat-num">26%</div><div class="stat-label">reduction in anxiety and depression in arts engagement participants (APPG, UK, 2017)</div></div>
+      </div>
+      <div class="citation">Dayson, C. &amp; Bashir, N. (2014). The social and economic impact of the Rotherham Social Prescribing Pilot. Sheffield Hallam University.</div>
+      <div class="citation">Husk, K., et al. (2020). Social prescribing: where is the evidence? <em>British Journal of General Practice</em>, 70(691), 62–63.</div>
+      <div class="citation">Stickley, T. &amp; Hui, A. (2012). Social prescribing through arts on prescription: a pilot study. <em>Perspectives in Public Health</em>, 132(1), 56–63.</div>
+      <div class="citation">Sneed, R.S., et al. (2021). A systematic review of arts-based interventions for chronic disease. <em>Arts in Psychotherapy</em>, 73, 101751.</div>
+      <div class="citation">Marmot, M. (2020). <em>Health Equity in England: The Marmot Review 10 Years On.</em> Institute of Health Equity.</div>
+      <hr class="divider">
+      <div class="section-label">Ohio Context</div>
+      <h2>Why Ohio, Why Now?</h2>
+      <p class="body">Ohio faces outsized challenges that social prescribing is uniquely positioned to address: high rates of opioid-related mortality, persistent rural health disparities across Appalachian Ohio, an aging population in many communities, and decades of deindustrialization creating social and economic fragmentation.</p>
+      <p class="body">At the same time, Ohio has extraordinary assets: world-class arts and cultural institutions in Cleveland, Columbus, and Cincinnati; Federally Qualified Health Centers serving rural communities; robust community health worker infrastructure; and a network of universities, hospitals, and nonprofits ready to collaborate.</p>
+      <p class="body">The Ohio Social Prescribing Collaborative is the connective tissue — the organization that brings these assets together with a shared framework, shared language, and shared ambition to make social prescribing a standard part of how Ohio delivers care.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="page-projects" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Our Work</div>
+      <h2>Current Projects</h2>
+      <p class="lead">We are building the infrastructure for social prescribing to scale across Ohio through several interconnected initiatives.</p>
+
+      <div class="project-card">
+        <div class="project-number">01</div>
+        <div>
+          <span class="tag">Education</span>
+          <h3>Healthcare Worker Education Program</h3>
+          <p>Developing and delivering curriculum to physicians, nurses, social workers, community health workers, and care coordinators across Ohio. Our training introduces social prescribing principles, teaches practitioners how to identify patients who would benefit, and provides practical tools for making community referrals. We are currently reaching out to medical schools to explore opportunities to embed social prescribing education into existing curricula and continuing education frameworks.</p>
+          <p style="margin-top:0.75rem"><strong>Status:</strong> Curriculum development phase. Reaching out to medical schools.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">02</div>
+        <div>
+          <span class="tag green">Mapping</span>
+          <h3>Ohio Social Prescribing Asset Map</h3>
+          <p>Building a comprehensive, publicly accessible database of community assets across all 88 Ohio counties that can serve as destinations for social prescriptions — arts programs, cultural institutions, nature spaces, volunteer opportunities, community centers, gardening programs, fitness groups, and more. The asset map will be integrated into clinical workflows and accessible to link workers statewide.</p>
+          <p style="margin-top:0.75rem"><strong>Status:</strong> Initial dataset live. Ongoing community submissions accepted. County-by-county outreach underway.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">03</div>
+        <div>
+          <span class="tag gold">Convenings</span>
+          <h3>Statewide Roundtable Series</h3>
+          <p>Hosting roundtables bringing together healthcare providers, arts organizations, policymakers, public health officials, community organizations, and people with lived experience of social prescribing. Roundtables will survey local needs, celebrate innovations, align stakeholders, and build the political will needed for systemic change.</p>
+          <p style="margin-top:0.75rem"><strong>Status:</strong> Monthly Zoom convenings underway. In-person roundtables planned for Fall 2026.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">04</div>
+        <div>
+          <span class="tag">Policy</span>
+          <h3>Policy Advocacy &amp; Reimbursement Pathways</h3>
+          <p>Working with Ohio legislators, the Ohio Department of Health, foundations, and Medicaid/Medicare partners to explore reimbursement models for social prescribing link workers and community referral services. Drawing on models from the UK NHS, Canadian Health Authorities, and pilot programs in California and Massachusetts. Goal: create a sustainable funding stream so social prescribing link workers can be embedded in clinical practices statewide.</p>
+          <p style="margin-top:0.75rem"><strong>Status:</strong> Stakeholder mapping in process. Initial legislative conversations underway.</p>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">05</div>
+        <div>
+          <span class="tag gold">Arts &amp; Health</span>
+          <h3>Arts in Health Integration Initiative</h3>
+          <p>Specifically focused on building bridges between Ohio's arts organizations and the healthcare system. Working with museums, performing arts organizations, community arts centers, and artist-run programs to develop health-partnered programming and referral protocols. Goal: make arts-based social prescriptions a routine and accessible option for Ohio clinicians and patients.</p>
+          <p style="margin-top:0.75rem"><strong>Status:</strong> Partnership conversations with Playhouse Square, Cleveland Museum of Art, and regional arts councils underway.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="page-map" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Asset Mapping</div>
+      <h2>Ohio Social Prescribing Asset Map</h2>
+      <p class="lead">Explore programs and organizations across Ohio that can serve as destinations for social prescriptions. Hover a pin to preview, click to visit the program website. Filter by type below.</p>
+
+      <div id="map-container">
+        <div class="map-controls">
+          <label>Filter:</label>
+          <button class="filter-btn active" onclick="filterMap('all',this)">All</button>
+          <button class="filter-btn" onclick="filterMap('artsrx',this)">🟠 Active Arts Prescribing</button>
+          <button class="filter-btn" onclick="filterMap('health',this)">🔵 SP-Adjacent Healthcare</button>
+          <button class="filter-btn" onclick="filterMap('arts',this)">🟢 Arts &amp; Culture Assets</button>
+          <button class="filter-btn" onclick="filterMap('nature',this)">🌿 Nature &amp; Green Space</button>
+        </div>
+
+        <div id="ohio-svg-wrap">
+          <!--
+            OHIO MAP — SVG viewBox 0 0 800 620
+            Projection: linear lat/lon → SVG pixels
+              Lon range: -84.82 (west/Indiana border) to -80.52 (east/PA border) → x: 30 to 770 (740px wide)
+              Lat range: 38.40 (south, Ohio River) to 42.00 (north, Lake Erie) → y: 590 to 30 (560px tall, inverted)
+
+            Formula:
+              x = 30 + (lon - (-84.82)) / (4.30) * 740
+              y = 590 - (lat - 38.40) / (3.60) * 560
+
+            Key city SVG coords:
+              Toledo     (-83.56, 41.66) → x=184, y=77
+              Cleveland  (-81.69, 41.50) → x=474, y=100
+              Youngstown (-80.65, 41.10) → x=652, y=162
+              Akron      (-81.52, 41.08) → x=500, y=165
+              Canton     (-81.38, 40.80) → x=521, y=208
+              Columbus   (-82.99, 39.96) → x=268, y=340
+              Dayton     (-84.19, 39.76) → x=100, y=371
+              Cincinnati (-84.51, 39.10) → x=56,  y=464  [SW corner, near Indiana & Ohio River]
+              Athens     (-82.10, 39.33) → x=404, y=429
+              Marietta   (-81.45, 39.42) → x=509, y=414
+              Zanesville (-82.01, 39.94) → x=418, y=344
+              Lima       (-84.10, 40.74) → x=114, y=218
+
+            Note: Cincinnati at x=56 IS correct — it's Ohio's most southwest city, tight against
+            the Indiana border. The Ohio River is the south border (y≈590). Cincinnati is ~130px
+            above that, clearly inside the state.
+          -->
+          <!--
+            SVG MAP — shape and city positions traced from reference map image
+            ViewBox: 0 0 800 620. State fills roughly x:40-760, y:70-570.
+
+            Verified city positions (matched to reference image proportions):
+              Toledo        260, 110  → 32.5%  17.7%
+              Cleveland     574, 150  → 71.7%  24.2%
+              Akron         565, 235  → 70.6%  37.9%
+              Canton        624, 280  → 78.1%  45.2%
+              Youngstown    702, 195  → 87.8%  31.5%
+              Columbus      464, 377  → 58.0%  60.8%
+              Dayton        226, 400  → 28.3%  64.5%
+              Cincinnati    116, 490  → 14.5%  79.0%
+              Athens        544, 410  → 68.0%  66.1%
+              Marietta      652, 445  → 81.5%  71.8%
+              Steubenville  724, 345  → 90.5%  55.6%
+              Kirtland      580, 130  → 72.5%  21.0%
+          -->
+          <svg id="ohio-main-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
+            <defs>
+              <linearGradient id="ohioFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#D8EED2"/>
+                <stop offset="100%" style="stop-color:#BDD9B4"/>
+              </linearGradient>
+              <linearGradient id="lakeFill" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#B8D8EA"/>
+                <stop offset="100%" style="stop-color:#A0C8DF"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background (surrounding states / water) -->
+            <rect width="800" height="620" fill="#EEF4F8"/>
+
+            <!--
+              OHIO BORDER — carefully traced from reference map:
+              NW: ~(40, 120) — Indiana meets Lake Erie area (Toledo region)
+              Lake Erie coast dips south notably at Sandusky Bay (~x=310, y=140)
+              then back north before Cleveland (~x=540, y=100)
+              NE: ~(760, 80) — PA meets Lake Erie
+              East: PA border drops straight south to ~(760, 310)
+              then Ohio River winds SW with jags:
+                ~(740, 340) Steubenville area
+                ~(700, 390) WV border turns
+                ~(650, 450) Marietta/Parkersburg
+                ~(570, 500) Gallipolis
+                ~(480, 540) Huntington area (lowest point, Ohio River bulge)
+                ~(430, 555) 
+                ~(370, 535) Portsmouth
+                ~(280, 510) 
+                ~(190, 510) near Cincinnati
+                ~(120, 510) Cincinnati area
+              SW: ~(40, 490) — Indiana border begins
+              West: Indiana border mostly straight north from (40,490) to (40,120)
+            -->
+            <path id="ohio-shape" d="
+              M 40,120
+              L 40,200 L 40,290 L 40,380 L 40,490
+              L 120,510 L 190,510 L 240,510 L 280,510
+              L 330,535 L 370,540 L 395,538
+              L 430,555 L 460,548 L 480,540
+              L 510,525 L 540,510 L 555,500
+              L 570,505 L 600,482 L 625,458
+              L 650,448 L 665,435 L 680,415
+              L 700,395 L 715,370 L 725,345
+              L 738,320 L 748,300 L 755,280
+              L 760,250 L 760,200 L 760,140 L 760,80
+              L 700,78 L 640,76 L 590,82
+              L 565,95 L 540,100 L 520,105
+              L 490,120 L 460,140 L 440,148
+              L 410,152 L 385,160 L 360,155
+              L 335,145 L 310,140 L 285,145
+              L 260,150 L 240,140 L 220,128
+              L 200,120 L 160,116 L 110,115 L 70,118 L 40,120 Z
+            " fill="url(#ohioFill)" stroke="#5A9050" stroke-width="2" stroke-linejoin="round"/>
+
+            <!-- Lake Erie — water above north shore -->
+            <path d="M 40,120 L 70,118 L 110,115 L 160,116 L 200,120 L 220,128 L 240,140
+              L 260,150 L 285,145 L 310,140 L 335,145 L 360,155 L 385,160 L 410,152
+              L 440,148 L 460,140 L 490,120 L 520,105 L 540,100 L 565,95 L 590,82
+              L 640,76 L 700,78 L 760,80 L 760,0 L 40,0 Z"
+              fill="url(#lakeFill)" opacity="0.85"/>
+            <text x="400" y="52" text-anchor="middle" font-size="13" fill="#3A6A8A" font-family="DM Sans,sans-serif" font-style="italic" font-weight="500">Lake Erie</text>
+
+            <!-- Ohio River label -->
+            <text x="420" y="547" text-anchor="middle" font-size="10" fill="#4A78A0" font-family="DM Sans,sans-serif" font-style="italic" transform="rotate(-5,420,547)">Ohio River</text>
+
+            <!-- State watermark -->
+            <text x="340" y="330" text-anchor="middle" font-size="88" fill="rgba(60,110,50,0.06)" font-family="Playfair Display,serif" font-weight="900">OHIO</text>
+
+            <!-- ── CITY REFERENCE DOTS ── -->
+            <circle cx="260" cy="175" r="4" fill="#3A5A30" opacity="0.55"/>
+            <text x="270" y="179" font-size="10" fill="#2A4020" font-family="DM Sans,sans-serif">Toledo</text>
+
+            <circle cx="574" cy="150" r="5" fill="#3A5A30" opacity="0.65"/>
+            <text x="490" y="154" font-size="11" fill="#1A3010" font-family="DM Sans,sans-serif" font-weight="600">Cleveland</text>
+
+            <circle cx="702" cy="195" r="4" fill="#3A5A30" opacity="0.5"/>
+            <text x="650" y="189" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Youngstown</text>
+
+            <circle cx="565" cy="235" r="4" fill="#3A5A30" opacity="0.5"/>
+            <text x="572" y="248" font-size="10" fill="#2A4020" font-family="DM Sans,sans-serif">Akron</text>
+
+            <circle cx="624" cy="280" r="3.5" fill="#3A5A30" opacity="0.45"/>
+            <text x="631" y="277" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Canton</text>
+
+            <circle cx="464" cy="377" r="5" fill="#3A5A30" opacity="0.65"/>
+            <text x="474" y="381" font-size="11" fill="#1A3010" font-family="DM Sans,sans-serif" font-weight="600">Columbus</text>
+
+            <circle cx="226" cy="400" r="4" fill="#3A5A30" opacity="0.5"/>
+            <text x="236" y="404" font-size="10" fill="#2A4020" font-family="DM Sans,sans-serif">Dayton</text>
+
+            <circle cx="116" cy="490" r="5" fill="#3A5A30" opacity="0.65"/>
+            <text x="126" y="494" font-size="11" fill="#1A3010" font-family="DM Sans,sans-serif" font-weight="600">Cincinnati</text>
+
+            <circle cx="544" cy="410" r="3.5" fill="#3A5A30" opacity="0.45"/>
+            <text x="552" y="407" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Athens</text>
+
+            <circle cx="652" cy="445" r="3.5" fill="#3A5A30" opacity="0.45"/>
+            <text x="659" y="442" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Marietta</text>
+
+            <circle cx="724" cy="345" r="3.5" fill="#3A5A30" opacity="0.45"/>
+            <text x="668" y="349" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Steubenville</text>
+
+            <!-- Compass rose -->
+            <text x="745" y="590" font-size="13" fill="rgba(50,90,40,0.25)" font-family="DM Sans,sans-serif">N ↑</text>
+          </svg>
+
+          <!--
+            ALL PINS — positioned as % of SVG canvas (800 wide × 620 tall)
+            Matched to reference map image proportions.
+            left = x/800*100,  top = y/620*100
+
+            City anchors:
+              Toledo        260, 110  → 32.5%  17.7%
+              Cleveland     574, 150  → 71.8%  24.2%
+              Kirtland      580, 130  → 72.5%  21.0%
+              Youngstown    702, 195  → 87.8%  31.5%
+              Akron         565, 235  → 70.6%  37.9%
+              Canton        624, 280  → 78.0%  45.2%
+              Steubenville  724, 345  → 90.5%  55.6%
+              Columbus      464, 377  → 58.0%  60.8%
+              Dayton        226, 400  → 28.3%  64.5%
+              Athens        544, 410  → 68.0%  66.1%
+              Marietta      652, 445  → 81.5%  71.8%
+              Cincinnati    116, 490  → 14.5%  79.0%
+          -->
+
+          <!-- === CLEVELAND 574,150 → 71.8% 24.2% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:71.8%;top:24.2%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Cleveland Museum of Art</strong><span>Free admission; creative aging, community wellness &amp; arts in health programs</span><a href="https://www.clevelandart.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:69.5%;top:27.0%" data-type="artsrx">
+            <div class="pin-dot artsrx"></div>
+            <div class="pin-label"><strong>Playhouse Square — Arts &amp; Minds</strong><span>Dance for Parkinson's &amp; arts programming for neurological disorders; collaboration with Cleveland Clinic</span><a href="https://www.playhousesquare.org/arts-minds" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:74.0%;top:22.0%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>UH Connor Whole Health</strong><span>Integrative medicine including art, music &amp; expressive therapies; whole-person care model</span><a href="https://www.uhhospitals.org/services/integrative-health-network" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:70.5%;top:29.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>MetroHealth — Institute for H.O.P.E.</strong><span>Systematic SDOH screening &amp; referral network; Center for Arts in Health; community health workers</span><a href="https://www.metrohealth.org/institute-for-hope" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:75.5%;top:25.0%" data-type="artsrx">
+            <div class="pin-dot artsrx"></div>
+            <div class="pin-label"><strong>Cleveland Clinic — Arts &amp; Medicine</strong><span>Verified arts prescribing program: art therapy, music therapy, live performances integrated into patient care</span><a href="https://my.clevelandclinic.org/departments/arts-medicine" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === KIRTLAND/HOLDEN ARBORETUM 580,130 → 72.5% 21.0% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:72.5%;top:21.0%" data-type="nature">
+            <div class="pin-dot nature"></div>
+            <div class="pin-label"><strong>Holden Arboretum</strong><span>One of the largest arboreta in the US; nature-based wellness &amp; therapeutic horticulture programs, NE Ohio</span><a href="https://www.holdenarb.org" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === OHIO CONTEMPORARY BALLET — Shaker Heights (near Cleveland) → 73.5% 27.5% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:73.5%;top:27.5%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Ohio Contemporary Ballet</strong><span>35+ year NE Ohio dance company; low-cost/free performances, community outreach &amp; accessible dance classes, Shaker Heights</span><a href="https://ocballet.org" target="_blank">Visit →</a></div>
+          </div>
+
+          
+          <!-- InMotion (Beachwood / Cleveland area) -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:76.5%;top:19.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>InMotion</strong><span>Free wellness programs for people with Parkinson's disease — exercise, arts, education &amp; support, Beachwood</span><a href="https://beinmotion.org" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === YOUNGSTOWN 702,195 → 87.8% 31.5% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:87.8%;top:31.5%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Butler Institute of American Art</strong><span>Free admission; community arts programs serving the Mahoning Valley</span><a href="https://butlerart.com" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === AKRON 565,235 → 70.6% 37.9% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:70.6%;top:37.9%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Akron Art Museum</strong><span>Community arts programs &amp; free community days</span><a href="https://www.akronartmuseum.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:72.3%;top:40.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>Summa Health — Healing Arts</strong><span>Verified arts-in-health program: visual arts, performing arts &amp; creative arts therapy integrated into patient care</span><a href="https://www.summahealth.org/art" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === CANTON 624,280 → 78.0% 45.2% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:78.0%;top:45.2%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Canton Museum of Art</strong><span>Community arts programs serving Stark County</span><a href="https://www.cantonart.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:79.7%;top:47.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>Aultman Health</strong><span>Regional health system serving Canton &amp; Stark County; community health programs</span><a href="https://www.aultman.org" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === STEUBENVILLE 724,345 → 90.5% 55.6% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:88.5%;top:55.6%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>Ohio Valley Health Center</strong><span>Free clinic providing primary care to uninsured &amp; underinsured patients in the Ohio Valley, Steubenville</span><a href="https://ovhealthcenter.org" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === TOLEDO 260,175 → 32.5% 28.2% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:32.5%;top:28.2%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Toledo Museum of Art</strong><span>Free general admission; art &amp; wellness programming for the community</span><a href="https://www.toledomuseum.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:34.5%;top:30.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>Toledo-Lucas County Health Dept.</strong><span>Public health &amp; SDOH initiatives serving Northwest Ohio</span><a href="https://lucascountyhealth.com" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === COLUMBUS 464,377 → 58.0% 60.8% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:58.0%;top:60.8%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Columbus Museum of Art</strong><span>Wonder Room, creative aging, community wellness programs</span><a href="https://www.columbusmuseum.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:59.8%;top:63.2%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>Nationwide Children's Hospital</strong><span>Art therapy &amp; music therapy programs across inpatient &amp; outpatient care; pediatric arts in health</span><a href="https://www.nationwidechildrens.org/specialties/music-therapy" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:55.8%;top:63.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>OSU Wexner Medical Center</strong><span>Academic medical center &amp; potential SP research partner; integrative health initiatives in Columbus</span><a href="https://wexnermedical.osu.edu" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:58.5%;top:58.5%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Short North Arts District</strong><span>Vibrant community arts corridor; galleries, events &amp; cultural programming in Columbus</span><a href="https://www.shortnorth.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:55.5%;top:65.5%" data-type="nature">
+            <div class="pin-dot nature"></div>
+            <div class="pin-label"><strong>Columbus Recreation &amp; Parks</strong><span>City parks, community centers, nature programs &amp; fitness — potential green prescribing partner</span><a href="https://www.columbus.gov/recreationandparks" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === DAYTON 226,400 → 28.3% 64.5% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:28.3%;top:64.5%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Dayton Art Institute</strong><span>Community arts, creative aging &amp; free community events</span><a href="https://www.daytonartinstitute.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:30.0%;top:66.8%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>Premier Health</strong><span>Community health system serving greater Dayton; potential SP-adjacent partner</span><a href="https://www.premierhealth.com" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === ATHENS 544,410 → 68.0% 66.1% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:68.0%;top:66.1%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Dairy Barn Arts Center</strong><span>Community arts hub serving Appalachian Ohio; exhibitions, education &amp; community events</span><a href="https://dairybarn.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:69.5%;top:63.8%" data-type="artsrx">
+            <div class="pin-dot artsrx"></div>
+            <div class="pin-label"><strong>Bobcat ArtsCare — Ohio University</strong><span>Active arts prescribing program connecting OU students &amp; Athens community to arts-based wellness</span><a href="https://www.ohio.edu/well-being/bobcat-artscare" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === MARIETTA 652,445 → 81.5% 71.8% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:81.5%;top:71.8%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Marietta College — Arts Programs</strong><span>Community arts &amp; creative programming in Southeast Ohio</span><a href="https://www.marietta.edu" target="_blank">Visit →</a></div>
+          </div>
+
+          <!-- === CINCINNATI 116,490 → 14.5% 79.0% === -->
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:14.5%;top:79.0%" data-type="arts">
+            <div class="pin-dot arts"></div>
+            <div class="pin-label"><strong>Cincinnati Art Museum</strong><span>Free Sundays; community arts &amp; wellness programming; potential arts prescribing partner</span><a href="https://www.cincinnatiartmuseum.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:16.2%;top:76.5%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>UC Health</strong><span>Academic medical center; Humanities &amp; Arts in Medicine pathway at UC College of Medicine</span><a href="https://www.uchealth.com" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:18.2%;top:74.0%" data-type="health">
+            <div class="pin-dot health"></div>
+            <div class="pin-label"><strong>TriHealth</strong><span>Community health system serving greater Cincinnati; SDOH-aware care model</span><a href="https://www.trihealth.com" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:14.5%;top:74.0%" data-type="nature">
+            <div class="pin-dot nature"></div>
+            <div class="pin-label"><strong>Cincinnati Nature Center</strong><span>Nature-based wellness &amp; education programs; green space for community wellbeing</span><a href="https://www.cincynature.org" target="_blank">Visit →</a></div>
+          </div>
+          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:12.0%;top:76.5%" data-type="nature">
+            <div class="pin-dot nature"></div>
+            <div class="pin-label"><strong>Cincinnati Parks Foundation</strong><span>Supports city parks &amp; green spaces as community health assets across Cincinnati</span><a href="https://www.cincyparks.com" target="_blank">Visit →</a></div>
+          </div>
+
+        </div><!-- end ohio-svg-wrap -->
+
+        <div class="map-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#D9611E"></div>Active Arts Prescribing</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#5B8DB8"></div>SP-Adjacent Healthcare</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2D7A4F"></div>Arts &amp; Culture Assets</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#6AAB6E"></div>Nature &amp; Green Space</div>
+          <div class="legend-item" style="font-size:0.78rem;color:var(--mid);margin-left:auto">Hover to preview · Click to visit</div>
+        </div>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem">📍 Know a program that should be on this map? <button onclick="showPage('connect')" style="color:var(--accent);font-weight:600">Submit a resource →</button></p>
+
+      <hr class="divider">
+      <h2>Programs Directory</h2>
+      <p style="color:var(--mid);font-size:0.88rem;margin-bottom:1.5rem">All 31 programs on the map, listed alphabetically. Click any name to visit.</p>
+      <div class="prog-list">
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.akronartmuseum.org" target="_blank">Akron Art Museum</a></strong><span>Community arts programs &amp; free community days</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.aultman.org" target="_blank">Aultman Health</a></strong><span>Regional health system serving Canton &amp; Stark County; community health programs</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.ohio.edu/well-being/bobcat-artscare" target="_blank">Bobcat ArtsCare — Ohio University</a></strong><span>Active arts prescribing program connecting OU students &amp; Athens community to arts-based wellness</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://butlerart.com" target="_blank">Butler Institute of American Art</a></strong><span>Free admission; community arts programs serving the Mahoning Valley</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.cantonart.org" target="_blank">Canton Museum of Art</a></strong><span>Community arts programs serving Stark County</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.cincinnatiartmuseum.org" target="_blank">Cincinnati Art Museum</a></strong><span>Free Sundays; community arts &amp; wellness programming; potential arts prescribing partner</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.cincynature.org" target="_blank">Cincinnati Nature Center</a></strong><span>Nature-based wellness &amp; education programs; green space for community wellbeing</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.cincyparks.com" target="_blank">Cincinnati Parks Foundation</a></strong><span>Supports city parks &amp; green spaces as community health assets across Cincinnati</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://my.clevelandclinic.org/departments/arts-medicine" target="_blank">Cleveland Clinic — Arts &amp; Medicine</a></strong><span>Verified arts prescribing program: art therapy, music therapy, live performances integrated into patient care</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.clevelandart.org" target="_blank">Cleveland Museum of Art</a></strong><span>Free admission; creative aging, community wellness &amp; arts in health programs</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.columbusmuseum.org" target="_blank">Columbus Museum of Art</a></strong><span>Wonder Room, creative aging, community wellness programs</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.columbus.gov/recreationandparks" target="_blank">Columbus Recreation &amp; Parks</a></strong><span>City parks, community centers, nature programs &amp; fitness — potential green prescribing partner</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://dairybarn.org" target="_blank">Dairy Barn Arts Center</a></strong><span>Community arts hub serving Appalachian Ohio; exhibitions, education &amp; community events</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.daytonartinstitute.org" target="_blank">Dayton Art Institute</a></strong><span>Community arts, creative aging &amp; free community events</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.holdenarb.org" target="_blank">Holden Arboretum</a></strong><span>One of the largest arboreta in the US; nature-based wellness &amp; therapeutic horticulture programs, NE Ohio</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://beinmotion.org" target="_blank">InMotion</a></strong><span>Free wellness programs for people with Parkinson's disease — exercise, arts, education &amp; support, Beachwood</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.marietta.edu" target="_blank">Marietta College — Arts Programs</a></strong><span>Community arts &amp; creative programming in Southeast Ohio</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.metrohealth.org/institute-for-hope" target="_blank">MetroHealth — Institute for H.O.P.E.</a></strong><span>Systematic SDOH screening &amp; referral network; Center for Arts in Health; community health workers</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.nationwidechildrens.org/specialties/music-therapy" target="_blank">Nationwide Children's Hospital</a></strong><span>Art therapy &amp; music therapy programs across inpatient &amp; outpatient care; pediatric arts in health</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://ocballet.org" target="_blank">Ohio Contemporary Ballet</a></strong><span>35+ year NE Ohio dance company; low-cost/free performances, community outreach &amp; accessible dance classes, Shaker Heights</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://ovhealthcenter.org" target="_blank">Ohio Valley Health Center</a></strong><span>Free clinic providing primary care to uninsured &amp; underinsured patients in the Ohio Valley, Steubenville</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://wexnermedical.osu.edu" target="_blank">OSU Wexner Medical Center</a></strong><span>Academic medical center &amp; potential SP research partner; integrative health initiatives in Columbus</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.playhousesquare.org/arts-minds" target="_blank">Playhouse Square — Arts &amp; Minds</a></strong><span>Dance for Parkinson's &amp; arts programming for neurological disorders; collaboration with Cleveland Clinic</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.premierhealth.com" target="_blank">Premier Health</a></strong><span>Community health system serving greater Dayton; potential SP-adjacent partner</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.shortnorth.org" target="_blank">Short North Arts District</a></strong><span>Vibrant community arts corridor; galleries, events &amp; cultural programming in Columbus</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.summahealth.org/art" target="_blank">Summa Health — Healing Arts</a></strong><span>Verified arts-in-health program: visual arts, performing arts &amp; creative arts therapy integrated into patient care</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.toledomuseum.org" target="_blank">Toledo Museum of Art</a></strong><span>Free general admission; art &amp; wellness programming for the community</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://lucascountyhealth.com" target="_blank">Toledo-Lucas County Health Dept.</a></strong><span>Public health &amp; SDOH initiatives serving Northwest Ohio</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.trihealth.com" target="_blank">TriHealth</a></strong><span>Community health system serving greater Cincinnati; SDOH-aware care model</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.uchealth.com" target="_blank">UC Health</a></strong><span>Academic medical center; Humanities &amp; Arts in Medicine pathway at UC College of Medicine</span></div></div>
+        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.uhhospitals.org/services/integrative-health-network" target="_blank">UH Connor Whole Health</a></strong><span>Integrative medicine including art, music &amp; expressive therapies; whole-person care model</span></div></div>
+      </div>
+
+    </div>
+  </div>
+  <footer
+    </div>
+  </div>
+</div>
+
+<!-- EVENTS -->
+<div id="page-events" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Upcoming Events</div>
+      <h2>Events &amp; Monthly Meetings</h2>
+
+      <div class="zoom-notice">
+        <div class="zoom-icon">📹</div>
+        <div>
+          <h3>Monthly Zoom Convenings — Mondays at 2:00 PM ET</h3>
+          <p>Our monthly gatherings bring together the Ohio Social Prescribing community for updates, presentations, and open conversation. Zoom links are sent exclusively to mailing list members. <button onclick="showPage('connect')" style="color:var(--gold);font-weight:600">Join our mailing list →</button> to receive access.</p>
+        </div>
+      </div>
+
+      <div class="section-label">Upcoming</div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-month">Feb</div><div class="event-day">23</div></div>
+        <div>
+          <h3>Monthly Zoom — February 2025</h3>
+          <p>Monday, February 23 · 2:00 PM ET · Online via Zoom · Topic: Asset Mapping Launch &amp; Healthcare Education Update</p>
+        </div>
+        <div class="event-badge">Upcoming</div>
+      </div>
+      <div class="event-card">
+        <div class="event-date-box" style="background:var(--forest)"><div class="event-month">Apr</div><div class="event-day">20</div></div>
+        <div>
+          <h3>Monthly Zoom — April 2025</h3>
+          <p>Monday, April 20 · 2:00 PM ET · Online via Zoom · Topic: Roundtable Planning &amp; Featured Speaker TBA</p>
+        </div>
+        <div class="event-badge">Upcoming</div>
+      </div>
+
+      <p style="font-size:0.88rem;color:var(--mid);margin:1.5rem 0;padding:1rem;background:var(--cream);border-radius:8px;border:1px solid var(--light-border)">
+        🔒 <strong>Zoom links are sent to mailing list members only.</strong> <button onclick="showPage('connect')" style="color:var(--accent);font-weight:600">Join the mailing list</button> to receive meeting access and reminders.
+      </p>
+
+      <hr class="divider">
+      <div class="section-label">Past Meetings</div>
+      <h2>Previous Recordings &amp; Notes</h2>
+
+      <div class="past-meeting">
+        <div>
+          <h4>Working Group Meeting — February 23, 2025</h4>
+          <p>Goal review, website &amp; asset map feedback, roundtable planning, working group formation, education initiatives</p>
+        </div>
+        <div class="past-links">
+          <span class="btn-sm btn-accent" style="opacity:0.4;cursor:default" title="Sign up to receive access">▶ Recording</span>
+          <span class="btn-sm btn-outline" style="opacity:0.4;cursor:default" title="Sign up to receive access">📄 Notes</span>
+        </div>
+      </div>
+
+      <div class="past-meeting">
+        <div>
+          <h4>Initial Conversation — January 28, 2025</h4>
+          <p>Founding discussion: overview of social prescribing, introductions, collaborative formation</p>
+          <p style="font-size:0.78rem;color:var(--mid);margin-top:0.4rem">🔑 <strong>Meeting ID:</strong> 922 8697 2335 &nbsp;·&nbsp; <strong>Passcode:</strong> 681837</p>
+        </div>
+        <div class="past-links">
+          <span class="btn-sm btn-accent" style="opacity:0.4;cursor:default" title="Sign up to receive access">▶ Recording</span>
+          <span class="btn-sm btn-outline" style="opacity:0.4;cursor:default" title="Sign up to receive access">📄 Notes</span>
+        </div>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--mid);margin-top:1rem">Recordings and notes are shared with mailing list members only. <button onclick="showPage('connect')" style="color:var(--accent);font-weight:600">Join the mailing list to receive access →</button></p>
+
+      <hr class="divider">
+      <div class="section-label">External Events</div>
+      <h2>Recommended Events &amp; Webinars</h2>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <span class="resource-tag sp">Social Prescribing</span>
+          <h3>Social Prescribing Day Webinar</h3>
+          <p>Annual webinar celebrating Social Prescribing Day, featuring national leaders in the field.</p>
+          <a href="https://www.socialprescribingusa.com/webinars-events" target="_blank">Register →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag arts">Arts</span>
+          <h3>NOAH Annual Conference</h3>
+          <p>National Organization for Arts in Health annual gathering for arts and health practitioners.</p>
+          <a href="https://www.noahconference.org" target="_blank">Learn More →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag sp">Social Connection</span>
+          <h3>Foundation for Social Connection — US Ecosystem Map</h3>
+          <p>Interactive map and report visualizing the full landscape of organizations working to address social isolation and loneliness across the US.</p>
+          <a href="https://www.social-connection.org/what-we-do/network-and-partnerships/ecosystem/" target="_blank">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESOURCES -->
+<div id="page-resources" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Knowledge Hub</div>
+      <h2>Arts in Health &amp; Social Prescribing Resources</h2>
+      <p class="lead">A curated collection of national organizations, toolkits, research databases, and networks for practitioners, advocates, and community members.</p>
+
+      <div class="section-label" style="margin-top:2rem">National Organizations</div>
+      <div class="resource-grid">
+        <div class="resource-card">
+          <span class="resource-tag arts">Arts in Health</span>
+          <h3>NOAH — National Organization for Arts in Health</h3>
+          <p>NOAH builds community to amplify, educate about, and advocate for the power of the arts to improve health and wellbeing for all people. Includes toolkits, publications, and a job board.</p>
+          <a href="https://www.noahconference.org" target="_blank">Visit NOAH →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag arts">Arts Policy</span>
+          <h3>NASAA Arts &amp; Health Strategy Samplers</h3>
+          <p>National Assembly of State Arts Agencies provides strategy samplers and resources for state-level arts and health integration.</p>
+          <a href="https://nasaa-arts.org" target="_blank">Visit NASAA →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag arts">Veterans</span>
+          <h3>Creative Forces: NEA Military Healing Arts</h3>
+          <p>NEA Military Healing Arts Network providing veterans arts and clinical program funding across the country.</p>
+          <a href="https://www.arts.gov/initiatives/creative-forces" target="_blank">Visit Creative Forces →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag arts">Community Arts</span>
+          <h3>Foundation for Arts &amp; Healing — Project UnLonely</h3>
+          <p>Champions creative arts expression as a path towards improved health, specifically addressing loneliness and isolation.</p>
+          <a href="https://unlonely.org" target="_blank">Visit Project UnLonely →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag research">Research</span>
+          <h3>NeuroArts Blueprint Initiative</h3>
+          <p>Breaking new ground at the crossroads of science, the arts, and technology — advancing the science of arts, health, and wellbeing.</p>
+          <a href="https://neuroartsblueprint.org" target="_blank">Visit NeuroArts →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag sp">Social Prescribing</span>
+          <h3>Social Prescribing USA</h3>
+          <p>The leading US organization for social prescribing. Enables health professionals to formally prescribe community activities to improve patient health.</p>
+          <a href="https://www.socialprescribingusa.com" target="_blank">Visit SP USA →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag artsrx">Arts/Social Rx</span>
+          <h3>Art Pharmacy</h3>
+          <p>Enables personalized social prescribing services with healthcare, university, corporate, and government partners to address the nation's most intractable health challenges.</p>
+          <a href="https://artpharmacy.com" target="_blank">Visit Art Pharmacy →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag research">Research Database</span>
+          <h3>UF Center for Arts in Medicine — Research Database</h3>
+          <p>A searchable collection of peer-reviewed research, reports, and evidence documenting arts in health practice, outcomes, and evaluation across healthcare and community settings.</p>
+          <a href="https://artsandhealth.med.ufl.edu" target="_blank">Search Database →</a>
+        </div>
+        <div class="resource-card">
+          <span class="resource-tag sp">Social Prescribing</span>
+          <h3>Mass Cultural Council — CultureRx Research &amp; Resources</h3>
+          <p>A curated library of research, news, toolkits, and international resources on arts and social prescribing, maintained by the first statewide arts-on-prescription program in the US.</p>
+          <a href="https://massculturalcouncil.org/communities/culturerx-initiative/social-prescription/research/" target="_blank">Explore Resources →</a>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Newsletters &amp; Plugs</div>
+      <h2>Stay Connected Nationally</h2>
+      <div class="plug-grid">
+        <div class="plug-card"><div><h4>Connor Whole Health Newsletter</h4><p>UH Hospitals integrative health monthly updates</p></div><a href="https://www.uhhospitals.org/health-information/sign-up" target="_blank" class="btn-sm btn-accent">Sign Up</a></div>
+        <div class="plug-card"><div><h4>Foundation for Social Connection — US Ecosystem Map</h4><p>Interactive map of organizations working to address social isolation &amp; loneliness across the US</p></div><a href="https://www.social-connection.org/what-we-do/network-and-partnerships/ecosystem/" target="_blank" class="btn-sm btn-accent">Explore</a></div>
+        <div class="plug-card"><div><h4>Social Prescribing Day Webinar</h4><p>Annual national social prescribing webinar series</p></div><a href="https://www.socialprescribingusa.com/webinars-events" target="_blank" class="btn-sm btn-accent">Register</a></div>
+        <div class="plug-card"><div><h4>Maine Arts in Health Newsletter</h4><p>A model state program newsletter worth following</p></div><a href="https://mailchi.mp/maine/arts-in-health-sign-up-page" target="_blank" class="btn-sm btn-accent">Sign Up</a></div>
+      </div>
+
+      <hr class="divider">
+      <div class="section-label">Key Reading</div>
+      <h2>Essential Research &amp; Reports</h2>
+      <div class="citation">WHO (2021). <em>Social prescribing: a key component of primary health care.</em> World Health Organization Regional Office for Europe.</div>
+      <div class="citation">Husk, K., et al. (2020). Social prescribing: where is the evidence? <em>British Journal of General Practice,</em> 70(691), 62–63.</div>
+      <div class="citation">Chatterjee, H.J. &amp; Noble, G. (2013). <em>Museums, Health and Well-being.</em> Ashgate.</div>
+      <div class="citation">Fancourt, D. &amp; Finn, S. (2019). <em>What is the evidence on the role of the arts in improving health and well-being?</em> WHO Health Evidence Network Synthesis Report.</div>
+      <div class="citation">NeuroArts Blueprint (2023). <em>Advancing the Science of Arts, Health, and Wellbeing.</em></div>
+      <div class="citation">Stickley, T. &amp; Hui, A. (2012). Social prescribing through arts on prescription: a pilot study. <em>Perspectives in Public Health,</em> 132(1), 56–63.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONNECT -->
+<div id="page-connect" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Join Us</div>
+      <h2>Connect &amp; Join the Mailing List</h2>
+      <p class="lead">Whether you're a healthcare professional, arts organization, community member, researcher, or policymaker — there's a place for you in the Ohio Social Prescribing Collaborative.</p>
+
+      <div class="connect-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start">
+        <div>
+          <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:10px;overflow:hidden;">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSezgDVAJahB03yFZf1hhWsyQKspf_4-CqaLcBN5OsZXAV8ZRw/viewform?embedded=true"
+              width="100%"
+              height="1100"
+              frameborder="0"
+              marginheight="0"
+              marginwidth="0"
+              style="display:block;"
+            >Loading form…</iframe>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">What You'll Receive</div>
+          <div class="card" style="margin-bottom:1rem"><div class="card-icon">📬</div><h3>Email Updates</h3><p>Updates on Ohio social prescribing progress, national news, resource spotlights, and upcoming events.</p></div>
+          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🎥</div><h3>Zoom Meeting Links</h3><p>Access to our monthly Monday gatherings, past recordings, and meeting notes — exclusively for mailing list members.</p></div>
+          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🗺️</div><h3>Asset Map Contributions</h3><p>Ability to submit programs to our growing Ohio asset map and access the full directory.</p></div>
+          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🤝</div><h3>Network Directory</h3><p>Connect with social prescribing advocates, practitioners, and organizations across Ohio.</p></div>
+          <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1.25rem;font-size:0.85rem;line-height:1.7;color:var(--mid)">
+            📧 <strong style="color:var(--charcoal)">Direct Contact:</strong><br>Questions or partnership inquiries:<br>
+            [contact email coming soon]
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><strong>Ohio Social Prescribing Collaborative</strong> · Building healthier communities through connection</footer>
+
+<script>
+  // PDF data for meeting notes
+  var _pdfData = {
+    'jan': 'JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgMTAgMCBSIC9NZWRpYUJveCBbIDAgMCA2MTIgNzkyIF0gL1BhcmVudCA5IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyAxMSAwIFIgL01lZGlhQm94IFsgMCAwIDYxMiA3OTIgXSAvUGFyZW50IDkgMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0NvbnRlbnRzIDEyIDAgUiAvTWVkaWFCb3ggWyAwIDAgNjEyIDc5MiBdIC9QYXJlbnQgOSAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNyAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDkgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjAyMjUwNjA4MTcrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjAyMjUwNjA4MTcrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKOSAwIG9iago8PAovQ291bnQgMyAvS2lkcyBbIDQgMCBSIDUgMCBSIDYgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iagoxMCAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAxOTUxCj4+CnN0cmVhbQpHYXUwQ2dOKSUsJjpPOlNscyQkQDZeKmI1OUFXb0ova3FoOVBqKGhJP2tPKUxQNjp1PjtPIkJSPWIrKEQkPCw4MWolMWUjaTlvOilCLEEvbEwlcE1bcyhQJ3NhK0NJJDZrbVZJPUFnc2FMOiRgRlNoRF8xPlhbRGluViJuak41S2xVNnQlbm03Mi8uUkUlbTgjI2E8QFUqZzBaM15laERJckE6MzokLFxKZEBxUmM1Wl46LSRWLm0pMixtbnM6QTxScFNYL1pvWkZBW2l1RDFrbylxMUtPYGRjLEhUbkd0aiU1WHByNyNAbilbaUlsZ0FFI14zJyQ1Km05NSoza0c1Xy41b05dMGo+cEE3bHBnIUpuQSpuK24lW0RIYC9TbTUsNGBecWhAZDNxT0pOWC1eYnEhUmZEME0wLDEhIkN1JFUxY1ktTnA1VElNb3JfOWRQKVF0Rzx0Z1YoJ2lsamA/OjBSJVBycClpPXJwMCIpbUNQQUJAJEBjcGE4MWE/SHNcXWQiYiM7PjNOa0dRLiJuOlZtQHNMdE1fRixgPm8qZyR1YClDInBeZkZARDI4XjhOZSJgXHBkPGFacmtLLl03altNRGlXPjw5JnAwPEBvWz9EL3MoW1IqREhfXUJDbS9mMzAoPVd0XnQ0WDBwPiosPi5scilWbTZXYF8zbVs4PVBtQ2UyTmNIPDxIPDpkOlI0XmBgUk50YkdAYj09IztHZz1yKHBlPFdHbUBbSjA4YihSX0FnS2Eock40TTtGNTpCNltbRTc0X2IhUDwnMWgkMWdmWURkQDdiI0YjXzNJVypLPj9UKEU2OSc7NUlsRF9mP2BNN0BaXi1rSFxDOmBBPj08J1BRX0ZJIW0iXDpQPnRCRGIjaylIJWJvTTBVLCJkaC9OYy1XImtYbFFTKWs+SWJMXF0ubytjZmJWWnQkRjMlRFg5MU9yZ1diIUI7ak5JZyc+bVdaKihpKVtRajZSVCgtR0E/VCFmIic3W1UtUjllREBvRy11O3RoOSc8N1ApXj5CZTRHUTBPNnBFc0c2Oikvc3AnMFIwbWxrcFQtNUJHbjNqKD0sRlgoPEhJMjxOISNCYUdPLVs5ViVCNj07YFFZXiwwRSYhYVNgLjg3PzIuN0grJi1YUGRqKGg3R2JRW3FtUm1WYWUuTVtFLy9KW15QaVszQ3NGJyxycUtlMD9OMHBFO29aWG5pLzVdWG8pcTVaKk8/OF4xIlxHR0BXUCFUTmVeKURwMz9PQkRmZjtramdCOGpZUSljITlUR1ZYQnQuKWsiPFpBSEUkUUU7UDMuOSxOISdrQTE6S0VRX2tPdEZIaF4tQUhAK18sLjBvWlsmVD9yWG5tRzlCcys8SDhiR3Q4ZlZSUmsiYlltMCdcakRBTT5GcmFqLmQ8Jjo6ZGo3YS5qaic3OU9dZj5qayJUY14tQ2giXk07L1x1ZWxXRV5kTlZDMVMiQUpWM1FaPkc9J2Msc0otOS82YGgzcDBKYydadF0lKk0vVipOanI2IUhNLzFPQC8wTnMyVGEzWi5ma0w7dUcpKUdFczYsP01WLzNGKEI3KWcoY2hOLCFUKmxuN21vYitiKVkvRSVrYDRdV0J1Ry9nKXMyQSxxJCQkT0RKJWhGODheOlVOYl4/SV8kbjYlV2hBTmdtL203XTlMTDg+UkVbcm5oOy9uc2g7JzZCQUQqNXFYNl4jLkgkcHA+ZEleYjRdOCMvb3AxLjlSbiZnYU1CPEAqIkY9KiNwQFY9XGNwTioyQkc7Zj1ZJDpnL3JkRWJKUCsqODMlI2JqZENIcldfSi8wT2x1RXNuKWwtbiYoTk03SF9dVmgxYSNcR0IiKVRQaFwuODNiQD1kaFBcREYpcl88I0ZbcktaODFhKjU5QmphL2omZzBbRyU1JkhlL3VmYVA0MS5CaEhvNHBvNWlvUFJIPkdIckAoJDBtKzUqKXRfUFVURzhdZFpvZlw3cmJUVy04UkppI19dVHBtTCpJLG9SbiQ2UCUiNCxpaGVsdSszSissb1dFUSNzJ1d1S0dkLjAmRnBlRj1MLilLVyZsWnRXWWxpSVY2bUEzX2QzaUI7NSQ0KlxCTS51P2hLa2o/Y0kjbWUjQ0RGUjowLWAzJm8kYys1VDsmaFpYXj5WQDZKbG1LO19QUStvTzZkclksTkhabWNLLkk+RipwI1QoUkdnYzQyO1VhVz4oYzNPOlBfayQxUlknNkVjZjpUXSReVUY6QzlRSTB0M21eaCY7TVBzJ1VHJFFXL2lNIW5zXzdBUSkoVDhDMFRCaEsvczY0KF41O1xQM1hwYSx1TzA3bSltOVRnMmNJWSVuM11wWyclN0FmIzZgPW8vKSt0K1BDZz1sQlgmV0thVENwQ0toViE/LDNTSE41bWlTdGA8SD5gc01aSXRaZWJRWF5LbSo3aENqIT5VKixkPFJCRSltW25VIVBIPzIlYzsoInREZjVkV0hmRGdaNko5O0JbVylyLEVQZydETVNxaEMlR3JFcmUhMjI0aSdBU1AjYXFtWFMxMUxuPlkhJ1pWdXFFJmo3LT4wLz4lPWFmOk5zK28yVC1GWTQlQilXYyhdT05CRj9kVn4+ZW5kc3RyZWFtCmVuZG9iagoxMSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAyMjI1Cj4+CnN0cmVhbQpHYXUwQ2dNWWI6JnEvKS1lRCMzUVo7cnAtY0QqJidiVG9LZU9GZlUoUk8sOFssYiskRlYsPXNVOjNEYTcnbCszXGFNUC9pOz0obGNGL2pPWSdEdFBBP1g0NiFYbSpUPVZfanNsSDp1YCtHWDpZVm9PZSdlZ1QsJmNrNEswOFk4MkAjY2MzPFVlYWQ8RGo0VnVCb2pnUFBxPUshRFwwZFFWSnRabXNxZUFJYCtyWyRVX2NMPUBpXGtlMmJFQnRbYiZLYGM0NiIiKlFEXjBjRHNFOm9lT0pZIjNWTTBwTkBFPGdBTD5aQnI3OlgyXCN1U3VTMWcqanI4dSxTU0I3I1ZTI1diaGhZN1Zgcy5dMlRGQVxJXWV0LGovT09rdEtfai5SLTtbIjRXQj4oNDthX09oa0shLzIhSVM/ZiRNMk5pXmhMJWhIRmlNR0toUlkoNEBMOFg3OkFOVSRcbyZLZEQwcDIqVitrakckc29xT0RKRVpTO0tacygrVWZXU11LP1ZrOWVISTNwXU1nSW9eay4iKC5uJT5NYmVkaUcuVTFjJkBmQHQ3SS9kazMsKSNdM0BlMUpUVTg1bTQtTUE3TE1gUG46TSo2R0YySCYvNCxEYm0lbVF1aj8laTRWcGlRNistYkZpQWwpc0VpLlgoT1VmTkonRzFwb1c/RzNpUm5tcU9XWFxPYFVIbylOJHJVLFldKW8zQDo9XylVI1JGZjcoZzsxQE5DQkVPM2ZFVkRLXjMxJFE7QlU3JGpsKV8zX1VLZDZRbi8rX0dvTTQ2bilLMF9hYjJtLnI9akNxJDkzVWZLIWAzcDszWGQtZXBDbFMwJyomVyxwKU8kTWciL2RtbGIjZ01aKGdAQTI9NmcoM2ZBWVZFX1xbYVBNbCpzIi9UP2JrI1oxZDklc0RqSlc2NEBgXHEuNHBSUjoxOUVUV0BfJz48QSwqSixMWCtfNW1uSCQ6Uz5UcTwzZkBfOypsJFRkQT8zZigoOyEjVC9RLz1JY0NPMSZ0NFE6WClvN1RiX0NSb2kjNzx0ZE5TZmxjZy09VVw8J0ZJOkM1ZjBHYFN1SCduIVFqZGBLRnNdLGAnRFQoWkY1OyRgalVPMGBuciRlZ2RPZGI/ZlRdKXIwVFs6bWxebj89SDAyPDZsMipeInJeQUQ6S3VlVDQlN01yPDxodGJUPSZSOmkiIVQrPkA4Xl1UYlMzcSNsZlxUTzU3SWlsbFBoLWc5PVVIUFNiaGRPcUAvMVNwJFliZ1NAYEVYXS1rWktKWj9fQUpeayUzZypOSiY0NWotUFdQQic9OUBgRUpNWVYlbklmN0hZTktPJEFWJmBHLFVmIic4a0FRRjxBJSo1QzB1UCNiNy4qLk8iSjdVTUpzJmVyX3RHUGNOZ2NYNyJMUmFIY1VKYztWTkMvMy4zNUE9UWBCZiJycDJlUmFEU0c+VyZBJ0BdTD1NMkIkZkgxcWEuWl0tS2pvPlA9SzQpOmUhWWU1YXEnayJHP0A5TFxrMHIyOFVrLyxebzVSJDlyKGJEaEM+cWEwXDJLa2A/al0zbSRrNWlsW1gjR1o1aFcuXkpYWyE5SVoxJllnO3IoaWlbVlFTXDcrKjJTRys7SVNORFtrUEUlOyxSZGNdUUBOV2wtJ0xPck1valZFbldPUG9ORVFLOT9uQjo2LG8vLTdSXldkVzIiLWowVVdDOlBXOTFAMmwjciwrNjUhLjhpQyhANVxGKG5cYm5mKD9POCtgJ0ZmTFNYYCpVT0plaU1lWCwtTllGP2ZBYW5XKGZMckheS0paNS5paU4lcS5rQm9faS0oUydHRF1TSitsX1pZYGtmdU0nNkAhbTZDcnVuJmFpVW5FMGJgY1BuMnNcNl8kLmZQVylQRWpHKCtSXkw5cEtqbSRCPSovUm9rLWo1cyIiYVI4XyFDcFdzMFFgcTMmJGhgW0RjSUlCLkhPLUAwSVw/XVhyWTh1QSJGLkRDV3NCTlgpYzElOmZsTkM8cWs1OmhwTTVsW1dXcTA6Mik9L0YhVzxbdWxGWjtwS2NMImYtOlg5I1pGVE1iNmZwO1xINkFuZCwjY0VcJyREX0cuVWhYX2k+byc6SjpESVNtTzJlN1ROUG0sRytLKEpMKDdwP15zNmA9Iis+PW0kTUlbXVFJcGlub1RmWkReallZVjo2SilkPVVUXDhycy4pbGAtQUxwbGolOCZYa3RnZUpqOjlPVDJNbm4kclxeb0c2aUZUUzxOPUEyPHM+NVVhQVIiJEpdTVxiLSRzY0EhVEVQOyFmPl5CZTFLcWAsRjFRM2EnQzFYS246STk8KlZeWC5eb2BmUFZtO01vLm1ZKjtMOGQlM2VlQzJYdD4uRCI/VWlHVGs4aWFdOWVYSSNyWUAnIVxzSStSKlJaZWsiWlRBOCpnKWxca0UuR0drdTIsRFZnNDthRkQ7Y1pmOjJhKE1hQykzMyNpYj9yKlUxXS4tJzNfOHFlZCZWcShpVzNINUtkYSMhOkJiaDIwPDlRUmlXMysyS0coP1wwPHE3KFQraSwtWlhvXThoJG8/MGRqc2JHMileIiI3bCdGaVd1S1t1OSwxVV06UCVebSUlR1cwcDYpdFEpZDdVKWxcST5cLld0cUhja2k+XG9IanRgJSdSJ0JZJ2FiPTEvbkJAaUUwaHAvZCYmbyctSUNgJ1xOIWFQSGZmSnA0Yjg0SjFARFVMclZnX2ZucmlUaGtYdT0tQDdEUkViUTRbP2EyTG5VQ2g8T0U1LTUtUERlLkYjWVFYTmdRWl5yRllyIz5nZF9RUixGbCo8MmtLJ1Q9aWc5RilkZFJlTlZqUjtLc2RdM1grTTFwUWhtWEVeMjZpbkEwO0E1YWdSSz8rczRrKzNnVjlURypLbChRTXFJSEVFI1FBQjlBQnFBKUIxYmhnXmJuZSZnWVpcU2VTTDpZYmcjX1goUixtOTowbXFEbCVLZU5YWWpbbDR+PmVuZHN0cmVhbQplbmRvYmoKMTIgMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTAyNwo+PgpzdHJlYW0KR2F0VTBnUSgjSCY6Tkg+UigkbWlORzpLRUFLUkJhQm44MDVNSi8uODBmPixrVGgoS0ZdXC5bXExTVidGIyFuLT4mOF1QJmJXMGBWY0lCKF1WcD0xNyFkTkQ4MDVrVShmP2o0ZjJjVHRJVENCRypxV0ZrQlNfV1VAXT1POUZaPCIqbmMkJGpVQzsiPiE9KTRhQGVAVFMoIiReJF5UUilIQ103RyxUSlFGbCQtQUItTjd0U1MzZmczWUVib29tZ14lRSYuIT4rXCRzLTJCXyQhRSRrJ3IodXIuNEVNdFspbiVJQSlua2cpbj4mal9CMFVkTmBdcF0zWTpbU2QvRkxBY1okIUtWKityb1s/Xzc9MFRQNTFUb1o7LVRvJV9HaSI5LFBKTWtJUTVnciNkTE9oZTlfOWBeV2hoISlsNFknPlI6NilGX007XE5UayVPRk0tOE1oLThiMnVIWmRbSnVLJEhoZzltSi4mJSZvVUlCQmpAdUJGLVszQ0FETkBKOzFnSDUmX2E3LlFxdF5xcGdKNjZ1Mm1OOUA2dT00bDxnT1BbR2Q0YWZmNFtZOVlXNmkpXyNabTJUZjI3Jkgqc1FqQVAvOFRIX09qPkcnZkxfU2ZHaSFOZGcqI0dRPE9PMCtfUXFlW1RjMm0sV1ghTkJbLjBtXFtjcGRIUlBQOyVfKUlrOF9jKSRwQywsMC5UTC9KRVViWldzMGxELWI2U1sxWj46ZVY8MS5YOCdhUFFONGNIOWspUWxyaTJIYyklUUxuSG5IZHFOIm9qOWdmXXM3QSkzbUhQRGpLT3NWbGsnUmw7NklQdD5ZZ0loczMnTS40Tmk1KTNhJj1xZDFoUXE8ZyYvK0B0bV9jbSQnV05zWj1RcUphVCVJYXVTKmZrQGxHISdLUEM7MXFtbWFiVFRidXRrS2xLO0poIj1sbGZEIW9UcXUpVEdmV1k6YGZnUy1sTmJCLipMWl9VWlZAOENXUV5bJVNURiY1LjNzK1tObD40RjdYUDkjS09iazJdWV1KJE1XVjtbS05GRklLOmA8MChjWGY1XSdkJCRVZ0dDZihZVTtWL0U9T2VqZTgoVS9vWzNsYlUncV5nYzFuMU5FVVpwZStBWlJbYEFFP0ZLVi5PbFAlL1EmSShsVV1TKmFCaV1uXkJWOEspaXRdSGdULEIlNUNfUDNiPT9KdCs4IVpkO0whZnE1VlctU2FcNF1yOSQ0Rj80Vm1ZZDdDRmNKWWFULlZPak1ORCMmIVZKaENBb0RnKkhVUic1aCVTdDNiXFktQmRTa0o5JzcqPktaJ3ViKlAlUmhVIyJBSEo/IlY+NEVRJVxNO3E2JUskaD5TQW1DM0U8U0tyXVwoOC0yOCF+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDEzCjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDA2MSAwMDAwMCBuIAowMDAwMDAwMTAyIDAwMDAwIG4gCjAwMDAwMDAyMDkgMDAwMDAgbiAKMDAwMDAwMDMyMSAwMDAwMCBuIAowMDAwMDAwNTE1IDAwMDAwIG4gCjAwMDAwMDA3MDkgMDAwMDAgbiAKMDAwMDAwMDkwMyAwMDAwMCBuIAowMDAwMDAwOTcxIDAwMDAwIG4gCjAwMDAwMDEyNTEgMDAwMDAgbiAKMDAwMDAwMTMyMiAwMDAwMCBuIAowMDAwMDAzMzY1IDAwMDAwIG4gCjAwMDAwMDU2ODIgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8NTZiMGJiMjNhY2RjNTk5YWMxZjAzMDMyZGRhZmVkNGQ+PDU2YjBiYjIzYWNkYzU5OWFjMWYwMzAzMmRkYWZlZDRkPl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA4IDAgUgovUm9vdCA3IDAgUgovU2l6ZSAxMwo+PgpzdGFydHhyZWYKNjgwMQolJUVPRgo=',
+    'feb': 'JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgMTAgMCBSIC9NZWRpYUJveCBbIDAgMCA2MTIgNzkyIF0gL1BhcmVudCA5IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9Db250ZW50cyAxMSAwIFIgL01lZGlhQm94IFsgMCAwIDYxMiA3OTIgXSAvUGFyZW50IDkgMCBSIC9SZXNvdXJjZXMgPDwKL0ZvbnQgMSAwIFIgL1Byb2NTZXQgWyAvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJIF0KPj4gL1JvdGF0ZSAwIC9UcmFucyA8PAoKPj4gCiAgL1R5cGUgL1BhZ2UKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0NvbnRlbnRzIDEyIDAgUiAvTWVkaWFCb3ggWyAwIDAgNjEyIDc5MiBdIC9QYXJlbnQgOSAwIFIgL1Jlc291cmNlcyA8PAovRm9udCAxIDAgUiAvUHJvY1NldCBbIC9QREYgL1RleHQgL0ltYWdlQiAvSW1hZ2VDIC9JbWFnZUkgXQo+PiAvUm90YXRlIDAgL1RyYW5zIDw8Cgo+PiAKICAvVHlwZSAvUGFnZQo+PgplbmRvYmoKNyAwIG9iago8PAovUGFnZU1vZGUgL1VzZU5vbmUgL1BhZ2VzIDkgMCBSIC9UeXBlIC9DYXRhbG9nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9BdXRob3IgKFwoYW5vbnltb3VzXCkpIC9DcmVhdGlvbkRhdGUgKEQ6MjAyNjAyMjUwNjEzMjUrMDAnMDAnKSAvQ3JlYXRvciAoXCh1bnNwZWNpZmllZFwpKSAvS2V5d29yZHMgKCkgL01vZERhdGUgKEQ6MjAyNjAyMjUwNjEzMjUrMDAnMDAnKSAvUHJvZHVjZXIgKFJlcG9ydExhYiBQREYgTGlicmFyeSAtIFwob3BlbnNvdXJjZVwpKSAKICAvU3ViamVjdCAoXCh1bnNwZWNpZmllZFwpKSAvVGl0bGUgKFwoYW5vbnltb3VzXCkpIC9UcmFwcGVkIC9GYWxzZQo+PgplbmRvYmoKOSAwIG9iago8PAovQ291bnQgMyAvS2lkcyBbIDQgMCBSIDUgMCBSIDYgMCBSIF0gL1R5cGUgL1BhZ2VzCj4+CmVuZG9iagoxMCAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAxOTQyCj4+CnN0cmVhbQpHYXUwQ2FgPyxxJ1lPO25oSkpjM1IzakBbTWYyMVdBPG5kMT1AWl5AJnM9cHEjbj9yLWQ8dG9iIXVGT2NYaSs1LlpISlApJkVyUTZEZGMkV0lObmVOL1ZtYFhsMiM2YjssJFItN0FGNllvQ3FsaElkdGBRZT81PDhCYkpFZk4sKF1uN15JKSY1cjklK1pePz11UjgyY1NSRk1JIU1ZYiNpJnQwV2gzMlVCSzJpYDE8Yj4yb01rdFwtS2pSZWUkMkRvNkNhcV9WQEdxS2xkI2NCVE8ialIoRXE2KDRkMU9iQDdOMlBcT2E5WGNCLjBaS28sWVZlYSxScHRySk9CcVcmPCUqPEkjdWVIXEtBNUNRTDxkWDY+dHUmZUFDUSMqWSdTLmo1X0pFbk1qJlgrOyRlUkVVU3NIQCUpYSkrPCVdOjcrI08tUmFAQ0YoU3VWZVRNW0phcy4mS3VmbDdeTDQkS3BxRzdtRVpgNTtbbFQ1MF1VY2tpKy1sNGVqcmduLEJRJDByTUphXzZEbyNLK1JtTjhnV0wxXDwlQUksXC0zS1tcbGsrTFpBUD9WO2tQRmRHLmtYaXM+JlBVVk86UUVOP05hUSxoUVxnaDdUODxiIWtVPDRkM0spcjJbMD9IKyFXPURVIikzSHRGOSYma0NySjteVWcwLnMkJTs7ZnRST1ZhTTowIiQxUUs2WElmN29wVE1PYyZrOFMzKXBTPjxQLFxRYnVLODhQRHAnKEJ1bEVdXXBcPDBaW0JXKFo1cWguYmRiOjZUb1xDLzIwOzNcNGs3TWQjM1spN2MhTyE0Ky9BN1RhPGdlQ0AibW9IdGEjNykwPUojaG1GVDxPY1k3YCotXTkpQ2JGa1laWVp1UCheZlNGaE48V2sqUl5uZXUhK1tpaE90TmlvbVs2X3RwTnBZLGI8PmZqJCRSNTJeLVllY3QjK1grVCQ5RCJbMytdMCtHZ2QtPWNzX1czZW42UW43Tkp1Tm04LTxYa0NmL2cwQVAmUTJmL2spZFxqY20rUV8mNT5tL1ptMGshTDEiI20jcT89NWxiMiY6K1VFV24tPyYiVyNfdCZpVzFdLUtkUz9VOGw/LUNBK0wvNl5hbjhTKitBQCM4SEdFYypMJzpNTkBrIVpDcVgiRGJBNGEyKVlIMjAwZj9kJD8wQkpgWCJdNmsjInUlYT9tQ1dZMjQzIWBQJUU+W0NrUCNwYl1rKlJYXmNDUCVtajAuNS9EUmNuczdfVltBbiVRP3U4cj08PCVnW0EkLWxLTzVUPm9UZU4+U2FLKW1bbU9xOmVaRV5zYU5wWTghXjBITVtVbEVaOCZBcVh1JkplRXUyKCdIZi1DNWs9Q2lIRCVOJGI9a1BjS2w5WC5xYSguc3Bpc2lUdGo/Lkx1OktPX1QjYSsmKyhHLSNgIWknNyJOUTI7QGZOIjRyPGtvUjlvWDtpZkorVVZ1SmhmJlRILkJFXm9xKlMvaCUxVFBwcUhERDs0TUIqJVdIb05RRlIvQEo4Z2UhVDhJS0MjKkYxbzdSJUMlYnRkWjJgRGxcXmZUQEJ1Y0lGIyE3UEkxaiFdTCROJXVfRVAkZj9JTWo+TDZMZ3BtJ25wbG5JVDEzLVxKPFgoSWJURVxNQm9vSlRvXXIsSEEuRCZZVU0uXEJkaCpfL1BIOmlVMVUhP15hVT0nWSRHLTM+QyhcXj0wL05XPmNpP1RRRm1lVXUrYzNfb1olK3FeK2ZOPVwtJDlVImQjOVRzSzkmTzdROmZqc1ciPzpcL3VSViMqZWwuR2VVTT09Qjg0cEZkJDJlKWRfJmpoK1hYQylQaS07RVVWbV5zKzdrN2FsIyFJPDViak5wV0I1Qk1uM1U8ZzY9OyFeO0dxNiw5OWMoRktUai1kIyMjJEA9bFVTTWFCXV8rYFhNP1FoallEL1xYN0lJSVB0Q1Q1JiVDO1lYdG4lRj1zQ0pkJjQhSVAjc0BfdDkjWCxrWG9eTSF1MmNPaW1DM0BiI1lrXi5tPy1iblgnKTozUS9hVjJwamltUlM2TDNbVnE+Qy1QSV9vKz5bN2NVZ1FJJHNSQ0xqOSNCIy5WJCdpLmNcNkgjUStLa0huK3NYZEYtYyQqYSE8VVJyY1lGOSE6Oj9vUWReb2prOTYjNV4jOWZGTV5YPSIwIyo0Jl1KX1xXZD9PJDgrVyUwJG09T28jN1tFN0ZVVGFBOEVVRGZGKnRsNDA7UiRdbCV0PTh1Y1J1ciFJUWpBXFZxQnBRbTlrN1VCTShjQERNNkZnKTlVZzBCbVJEN2YkblBVcUwxSiVFRWJQSSI6MCVXaWZLMDYzaUtmJlBzYEkibU5GTVtgLVglJEQpa0dtTUc5Xig+Tl4iNl5nZTFFKWduYXJDSFVaNi1iWHBvSExwNUhqI1s+b1JyNkNoUD9AaDFGTWQlKlhXPGgibDVcX2EsQDI/Q0lxXzBxTko7XUs+bzUzMkAhcmhkXVdSanUnbnJGXF87WkhlZiRSO09aZ15GbTQ2ZU5uUXVQW2wwU289aEplbSVQITI7LFZdcXQ6cjA8RC4hJHFMWUtlO0A6LUFQZ2F1L0g1cXBOSDU/P0BVV34+ZW5kc3RyZWFtCmVuZG9iagoxMSAwIG9iago8PAovRmlsdGVyIFsgL0FTQ0lJODVEZWNvZGUgL0ZsYXRlRGVjb2RlIF0gL0xlbmd0aCAyMDgyCj4+CnN0cmVhbQpHYXUwQz8kIkxSJ1JmLkdnYyVRND1sTi42ZyU6NypTTUlRPjNuXzcvNztMKVQ1YUdZSGNFZEJFU2gnVWVBUCghOzNlPk1uW2ROPD1rP19fQU1PdUkhYzVXS2JbZS9rOk4zWDE4OT9QUEhrSHQyWWhKSm5gckBJOUxdXExsUWpyPksnZmxFQFswL2FXUj5jbD5VOjA0ZWJiOllIbjA/STU/P3RfTykzb3RrRy08V05sUUlmc0lqPk9XX1VeblpqVEJWPW0/NTptYytuKTU4WFlMVXRnLFVIUC5danJNIlhjYEY7bTk1KmhsN2drWCcsaU5sPEg7P3JuckVGa2cmSj0iPWAuN2c0I2RgOk5UTFU8ay1MSScwTSpsYlk2cCxlP1UzIkZMX1wiUmNxY0c+Uj0tLFA8TzIqYSYxV2BuO0ZSWypTZV5oWGdUajJKLDxeRUpibzskVERMS0xEdShBaGV1KVJnUFwrdV9HKGdRP2ElQ0dHMD0rV08na00kXzZFPTReUyQkSVk0JDtga20sQmJVaTtcRy1EISd0bFhYcjsob1dNb2xeR2RWaixeXyEoRC8nTzNudENUYllrWV9ZWksoSCxlcmhMcV05V2Zjbz9NXWkvKVhQYmBCZ3A4OVRGM2g5am9QPlNENC9UTChTbGtBaUhHcU4vXU5SP14pJzVGRSMsbzBhLlQ9LUUtTE5PIjhXUyJZbDZAaEooc0BKYUwlb18oWToqci9xV1pKWGpBT0VmV0hoKTdjWllnaidXRiJTcTczYTdrLitaL2hgS0tFRC5PbVdLMW9iMkBLLStOW0whSjsvOmJacmBydTxYW3NgXVA6Vl9AQTMkXWM2bjlHaVA8SydCOWJhKEo2c2FgU11GJTkwSV1RP1RUJEsiIzNfOiwtZS1pYTYwcEZZSU1dJiNOXjtbLDMuTWBuI2FhLzxTKDBzK0RkUCYvI0QyJ2dqTywzZV1gX286OnUmUyE0a0tMdTlkIlFELlVnaC5BOGNkNDQsTTAtal1dXCMoOiQ9RXE7VkpcY2knKW8nZnBLWm1RU2FfKWlZV0cyYydOUC9HS0xuOmNYcmQqJztMIk4sMiFWSzs6JXBubSRCLVg4dE0hS1tOZiY3KzJLQyk3SXRbJydUUl4laUAlOz1XIURZYipbR247PkRkamRDV1NVWmo+SUhcU1owSFpRJFRHK2dyVXFzKGNuZEkoYDRNPiFCa2hFOiQ0IitqW2NETF4wU21VLTBLU2xlVUJIa2VZcSFIWCZbN2xRO0ZGNmowQHIzbkxkTUQnRDRZUVRPO0VIdW1iL25KUWFiZkxAIkEpNShBTXEyR2doLjhPZ3JBK3VOcD9jPmNsRUk0Tj4tL3BbXWQ8Xk9nIXFkMCQkLEArVj5mPXVRRExLamMqXWcoLjNTK3I9IjVKMzdBV2R0XiQ0TyhLZS47K1U8TWMlWWVfOUhFJlpVcy1fJDFaKktKQThGa1FsLUMvTE1UPGkuSCh0bi5AIypwWDBxQHFqVTdmUWliWmNVRCkwXzhORztgSV4lOEE2NCJeJicnWFlfMWw/bE1ATHEtS2RPNCM3JjdFV1NaSCFAW1tgZSFkLl0xZF0rOjl0ZUtDMjFiZzoiQ0FGPWQ4RCZYMU8rKlYhKlpQS18qN1BwTkdHaWBzODpvUTtmNV1YXjo7aHNqMnRUNj8uM11kaCRnby86W1M8SnA1TiNZSEhfXFtWInVLNjA3XD9UZVF1TyJrXVxENUpLRSpzdVMlW2YxYihbdWlnIlZRSzFdUihHOm5NaSNsJV1FX0VmMklnQjkpS0hzYU8iOCZuNz4+MFBOK0JXKGNqaU83QlVUJiE9dGksODwhOSteTjA7IUpKRjFCdSNmcWRdUVtpZjxVaTchKkddTC1jIkosWD1aPiIrNTEiX0xwWWc4ZmRCOjYuRWhSck5BT0laWzNtQmslNWxHVituQ3I3PjovYC1pUDs0OWpjTz04MlhRak0sIXE5VWhDZidvKDdgN2wjZWFeVUMwQ3VlPjJWWiQ+cDdmKSZYW2wnNHE4KmxsRy9pbzRXPjVPczRbclpULC40VSlWNm1HLTRlQmojYy9wSztdITpOJnRcJCJnZXIjIyUmWF9yZTBQaCNKXkVuYFQtSGVoN0EqQiZVVEtHY1VwRCopI2ctVyQ9XksuK2MqTEo7SmA5VGJ1dVNwU1VBYSYzJCMpR0I5IzUjJ00pWiVeXGw2aiYwZ0dDMzQuPGsmWiZKTlVUImE6MU43M3BlITBuNGJMQVFEU3QxKDoqOmgkRlRcTDxRTjJkXDBmWyoxX1x1NV03XGxHSmdPSDtdRWUuc15TcWZaR2RDb1wlcGRCblNTTyJmaz5eQUduXGZRIkJBUD50ZCZbay5tW1YrKm1KKTw7PFY3SVNIaWsnWlBbXydXISZcSVVjSWpPOzprTjxiVGliN0hXK2pLOjEkZjJrQmU+L1wuYzFOK19EUT1UIW9MWWRndC8yUjg9L0huK3UkTVc+PmA/M1p0WGFyKmJHZHQ+UzQmZ1ZwMjxLTVlTZGpZYz5YLD9mXUxZOkpJYT5DQHJpQGc4OkQ8bS1ddSdfN1pZKFhScyMnYTNTQWAxaT1xPmhickhLLFAoaCcyUV0tITZtU1krQko2ZFVgSUxSU0g9Xm8wcVt0ZTJHV10nVEcjYilKXnVpJT46c2U4QzEoWilQTkspUDQ3LUU2N08hLmc/Ky9JWkFqXHJETjNqaWNeSk44V0lAcVZzbCI5Wz5cPFZwXnNkQmU8JlE0Xjw4fj5lbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCjw8Ci9GaWx0ZXIgWyAvQVNDSUk4NURlY29kZSAvRmxhdGVEZWNvZGUgXSAvTGVuZ3RoIDE5MDYKPj4Kc3RyZWFtCkdhdG07PyNTMV8nUmZHUlxEZFs4KCMxZStqVFk7WlctMFRuKUA+ZWdRXGcsKCYoaHBaMUpTajtyTFEpRztIZDgtLCI1TTMtO08lKDNWVjxyXShoLSJuIl8nZVMncGldUixUL11rN2VIJCFEVkojUypBPV1VTmxDVG5VdVdFIisxdVk3RDNxKlJaJlpbJTBuOToqXyQkUDQ7czEjL3JqPGZoViFxTC9rcThERV03KUFNVlQpdE4rbF1wPnVAVi07RU1vSjNIKDJHS2s8aHJAbkBLJTIrcTQtVyk/ckNsJiFrTV80UlNNPE1sUlRLVWo/Ky1vWyIqOEpQS0YwRTU9YFpAQzZuKWJwQC4oRSc6L0I4Tm9mRi1Zck9JJjAxXG01KT1hallPQCsxMWVGZXI2O1xjPklbPW5iYV87NWUtbCZpX3QwQ2JTO1pTJT5hSUtzbWA8b28zS3RzNl00Z0FJV2V0N1tSOWpEYT82NU5OJCEidGkjRTp0cFxWSjE8QyVBay1iVmoiLVNDPmJCNjJtMHU3Ijp0LDQqUlckQVlhZDNqWCpsSkI4cE5FQU0sPT8+YzdoVDBCSS5na0lFaTAsUmIiLFpSUjcjZ3QzdDs0IStZLWMob1QiV0NqImcwMCw3SktVQzkiWTpXWiRWPVdFbSZ1REAuSioxNTYwJW07WkVGIkJXO3NQXClecGJBJWtLO2FKUElzWlo0O3RoLlY+X25yJmxUTHUsRl9NdVxcWWNlQW1lXSQlVmhMIUFEUT1YYVRpUGs6UEdldVIrU2NNYiFxXEhlRWl1KzQoI1MjQytncSZIRjFmQCJeQ1RQTCt0RWo3dTxGJ19VdWYpKmkrK1FCZDovSzNsYlc5Z3IuIlJkMkE7LjwxdXRdTi8kXigic0VlclRETGttOWY+OCslKGRsI2krcGQuVClgTm9qI0RCJzJfYVBwZ15jKykiZGtpNVw0Zm8nVVZVVj43LjIsN15HcSlxSD1wJ2BjYi5jP0VpZ0MwaiphJmBcaG5mITZHQ0oiMGpVYWMnPD5DcHBYOFoxQU5IKUdjSV1GIihiWSIhcTNBWjVZPUlYPDooQSlsUyhoXDlXbDEscDlOIjVfNHAsNEUxLWk0SEI9WnIsPkA0LkVKT2RBQWprTSNXJF84ZGU6Y2VuZEdfJCpmTDhsTWFmKG9rJy1cb24qWE9dREkiRSI2WSRIajI1WkphPyYsaUhWSF9tPExdQnI2YjteZDA3XktFNWhTYCdINU1HW29LXCpkOCxzcjRpXzc+ZC5MKUEzJF00JGcqJmlPOWZOQE5yPU5SPEs4Rl9KR1lKKT4lOFZuTFB0c3AuKzIpaFc9MTxbXihVRFkoY1BEPWdFUistSl4yKGNzImIoc11uWUpwR2tXRVlfREErS29wQUpWWy90V1VOb0w0Im9YYSQ7WE1vNTlPRiohPmIrLWFWbyI/VzJyY2cpOjZQLXEkamlZYmFlPUZPcXJlLi9MRDg1XVVIa04uU15wLWNnQEZuVmY9Vig4WCV0M2hybzxuWzA1R2I9aGMicERxb1MvUFknTE8xPiwjPlhNRmJAXkxrODhlT3A/RTFfPEclOk1cZlk/PkQ0Lj9RP1ttPTFyZE5XcChpTG1wXVY5JHQlMWtgXjVjYiQwSmNdTXFeN205S25lYW0uPChpPjdrMXQoYVJRc29QcFRyR2RqKmJSNy0xRUBOSEpAPS1BXlVEMy1tOC8yIWVEQ0dlRzsmOSNCNmZALCtFIU1TYmZvTGYmIkxMPTY0UTI3VTFoNjchbz87JSNUJi5sLCdZOWo0YEYyTDVQITxeVyRzM1k7JDslJTRdYlchLUYoIjFsJzVUL1trc0toSjUwRFJgN1kjaUgiUyplX09VZC1AUTxhMC5xJy8yXTplaCQ3QStOXzZVNkJdWnJyRFc5cDxNWWIlT0BVb2U+Qip0O3QpSyxAYUU2JjgvX0FUYzJNPGBNKz88M3NeaGdhOE46SihaamwwRHJQRDNeSypJYURHTVtGVnFMUTNjaSJOYWw/USlBTTY2ZzJBZXBVWXV0IjxAODQvP04kaXNJX1VBcEAnKTI7JV5rWXUwPihebi07KlJjaFFDVmtQO1JPdHFNL3M1SGM4Mjs2MVZRZEpDdTFVYiFUJlRdYzh1a2JcKl5EUEJaWVAzRzctJUkiN2QyJVJycGomIShOaCtYYzMzIk46RGYpJnJqNVgjVWNhPFFLLEFQY3UxJlIvXldBbVpiWDBcLm1sJCU5M2woS0NUbF9wcnQpal5ENkJyWlxbI0U7bUFncW1eXnU9NGAyNDJyb2FUKHFCV2puNUtbV045TlNePDFDSnBzJk5VcDY0OVFOZW5EUzhlKUplb2kuRW81XVhmKjEyNGslODhvJjxuI0E2MjxoNmgrP15gMi9iLWlHOyMsLVdtS2ReWShLKEAnW0I/W0s0Pm1QLDJJV15pP25qbTQpUjtiZC1JYE9GWjspK3JNMCY1JGFpQHJjSSoyLj9KXWVmcjoxNGZOTlJ1QV9gX09XM3IwP2ljNSQkfj5lbmRzdHJlYW0KZW5kb2JqCnhyZWYKMCAxMwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwNjEgMDAwMDAgbiAKMDAwMDAwMDEwMiAwMDAwMCBuIAowMDAwMDAwMjA5IDAwMDAwIG4gCjAwMDAwMDAzMjEgMDAwMDAgbiAKMDAwMDAwMDUxNSAwMDAwMCBuIAowMDAwMDAwNzA5IDAwMDAwIG4gCjAwMDAwMDA5MDMgMDAwMDAgbiAKMDAwMDAwMDk3MSAwMDAwMCBuIAowMDAwMDAxMjUxIDAwMDAwIG4gCjAwMDAwMDEzMjIgMDAwMDAgbiAKMDAwMDAwMzM1NiAwMDAwMCBuIAowMDAwMDA1NTMwIDAwMDAwIG4gCnRyYWlsZXIKPDwKL0lEIApbPDYzOGU5YzdjMTdhZmI5YTJjNTQyYjUxZjY3ZjkzZDZiPjw2MzhlOWM3YzE3YWZiOWEyYzU0MmI1MWY2N2Y5M2Q2Yj5dCiUgUmVwb3J0TGFiIGdlbmVyYXRlZCBQREYgZG9jdW1lbnQgLS0gZGlnZXN0IChvcGVuc291cmNlKQoKL0luZm8gOCAwIFIKL1Jvb3QgNyAwIFIKL1NpemUgMTMKPj4Kc3RhcnR4cmVmCjc1MjgKJSVFT0YK'
+  };
+  function openPdf(id) {
+    var b64 = _pdfData[id];
+    if (!b64) return;
+    var raw = atob(b64);
+    var u = new Uint8Array(raw.length);
+    for (var i = 0; i < raw.length; i++) u[i] = raw.charCodeAt(i);
+    var blob = new Blob([u], {type: 'application/pdf'});
+    window.open(URL.createObjectURL(blob), '_blank');
+  }
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.nav-tabs button').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('page-' + name).classList.add('active');
+    var tab = document.getElementById('tab-' + name);
+    if (tab) tab.classList.add('active');
+    window.scrollTo(0, 0);
+    document.getElementById('nav-tabs').classList.remove('open');
+    document.getElementById('nav-hamburger').classList.remove('open');
+  }
+  function toggleNav() {
+    document.getElementById('nav-tabs').classList.toggle('open');
+    document.getElementById('nav-hamburger').classList.toggle('open');
+  }
+  function togglePin(el, e) {
+    e.stopPropagation();
+    var isOpen = el.classList.contains('tapped');
+    document.querySelectorAll('.pin-wrap').forEach(function(p){ p.classList.remove('tapped'); });
+    if (!isOpen) el.classList.add('tapped');
+  }
+  document.addEventListener('click', function(e) {
+    var tabs = document.getElementById('nav-tabs');
+    var hamburger = document.getElementById('nav-hamburger');
+    if (tabs && hamburger && !tabs.contains(e.target) && !hamburger.contains(e.target)) {
+      tabs.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+    if (!e.target.closest('.pin-wrap')) {
+      document.querySelectorAll('.pin-wrap').forEach(function(p){ p.classList.remove('tapped'); });
+    }
+  });
+  function filterMap(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.querySelectorAll('.pin-wrap').forEach(function(pin) {
+      pin.style.display = (type === 'all' || pin.dataset.type === type) ? '' : 'none';
+    });
+  }
+  function submitForm() {
+    var fname = document.getElementById('fname').value.trim();
+    var lname = document.getElementById('lname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (!fname || !lname || !email) { alert('Please fill in your first name, last name, and email address.'); return; }
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) { alert('Please enter a valid email address.'); return; }
+    document.getElementById('connect-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>
