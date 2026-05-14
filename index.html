@@ -1841,6 +1841,7 @@
         .cal-month-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.25rem; }
         .cal-month-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--charcoal); }
         .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; background:var(--light-border); border:1px solid var(--light-border); border-radius:8px; overflow:hidden; }
+        .cal-dow { background:var(--forest); color:white; text-align:center; font-size:0.72rem; font-weight:600; letter-spacing:0.04em; padding:0.3rem 0; text-transform:uppercase; }
         .cal-day-header { background:var(--charcoal); color:white; text-align:center; padding:0.5rem 0.25rem; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; }
         .cal-cell { background:white; min-height:80px; padding:0.35rem 0.4rem; position:relative; vertical-align:top; }
         .cal-cell.empty { background:var(--cream); }
@@ -1889,35 +1890,35 @@
       <div class="event-detail-overlay" id="overlay" onclick="closeEvent()"></div>
 
       <!-- Event Detail Modals -->
-      <div class="event-detail" id="detail-third-fri-may"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — May 16</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ohio's largest monthly art walk at 78th Street Studios. 60+ galleries, studios, and creative businesses open simultaneously. Live music, guest artisans, and food throughout the building.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, May 16 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St, Gordon Square<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 22 Detroit Ave bus<br><strong>Accessibility:</strong> Wheelchair lift by request</p><a href="https://78thstreetstudios.com" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
+      <div class="event-detail" id="detail-third-fri-may"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — May 15</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ohio's largest monthly art walk at 78th Street Studios. 60+ galleries, studios, and creative businesses open simultaneously. Live music, guest artisans, and food throughout the building.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, May 15 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St, Gordon Square<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 22 Detroit Ave bus<br><strong>Accessibility:</strong> Wheelchair lift by request</p><a href="https://78thstreetstudios.com" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
-      <div class="event-detail" id="detail-art-house-may"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — May 17</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Friends and Family Open Studios at Art House Cleveland. Free multi-generational art workshop exploring different cultures through hands-on art making. All ages and backgrounds welcome.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, May 17 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 51 Pearl Rd bus</p><a href="https://www.arthouseinc.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
+      <div class="event-detail" id="detail-art-house-may"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — May 16</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Friends and Family Open Studios at Art House Cleveland. Free multi-generational art workshop exploring different cultures through hands-on art making. All ages and backgrounds welcome.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, May 16 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 51 Pearl Rd bus</p><a href="https://www.arthouseinc.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
       <div class="event-detail" id="detail-cain-ocb-jun"><button class="close-btn" onclick="closeEvent()">✕</button><h4>OCB — Free Community Performance</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ohio Contemporary Ballet free community performance at Cuyahoga County Eastern Campus in Highland Hills.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, June 13, 2026<br><strong>Where:</strong> Cuyahoga County Eastern Campus, 4250 Richmond Rd, Highland Hills, OH 44122<br><strong>Cost:</strong> Free</p><a href="https://ocballet.org/performances" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
       <div class="event-detail" id="detail-ocb-ballet-stars"><button class="close-btn" onclick="closeEvent()">✕</button><h4>OCB — Ballet Under the Stars</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ohio Contemporary Ballet's "Ballet Under the Stars" outdoor performance at the OCBallet Center in Shaker Heights. A beloved outdoor community tradition.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> June 19–20, 2026<br><strong>Where:</strong> OCBallet Center, 3558 Lee Rd, Shaker Heights, OH 44120<br><strong>Cost:</strong> Free<br><strong>Accessibility:</strong> Outdoor venue; accessible by car · RTA 34/39 bus to Lee Rd</p><a href="https://ocballet.org/performances" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
-      <div class="event-detail" id="detail-wow-start"><button class="close-btn" onclick="closeEvent()">✕</button><h4>WOW! Wade Oval Wednesdays — Summer Series Begins</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ten consecutive Wednesday evenings of free outdoor live music at Wade Oval in University Circle. Food trucks, vendors, kid-friendly activities, and a beer and wine garden. All genres and ages welcome. Neighborhood shuttle from Glenville available. Select University Circle museums stay open late on Wednesdays.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Wednesdays, June 18 – August 20 · 5:30–8:30pm<br><strong>Where:</strong> Wade Oval, 10820 East Blvd, University Circle<br><strong>Transit:</strong> RTA HealthLine to East Blvd · Red Line to University Circle · Free Neighborhood Shuttle from Glenville<br><strong>Accessibility:</strong> Fully accessible outdoor venue · Bagged meters for disability parking on Wade Oval Dr</p><a href="https://www.universitycircle.org/wow" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at universitycircle.org</a></div>
+      <div class="event-detail" id="detail-wow-start"><button class="close-btn" onclick="closeEvent()">✕</button><h4>WOW! Wade Oval Wednesdays — Summer Series Begins</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ten consecutive Wednesday evenings of free outdoor live music at Wade Oval in University Circle. Food trucks, vendors, kid-friendly activities, and a beer and wine garden. All genres and ages welcome. Neighborhood shuttle from Glenville available. Select University Circle museums stay open late on Wednesdays.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Wednesdays, June 17 – August 19 · 5:30–8:30pm<br><strong>Where:</strong> Wade Oval, 10820 East Blvd, University Circle<br><strong>Transit:</strong> RTA HealthLine to East Blvd · Red Line to University Circle · Free Neighborhood Shuttle from Glenville<br><strong>Accessibility:</strong> Fully accessible outdoor venue · Bagged meters for disability parking on Wade Oval Dr</p><a href="https://www.universitycircle.org/wow" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at universitycircle.org</a></div>
 
       <div class="event-detail" id="detail-edgewater-live"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Edgewater LIVE — Thursday Lakefront Concerts</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Weekly outdoor concerts on the shore of Lake Erie at Edgewater Beach House, featuring performers from the Tri-C Creative Arts Program. Bring a blanket, enjoy food from nearby vendors, and take in live music with Lake Erie as your backdrop.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Thursdays, June through August · 4:30pm<br><strong>Where:</strong> Edgewater Beach House, Centennial Plaza<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 55 bus to Edgewater Park</p></div>
 
-      <div class="event-detail" id="detail-third-fri-jun"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — June 20</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly art walk at 78th Street Studios. 60+ creative businesses open simultaneously. Live music, guest artisans, and food throughout the building. Summer editions have extra energy spilling into the neighborhood.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, June 20 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 22 bus · Free parking on-site</p><a href="https://78thstreetstudios.com" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
+      <div class="event-detail" id="detail-third-fri-jun"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — June 19</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly art walk at 78th Street Studios. 60+ creative businesses open simultaneously. Live music, guest artisans, and food throughout the building. Summer editions have extra energy spilling into the neighborhood.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, June 19 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 22 bus · Free parking on-site</p><a href="https://78thstreetstudios.com" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
-      <div class="event-detail" id="detail-art-house-jun"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — June 21</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free multi-generational art workshop at Art House Cleveland. Exploring different cultures through hands-on art making. All ages and backgrounds welcome. No experience required.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, June 21 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 51 Pearl Rd bus</p><a href="https://www.arthouseinc.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
+      <div class="event-detail" id="detail-art-house-jun"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — June 20</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free multi-generational art workshop at Art House Cleveland. Exploring different cultures through hands-on art making. All ages and backgrounds welcome. No experience required.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, June 20 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 51 Pearl Rd bus</p><a href="https://www.arthouseinc.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
       <div class="event-detail" id="detail-community-dance-day"><button class="close-btn" onclick="closeEvent()">✕</button><h4>DANCECleveland Community Dance Day — July 25</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Adaptive Dance</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A full day of free dance classes for all ages and abilities across the Playhouse Square District. Classes in Modern, Ballet, African Drum and Dance, Hip Hop, Pilates, Stepping, and adaptive dance (Dance for Every Body). Free student showcase performance at 3pm in the Allen Theatre. One of Cleveland's most joyful community events.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, July 25 · Starting 10am<br><strong>Where:</strong> Playhouse Square District, 1519 Euclid Ave<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA HealthLine or Red Line<br><strong>Accessibility:</strong> Adaptive dance class included · Fully accessible venue · All levels and bodies welcome</p><a href="https://www.dancecleveland.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at dancecleveland.org</a></div>
 
       <div class="event-detail" id="detail-inlet-cain"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Inlet Dance Theatre — Free Summer Concert at Cain Park</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Inlet Dance Theatre's annual free summer concert at Cain Park Evans Amphitheater in Cleveland Heights. Features new works created by Inlet company members, Summer Dance Intensive students, and repertory favorites. Kids Matinee available with audience participation.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> July 25–26, 2026 (Kids Matinee July 25 · Evening Concert July 26)<br><strong>Where:</strong> Cain Park Evans Amphitheater, 14591 Superior Rd, Cleveland Heights<br><strong>Cost:</strong> Free<br><strong>Accessibility:</strong> Outdoor amphitheater</p><a href="https://www.inletdance.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
-      <div class="event-detail" id="detail-third-fri-jul"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — July 18</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly art walk at 78th Street Studios. 60+ creative businesses, live music, artisans, and food. All welcome including well-behaved children and dogs.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, July 18 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
+      <div class="event-detail" id="detail-third-fri-jul"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — July 17</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly art walk at 78th Street Studios. 60+ creative businesses, live music, artisans, and food. All welcome including well-behaved children and dogs.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, July 17 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
 
-      <div class="event-detail" id="detail-art-house-jul"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — July 19</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free multi-generational art workshop at Art House Cleveland. Exploring different cultures through hands-on art making.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, July 19 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free</p></div>
+      <div class="event-detail" id="detail-art-house-jul"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — July 18</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free multi-generational art workshop at Art House Cleveland. Exploring different cultures through hands-on art making.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, July 18 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free</p></div>
 
       <div class="event-detail" id="detail-wow-end"><button class="close-btn" onclick="closeEvent()">✕</button><h4>WOW! Wade Oval Wednesdays — Final Concert</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The final night of the 10-concert summer series. Historically one of the most attended evenings of the season.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Wednesday, August 20 · 5:30–8:30pm<br><strong>Where:</strong> Wade Oval, University Circle<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA accessible</p></div>
 
-      <div class="event-detail" id="detail-third-fri-aug"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — August 15</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Summer finale edition of the monthly art walk at 78th Street Studios.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, August 15 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
+      <div class="event-detail" id="detail-third-fri-aug"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk — August 21</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Summer finale edition of the monthly art walk at 78th Street Studios.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, August 21 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
 
-      <div class="event-detail" id="detail-art-house-aug"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — August 16</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free multi-generational art workshop at Art House Cleveland.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, August 16 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free</p></div>
+      <div class="event-detail" id="detail-art-house-aug"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Art House Open Studios — August 15</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free multi-generational art workshop at Art House Cleveland.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, August 15 · 1–3pm<br><strong>Where:</strong> Art House, Brooklyn Centre<br><strong>Cost:</strong> Free</p></div>
 
       <div class="event-detail" id="detail-dance-cle-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>DANCECleveland — Dominic Moore-Dunson: Black by Nature</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Ticketed</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">New work by acclaimed Cleveland choreographer Dominic Moore-Dunson. Community and student discount ticket options available. Check dancecleveland.org for community pricing.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> September 19 and 26, 2026 · 1pm and 4pm<br><strong>Where:</strong> Playhouse Square<br><strong>Transit:</strong> RTA accessible<br><strong>Accessibility:</strong> Fully accessible venue</p><a href="https://www.dancecleveland.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Tickets at dancecleveland.org</a></div>
 
@@ -1932,7 +1933,7 @@
       <div class="event-detail" id="detail-cma-holiday"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Museum of Art — Holiday Programming</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">CMA's holiday season brings live choral and orchestral performances, family activities, and themed programming in the Ames Family Atrium. Free as part of general admission.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> November through January<br><strong>Where:</strong> 11150 East Blvd, University Circle<br><strong>Transit:</strong> RTA accessible<br><strong>Accessibility:</strong> Fully accessible</p><a href="https://www.clevelandart.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>
 
 
-      <div class="event-detail" id="detail-station-hope"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Public Theatre — Station Hope</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">CPT's annual free community festival rooted in the legacy of the Underground Railroad. Features live poetry, music, dance, theatre, and community celebration on and around the CPT campus in Gordon Square. All ages and backgrounds welcome. One of Cleveland's most meaningful free arts events.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, May 29, 2026 · Afternoon<br><strong>Where:</strong> Cleveland Public Theatre, 6415 Detroit Ave (Gordon Square)<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 22 Detroit Ave bus to W. 65th St<br><strong>Accessibility:</strong> ADA accessible · All-gender restroom</p><a href="https://www.cptonline.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at cptonline.org</a></div>
+      <div class="event-detail" id="detail-station-hope"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Public Theatre — Station Hope</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">CPT's annual free community festival rooted in the legacy of the Underground Railroad. Features live poetry, music, dance, theatre, and community celebration on and around the CPT campus in Gordon Square. All ages and backgrounds welcome. One of Cleveland's most meaningful free arts events.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, May 29, 2026 · Afternoon<br><strong>Where:</strong> Cleveland Public Theatre, 6415 Detroit Ave (Gordon Square)<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 22 Detroit Ave bus to W. 65th St<br><strong>Accessibility:</strong> ADA accessible · All-gender restroom</p><a href="https://www.cptonline.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at cptonline.org</a></div>
 
       <div class="event-detail" id="detail-big-run"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Big Run 216 — Free Community 5K</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Cleveland's beloved annual free untimed 5K at Edgewater Park, organized by Run Wild CLE and Run With the Winners. Hundreds of runners, walkers, and community members come out for this warm-weather celebration of the city's running scene. Vendors, music, food trucks, and a festive atmosphere. All paces welcome.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> June 2026 (exact date TBA — follow @runwildcle on Instagram)<br><strong>Where:</strong> Edgewater Park, 6500 Memorial Shoreway<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 55 bus to Edgewater Park<br><strong>Accessibility:</strong> Flat paved course · All paces welcome including walkers</p></div>
 
@@ -1964,9 +1965,9 @@
 
       <div class="event-detail" id="detail-movies-crocker"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Movies in the Park at Crocker Park</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free outdoor movie nights all summer long at Crocker Park in Westlake. Bring blankets and lawn chairs. Presented by Birchwood School of Hawken. Family-friendly films in a beautiful outdoor setting.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Thursdays, May 28 through September 3 (check crockerpark.com for titles)<br><strong>Where:</strong> 177 Market St, Westlake (Crocker Park)<br><strong>Cost:</strong> Free<br><strong>Getting there:</strong> ~20 min west of Cleveland; parking on-site</p><a href="https://crockerpark.com/our-events/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at crockerpark.com</a></div>
 
-      <div class="event-detail" id="detail-line-dancing"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Truck Tuesdays: Free Line Dancing</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free line dancing instruction led by Robert Johnson Jr. at the Harvard Community Services Center's monthly Food Truck Tuesdays, with Soul City BBQ on-site. July's session includes a free tie-dye art class by Oh Sew Powerful, Inc. A joyful community event on the east side.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>Dates:</strong> May 12, June 2, July 7 · 4–8pm total · Free line dancing 5–7pm<br><strong>July 7 bonus:</strong> Art class (tie-dye caps) 5–7pm with Brenda Lee Simpson<br><strong>Where:</strong> Harvard Community Services Center, 18240 Harvard Ave, Cleveland 44128<br><strong>Contact:</strong> 216.991.8585 x3103<br><strong>Transit:</strong> RTA 14 bus to Harvard Ave</p></div>
+      <div class="event-detail" id="detail-line-dancing"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Truck Tuesdays: Free Line Dancing</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free line dancing instruction led by Robert Johnson Jr. at the Harvard Community Services Center's monthly Food Truck Tuesdays, with Soul City BBQ on-site. July's session includes a free tie-dye art class by Oh Sew Powerful, Inc. A joyful community event on the east side.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>Dates:</strong> Tuesday May 12, Tuesday June 2, Tuesday July 7 · 4–8pm total · Free line dancing 5–7pm<br><strong>July 7 bonus:</strong> Art class (tie-dye caps) 5–7pm with Brenda Lee Simpson<br><strong>Where:</strong> Harvard Community Services Center, 18240 Harvard Ave, Cleveland 44128<br><strong>Contact:</strong> 216.991.8585 x3103<br><strong>Transit:</strong> RTA 14 bus to Harvard Ave</p></div>
 
-      <div class="event-detail" id="detail-asian-festival"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Asian Festival</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Cultural</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The 17th Annual Cleveland Asian Festival celebrates the city's diverse Asian communities during Asian Pacific American Heritage Month. Two days of free cultural performances, martial arts demonstrations, 100+ vendors, 30 local restaurants and food trucks, free health screenings, a cosplay showcase, K-Pop dance competition, Colors of Asia fashion show, and free AsiaTown neighborhood tours. One of Cleveland's best-loved community festivals.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> May 16–17, 2026 · 11am–7pm · Rain or shine<br><strong>Where:</strong> AsiaTown Asia Plaza, 2999 Payne Ave, Cleveland 44114<br><strong>Admission:</strong> Free · Free parking at CSU E. 24th and Payne lots with free shuttle<br><strong>Transit:</strong> RTA HealthLine to E. 30th or walk from downtown</p><a href="https://clevelandasianfestival.org/2026/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at clevelandasianfestival.org</a></div>
+      <div class="event-detail" id="detail-asian-festival"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Asian Festival</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Cultural</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The 17th Annual Cleveland Asian Festival celebrates the city's diverse Asian communities during Asian Pacific American Heritage Month. Two days of free cultural performances, martial arts demonstrations, 100+ vendors, 30 local restaurants and food trucks, free health screenings, a cosplay showcase, K-Pop dance competition, Colors of Asia fashion show, and free AsiaTown neighborhood tours. One of Cleveland's best-loved community festivals.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>Dates:</strong> Tuesdays: May 12, June 2, July 7 · 4–8pm · Free line dancing 5–7pm<br><strong>Where:</strong> AsiaTown Asia Plaza, 2999 Payne Ave, Cleveland 44114<br><strong>Admission:</strong> Free · Free parking at CSU E. 24th and Payne lots with free shuttle<br><strong>Transit:</strong> RTA HealthLine to E. 30th or walk from downtown</p><a href="https://clevelandasianfestival.org/2026/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at clevelandasianfestival.org</a></div>
 
       <div class="event-detail" id="detail-one-world-day"><button class="close-btn" onclick="closeEvent()">✕</button><h4>80th Annual One World Day</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Cultural</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">One World Day brings together nearly 120 ethnicities represented in Cleveland for a celebration of cultural heritage at the Cleveland Cultural Gardens in Rockefeller Park. The Parade of Flags begins at noon along East Blvd and MLK Jr. Drive. A Naturalization Ceremony welcomes new American citizens. Folk dancing, children's village, live cultural performances, international food, and a beer garden. One of Cleveland's most meaningful and joyful free events.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Sunday, August 30, 2026 · 11am–6pm · Parade of Flags at noon<br><strong>Where:</strong> Cleveland Cultural Gardens, Rockefeller Park (East Blvd and MLK Jr. Dr)<br><strong>Admission:</strong> Free · Free parking at Metroparks South Gordon Park lot and VA lot with shuttle<br><strong>Note:</strong> MLK and East Blvd closed to traffic 7am–midnight</p><a href="https://clevelandoneworldday.org/2026/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at clevelandoneworldday.org</a></div>
 
@@ -1992,11 +1993,20 @@
       <div class="cal-month">
         <div class="cal-month-header"><div class="cal-month-name">May 2026</div></div>
         <div class="cal-grid">
-          <div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>
-          <!-- May 1 is Thursday (offset 4) -->
-          <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-dow">Sun</div>
+          <div class="cal-dow">Mon</div>
+          <div class="cal-dow">Tue</div>
+          <div class="cal-dow">Wed</div>
+          <div class="cal-dow">Thu</div>
+          <div class="cal-dow">Fri</div>
+          <div class="cal-dow">Sat</div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
           <div class="cal-cell"><div class="cal-date">1</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event movement recurring" onclick="openEvent('namaste-lakefront')">🧘 N.C. Namaste</div><div class="cal-event movement recurring" onclick="openEvent('line-dancing')">💃 Line Dancing</div></div>
+          <div class="cal-cell"><div class="cal-date">2</div></div>
           <div class="cal-cell"><div class="cal-date">3</div></div>
           <div class="cal-cell"><div class="cal-date">4</div></div>
           <div class="cal-cell"><div class="cal-date">5</div></div>
@@ -2005,28 +2015,33 @@
           <div class="cal-cell"><div class="cal-date">8</div></div>
           <div class="cal-cell"><div class="cal-date">9</div></div>
           <div class="cal-cell"><div class="cal-date">10</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div><div class="cal-event community recurring" onclick="openEvent('psq-farmers-market')">🥦 PSQ Farmers Market</div><div class="cal-event arts recurring" onclick="openEvent('movies-crocker')">🎬 Movies in the Park</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event music recurring" onclick="openEvent('library-sound-bites')">🎵 CPL Sound Bites</div></div>
+          <div class="cal-cell"><div class="cal-date">11</div></div>
+          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event movement" onclick="openEvent('line-dancing')">💃 Food Truck Tuesdays: Line Dancing</div></div>
           <div class="cal-cell"><div class="cal-date">13</div></div>
           <div class="cal-cell"><div class="cal-date">14</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div><div class="cal-event arts" onclick="openEvent('third-fri-may')">🎨 3rd Friday Art Walk</div><div class="cal-event community" onclick="openEvent('asian-festival')">🏮 Asian Festival Day 1</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div><div class="cal-event arts" onclick="openEvent('art-house-may')">🎨 Art House Open Studios</div><div class="cal-event community" onclick="openEvent('asian-festival')">🏮 Asian Festival Day 2</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
+          <div class="cal-cell"><div class="cal-date">15</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-may')">🎨 3rd Friday Art Walk</div></div>
+          <div class="cal-cell"><div class="cal-date">16</div><div class="cal-event arts recurring" onclick="openEvent('art-house-may')">🎨 Art House Open Studios</div><div class="cal-event community" onclick="openEvent('asian-festival')">🏮 Asian Festival Day 1</div></div>
+          <div class="cal-cell"><div class="cal-date">17</div><div class="cal-event community" onclick="openEvent('asian-festival')">🏮 Asian Festival Day 2</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">18</div></div>
           <div class="cal-cell"><div class="cal-date">19</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div></div>
+          <div class="cal-cell"><div class="cal-date">20</div></div>
           <div class="cal-cell"><div class="cal-date">21</div></div>
           <div class="cal-cell"><div class="cal-date">22</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div><div class="cal-event music recurring" onclick="openEvent('bop-stop')">🎵 BOP STOP Live Music</div></div>
-          <div class="cal-cell"><div class="cal-date">24</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">23</div></div>
+          <div class="cal-cell"><div class="cal-date">24</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">25</div></div>
           <div class="cal-cell"><div class="cal-date">26</div></div>
           <div class="cal-cell"><div class="cal-date">27</div></div>
-          <div class="cal-cell"><div class="cal-date">28</div></div>
-          <div class="cal-cell"><div class="cal-date">29</div><div class="cal-event community" onclick="openEvent('station-hope')">🎭 CPT Station Hope</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div><div class="cal-event community" onclick="openEvent('one-world-day')">🌍 One World Day</div></div>
-          <div class="cal-cell"><div class="cal-date">31</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
-          <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event arts recurring" onclick="openEvent('movies-crocker')">🎬 Movies in the Park begins</div></div>
+          <div class="cal-cell"><div class="cal-date">29</div><div class="cal-event arts" onclick="openEvent('station-hope')">🎭 CPT Station Hope</div></div>
+          <div class="cal-cell"><div class="cal-date">30</div></div>
+          <div class="cal-cell"><div class="cal-date">31</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
         </div>
       </div>
 
@@ -2034,39 +2049,48 @@
       <div class="cal-month">
         <div class="cal-month-header"><div class="cal-month-name">June 2026</div></div>
         <div class="cal-grid">
-          <div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>
+          <div class="cal-dow">Sun</div>
+          <div class="cal-dow">Mon</div>
+          <div class="cal-dow">Tue</div>
+          <div class="cal-dow">Wed</div>
+          <div class="cal-dow">Thu</div>
+          <div class="cal-dow">Fri</div>
+          <div class="cal-dow">Sat</div>
           <div class="cal-cell empty"></div>
           <div class="cal-cell"><div class="cal-date">1</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div></div>
+          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event movement" onclick="openEvent('line-dancing')">💃 Food Truck Tuesdays: Line Dancing</div></div>
           <div class="cal-cell"><div class="cal-date">3</div></div>
-          <div class="cal-cell"><div class="cal-date">4</div><div class="cal-event music" onclick="openEvent('edgewater-live')">🎵 Edgewater LIVE begins</div><div class="cal-event movement recurring" onclick="openEvent('harbor-hustlers')">🏃 Harbor Hustlers</div><div class="cal-event movement" onclick="openEvent('yoga-summer')">🧘 Outdoor Yoga daily</div></div>
+          <div class="cal-cell"><div class="cal-date">4</div><div class="cal-event music recurring" onclick="openEvent('edgewater-live')">🎵 Edgewater LIVE begins</div><div class="cal-event movement recurring" onclick="openEvent('harbor-hustlers')">🏃 Harbor Hustlers Run</div></div>
           <div class="cal-cell"><div class="cal-date">5</div></div>
-          <div class="cal-cell"><div class="cal-date">6</div><div class="cal-event music recurring" onclick="openEvent('bop-stop')">🎵 BOP STOP Live Music</div></div>
-          <div class="cal-cell"><div class="cal-date">7</div><div class="cal-event movement" onclick="openEvent('line-dancing')">💃 Line Dancing + Art</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">6</div></div>
+          <div class="cal-cell"><div class="cal-date">7</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">8</div></div>
           <div class="cal-cell"><div class="cal-date">9</div></div>
           <div class="cal-cell"><div class="cal-date">10</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div></div>
+          <div class="cal-cell"><div class="cal-date">11</div><div class="cal-event community recurring" onclick="openEvent('psq-farmers-market')">🥦 PSQ Farmers Market begins</div></div>
           <div class="cal-cell"><div class="cal-date">12</div></div>
-          <div class="cal-cell"><div class="cal-date">13</div><div class="cal-event movement" onclick="openEvent('cain-ocb-jun')">🩰 OCB Free Performance</div></div>
-          <div class="cal-cell"><div class="cal-date">14</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div><div class="cal-event nature" onclick="openEvent('hike-summer')">🚶 Take a Hike: Summer Series</div></div>
+          <div class="cal-cell"><div class="cal-date">13</div><div class="cal-event arts" onclick="openEvent('cain-ocb-jun')">🩰 OCB Free Performance</div></div>
+          <div class="cal-cell"><div class="cal-date">14</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div><div class="cal-event nature recurring" onclick="openEvent('hike-summer')">🚶 Take a Hike: Summer Series</div></div>
           <div class="cal-cell"><div class="cal-date">15</div></div>
           <div class="cal-cell"><div class="cal-date">16</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div></div>
-          <div class="cal-cell"><div class="cal-date">18</div><div class="cal-event music" onclick="openEvent('wow-start')">🎵 WOW! Wade Oval begins</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event movement" onclick="openEvent('ocb-ballet-stars')">🩰 OCB Ballet Under Stars</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div><div class="cal-event arts" onclick="openEvent('third-fri-jun')">🎨 3rd Friday Art Walk</div></div>
-          <div class="cal-cell"><div class="cal-date">21</div><div class="cal-event arts" onclick="openEvent('art-house-jun')">🎨 Art House Open Studios</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div><div class="cal-event music" onclick="openEvent('symphony-sunset')">🎻 Symphony at Sunset</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">17</div><div class="cal-event music recurring" onclick="openEvent('wow-start')">🎵 WOW! Wade Oval begins</div></div>
+          <div class="cal-cell"><div class="cal-date">18</div></div>
+          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-jun')">🎨 3rd Friday Art Walk</div><div class="cal-event arts" onclick="openEvent('ocb-ballet-stars')">🩰 OCB Ballet Under the Stars Day 1</div></div>
+          <div class="cal-cell"><div class="cal-date">20</div><div class="cal-event arts" onclick="openEvent('ocb-ballet-stars')">🩰 OCB Ballet Under the Stars Day 2</div><div class="cal-event arts recurring" onclick="openEvent('art-house-jun')">🎨 Art House Open Studios</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div></div>
+          <div class="cal-cell"><div class="cal-date">21</div><div class="cal-event music recurring" onclick="openEvent('symphony-sunset')">🎻 Symphony at Sunset</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">22</div></div>
           <div class="cal-cell"><div class="cal-date">23</div></div>
           <div class="cal-cell"><div class="cal-date">24</div></div>
           <div class="cal-cell"><div class="cal-date">25</div></div>
           <div class="cal-cell"><div class="cal-date">26</div></div>
           <div class="cal-cell"><div class="cal-date">27</div></div>
-          <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event movement" onclick="openEvent('big-run')">🏃 Big Run 216 (est.)</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div><div class="cal-event movement" onclick="openEvent('big-run')">🏃 Big Run 216 (est.)</div></div>
           <div class="cal-cell"><div class="cal-date">29</div></div>
           <div class="cal-cell"><div class="cal-date">30</div></div>
-          <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
         </div>
         <p style="font-size:0.8rem;color:var(--mid);margin-top:0.5rem">🔁 WOW! Wednesdays continue weekly through Aug 20 · Edgewater LIVE Thursdays continue through August</p>
       </div>
@@ -2075,39 +2099,48 @@
       <div class="cal-month">
         <div class="cal-month-header"><div class="cal-month-name">July 2026</div></div>
         <div class="cal-grid">
-          <div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>
-          <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
-          <div class="cal-cell"><div class="cal-date">1</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
+          <div class="cal-dow">Sun</div>
+          <div class="cal-dow">Mon</div>
+          <div class="cal-dow">Tue</div>
+          <div class="cal-dow">Wed</div>
+          <div class="cal-dow">Thu</div>
+          <div class="cal-dow">Fri</div>
+          <div class="cal-dow">Sat</div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell"><div class="cal-date">1</div></div>
+          <div class="cal-cell"><div class="cal-date">2</div></div>
           <div class="cal-cell"><div class="cal-date">3</div></div>
           <div class="cal-cell"><div class="cal-date">4</div></div>
-          <div class="cal-cell"><div class="cal-date">5</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">5</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">6</div></div>
-          <div class="cal-cell"><div class="cal-date">7</div></div>
-          <div class="cal-cell"><div class="cal-date">8</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">9</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
+          <div class="cal-cell"><div class="cal-date">7</div><div class="cal-event movement" onclick="openEvent('line-dancing')">💃 Food Truck Tuesdays: Line Dancing + Art</div></div>
+          <div class="cal-cell"><div class="cal-date">8</div></div>
+          <div class="cal-cell"><div class="cal-date">9</div></div>
           <div class="cal-cell"><div class="cal-date">10</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div><div class="cal-event music recurring" onclick="openEvent('bop-stop')">🎵 BOP STOP Live Music</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event movement" onclick="openEvent('line-dancing')">💃 Line Dancing</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">11</div></div>
+          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div><div class="cal-event nature recurring" onclick="openEvent('hike-summer')">🚶 Take a Hike: Tours</div></div>
           <div class="cal-cell"><div class="cal-date">13</div></div>
           <div class="cal-cell"><div class="cal-date">14</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div></div>
-          <div class="cal-cell"><div class="cal-date">18</div><div class="cal-event arts" onclick="openEvent('third-fri-jul')">🎨 3rd Friday Art Walk</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event arts" onclick="openEvent('art-house-jul')">🎨 Art House Open Studios</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div><div class="cal-event music" onclick="openEvent('symphony-sunset')">🎻 Symphony at Sunset</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">15</div></div>
+          <div class="cal-cell"><div class="cal-date">16</div></div>
+          <div class="cal-cell"><div class="cal-date">17</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-jul')">🎨 3rd Friday Art Walk</div></div>
+          <div class="cal-cell"><div class="cal-date">18</div><div class="cal-event arts recurring" onclick="openEvent('art-house-jul')">🎨 Art House Open Studios</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div></div>
+          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event music recurring" onclick="openEvent('symphony-sunset')">🎻 Symphony at Sunset</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">20</div></div>
           <div class="cal-cell"><div class="cal-date">21</div></div>
-          <div class="cal-cell"><div class="cal-date">22</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
+          <div class="cal-cell"><div class="cal-date">22</div></div>
+          <div class="cal-cell"><div class="cal-date">23</div></div>
           <div class="cal-cell"><div class="cal-date">24</div></div>
           <div class="cal-cell"><div class="cal-date">25</div><div class="cal-event community" onclick="openEvent('community-dance-day')">🩰 Community Dance Day</div></div>
-          <div class="cal-cell"><div class="cal-date">26</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">26</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">27</div></div>
           <div class="cal-cell"><div class="cal-date">28</div></div>
-          <div class="cal-cell"><div class="cal-date">29</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
+          <div class="cal-cell"><div class="cal-date">29</div></div>
+          <div class="cal-cell"><div class="cal-date">30</div></div>
           <div class="cal-cell"><div class="cal-date">31</div></div>
+          <div class="cal-cell empty"></div>
         </div>
       </div>
 
@@ -2115,40 +2148,55 @@
       <div class="cal-month">
         <div class="cal-month-header"><div class="cal-month-name">August 2026</div></div>
         <div class="cal-grid">
-          <div class="cal-day-header">Sun</div><div class="cal-day-header">Mon</div><div class="cal-day-header">Tue</div><div class="cal-day-header">Wed</div><div class="cal-day-header">Thu</div><div class="cal-day-header">Fri</div><div class="cal-day-header">Sat</div>
-          <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-dow">Sun</div>
+          <div class="cal-dow">Mon</div>
+          <div class="cal-dow">Tue</div>
+          <div class="cal-dow">Wed</div>
+          <div class="cal-dow">Thu</div>
+          <div class="cal-dow">Fri</div>
+          <div class="cal-dow">Sat</div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
           <div class="cal-cell"><div class="cal-date">1</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">3</div></div>
           <div class="cal-cell"><div class="cal-date">4</div></div>
-          <div class="cal-cell"><div class="cal-date">5</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">6</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
+          <div class="cal-cell"><div class="cal-date">5</div></div>
+          <div class="cal-cell"><div class="cal-date">6</div></div>
           <div class="cal-cell"><div class="cal-date">7</div><div class="cal-event music recurring" onclick="openEvent('bop-stop')">🎵 BOP STOP Live Music</div></div>
           <div class="cal-cell"><div class="cal-date">8</div></div>
-          <div class="cal-cell"><div class="cal-date">9</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div><div class="cal-event nature recurring" onclick="openEvent('hike-summer')">🚶 Take a Hike: Tours</div></div>
+          <div class="cal-cell"><div class="cal-date">9</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div><div class="cal-event nature recurring" onclick="openEvent('hike-summer')">🚶 Take a Hike: Tours</div></div>
           <div class="cal-cell"><div class="cal-date">10</div></div>
           <div class="cal-cell"><div class="cal-date">11</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">13</div><div class="cal-event music recurring">🎵 Edgewater LIVE</div></div>
+          <div class="cal-cell"><div class="cal-date">12</div></div>
+          <div class="cal-cell"><div class="cal-date">13</div></div>
           <div class="cal-cell"><div class="cal-date">14</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div><div class="cal-event arts" onclick="openEvent('third-fri-aug')">🎨 3rd Friday Art Walk</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div><div class="cal-event arts" onclick="openEvent('art-house-aug')">🎨 Art House Open Studios</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div><div class="cal-event music" onclick="openEvent('symphony-sunset')">🎻 Symphony at Sunset</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">15</div><div class="cal-event arts recurring" onclick="openEvent('art-house-aug')">🎨 Art House Open Studios</div><div class="cal-event arts recurring" onclick="openEvent('fairmount-open')">🎨 Fairmount Open Studios</div></div>
+          <div class="cal-cell"><div class="cal-date">16</div><div class="cal-event music recurring" onclick="openEvent('symphony-sunset')">🎻 Symphony at Sunset</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">17</div></div>
           <div class="cal-cell"><div class="cal-date">18</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event music recurring">🎵 WOW! Wednesdays</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div><div class="cal-event music" onclick="openEvent('wow-end')">🎵 WOW! Final Concert</div></div>
-          <div class="cal-cell"><div class="cal-date">21</div></div>
+          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event music" onclick="openEvent('wow-end')">🎵 WOW! Final Concert</div></div>
+          <div class="cal-cell"><div class="cal-date">20</div></div>
+          <div class="cal-cell"><div class="cal-date">21</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-aug')">🎨 3rd Friday Art Walk</div></div>
           <div class="cal-cell"><div class="cal-date">22</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">23</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">24</div></div>
           <div class="cal-cell"><div class="cal-date">25</div></div>
           <div class="cal-cell"><div class="cal-date">26</div></div>
           <div class="cal-cell"><div class="cal-date">27</div></div>
           <div class="cal-cell"><div class="cal-date">28</div></div>
           <div class="cal-cell"><div class="cal-date">29</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div><div class="cal-event community" onclick="openEvent('one-world-day')">🌍 One World Day</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up Square</div></div>
+          <div class="cal-cell"><div class="cal-date">30</div><div class="cal-event community" onclick="openEvent('one-world-day')">🌍 One World Day</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div></div>
           <div class="cal-cell"><div class="cal-date">31</div></div>
-          <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
         </div>
       </div>
 
