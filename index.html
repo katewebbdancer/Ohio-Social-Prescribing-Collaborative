@@ -2387,7 +2387,8 @@
     if (hash) showPage(hash, false);
   });
 
-  document.addEventListener('DOMContentLoaded', initPageFromHash);
+  // Script is at bottom of page so DOM is already ready — call directly
+  initPageFromHash();
   function toggleNav() {
     document.getElementById('nav-tabs').classList.toggle('open');
     document.getElementById('nav-hamburger').classList.toggle('open');
