@@ -2351,10 +2351,12 @@
     var blob = new Blob([u], {type: 'application/pdf'});
     window.open(URL.createObjectURL(blob), '_blank');
   }
-  function showPage(name) {
+  function showPage(name, updateHash) {
     document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
     document.querySelectorAll('.nav-tabs button').forEach(function(b){ b.classList.remove('active'); });
-    document.getElementById('page-' + name).classList.add('active');
+    var pageEl = document.getElementById('page-' + name);
+    if (!pageEl) return;
+    pageEl.classList.add('active');
     // Supplements and vitamins are sub-pages of the resource guide tab
     var tabName = (name === 'supplements' || name === 'vitamins') ? 'referral-guide' : name;
     var tab = document.getElementById('tab-' + tabName);
@@ -2362,7 +2364,30 @@
     window.scrollTo(0, 0);
     document.getElementById('nav-tabs').classList.remove('open');
     document.getElementById('nav-hamburger').classList.remove('open');
+    // Update the URL hash so each tab has a shareable link
+    if (updateHash !== false) {
+      history.replaceState(null, '', '#' + name);
+    }
   }
+
+  // On load, read the hash and show the right page
+  function initPageFromHash() {
+    var hash = window.location.hash.replace('#', '');
+    var validPages = ['welcome','mission','projects','map','events','referral-guide','resources','connect','supplements','vitamins'];
+    if (hash && validPages.indexOf(hash) !== -1) {
+      showPage(hash, false);
+    } else {
+      showPage('welcome', false);
+    }
+  }
+
+  // Handle browser back/forward navigation
+  window.addEventListener('hashchange', function() {
+    var hash = window.location.hash.replace('#', '');
+    if (hash) showPage(hash, false);
+  });
+
+  document.addEventListener('DOMContentLoaded', initPageFromHash);
   function toggleNav() {
     document.getElementById('nav-tabs').classList.toggle('open');
     document.getElementById('nav-hamburger').classList.toggle('open');
