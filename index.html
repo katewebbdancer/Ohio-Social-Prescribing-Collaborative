@@ -296,7 +296,7 @@
   /* Supplements: flat results list shown during search */
   #supp-search-results { display: none; }
   #supp-search-results.active { display: block; }
-  #supp-search-results .resource-card { margin-bottom: 1rem; }
+  #supp-search-results .resource-card, #supp-search-results-yo .resource-card { margin-bottom: 1rem; }
   /* Small category label shown in search results */
   .result-cat-label {
     font-size: 0.72rem;
@@ -333,7 +333,7 @@
     <li><button onclick="showPage('projects')" id="tab-projects">Projects</button></li>
     <li><button onclick="showPage('map')" id="tab-map">Asset Map</button></li>
     <li><button onclick="showPage('events')" id="tab-events">Events</button></li>
-    <li><button onclick="showPage('referral-guide')" id="tab-referral-guide">CLE SP Referral Guide</button></li>
+    <li><button onclick="showPage('referral-guide')" id="tab-referral-guide">Regional SP Referral Guides</button></li>
     <li><button onclick="showPage('resources')" id="tab-resources">SP Knowledge Hub</button></li>
     <li><button onclick="showPage('connect')" id="tab-connect">Connect</button></li>
   </ul>
@@ -1048,6 +1048,57 @@
 <div id="page-referral-guide" class="page">
   <div class="hero" style="padding:3rem 2rem 2.5rem">
     <div class="hero-inner">
+      <div class="hero-eyebrow">📋 Regional Social Prescribing Referral Guides</div>
+      <h1>A Living Guide to <em>Community Wellness</em> Across Ohio</h1>
+      <p class="hero-subtitle">Choose a region to explore curated, vetted social prescribing resources near you.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner" style="max-width:860px">
+
+      <p style="font-size:1rem;line-height:1.8;color:var(--mid);margin-bottom:2.5rem">
+        Social prescribing connects people to community-based activities and resources that support health, wellbeing, and social connection. OSPC is building referral guides region by region, starting with Cleveland and expanding across Ohio. Select a region below to get started.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2.5rem">
+
+        <div onclick="showPage('referral-guide-cle')" style="cursor:pointer;background:white;border:2px solid var(--light-border);border-radius:16px;padding:2rem 1.75rem;transition:all 0.2s;display:flex;flex-direction:column;gap:1rem" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='var(--light-border)';this.style.transform='none';this.style.boxShadow='none'">
+          <div style="font-size:2.5rem;line-height:1">🏙️</div>
+          <div>
+            <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--charcoal);margin:0 0 0.5rem">Cleveland</h2>
+            <p style="font-size:0.92rem;line-height:1.7;color:var(--mid);margin:0">Our most established referral guide: a curated catalogue of year-round resources ("SP Supplements") and a living calendar of upcoming programming and events ("SP Vitamins").</p>
+          </div>
+          <div style="margin-top:auto;padding-top:0.75rem">
+            <span style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--accent)">Explore the Cleveland guide →</span>
+          </div>
+        </div>
+
+        <div onclick="showPage('supplements-youngstown')" style="cursor:pointer;background:white;border:2px solid var(--light-border);border-radius:16px;padding:2rem 1.75rem;transition:all 0.2s;display:flex;flex-direction:column;gap:1rem" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='var(--light-border)';this.style.transform='none';this.style.boxShadow='none'">
+          <div style="font-size:2.5rem;line-height:1">🌳</div>
+          <div>
+            <h2 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--charcoal);margin:0 0 0.5rem">Youngstown</h2>
+            <p style="font-size:0.92rem;line-height:1.7;color:var(--mid);margin:0">A growing catalogue of year-round arts, culture, and nature resources in the Mahoning Valley.</p>
+          </div>
+          <div style="margin-top:auto;padding-top:0.75rem">
+            <span style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.88rem;font-weight:600;color:var(--accent)">Explore the Youngstown guide →</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:12px;padding:1.5rem 1.75rem;font-size:0.9rem;line-height:1.8;color:var(--mid)">
+        <strong style="color:var(--charcoal)">About these guides</strong><br>
+        Regional SP Referral Guides are maintained by the Ohio Social Prescribing Collaborative (OSPC) as part of an ongoing effort to map and strengthen the social prescribing ecosystem across Ohio, region by region. Resources are vetted for accessibility, cost, and relevance to populations served by healthcare partners. Each guide is refreshed on a rolling basis. If you know of a resource that should be included, please <button onclick="showPage('connect')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.9rem;padding:0">reach out through the Connect page</button>.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="page-referral-guide-cle" class="page">
+  <div class="hero" style="padding:3rem 2rem 2.5rem">
+    <div class="hero-inner">
       <div class="hero-eyebrow">📋 Cleveland Social Prescribing Referral Guide</div>
       <h1>A Living Guide to <em>Community Wellness</em> in Cleveland</h1>
       <p class="hero-subtitle">Two referral tools in one: a curated catalogue of year-round resources and a living calendar of upcoming programming and events.</p>
@@ -1056,6 +1107,10 @@
 
   <div class="section">
     <div class="section-inner" style="max-width:860px">
+
+      <p style="font-size:0.88rem;margin-bottom:1.5rem">
+        <button onclick="showPage('referral-guide')" style="color:var(--mid);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.88rem;padding:0">&#8592; All Regional Guides</button>
+      </p>
 
       <p style="font-size:1rem;line-height:1.8;color:var(--mid);margin-bottom:2.5rem">
         Social prescribing connects people to community-based activities and resources that support health, wellbeing, and social connection. This guide is built around two kinds of resources, those you can access any time and those that are time-specific. Together, they form a growing map of what Cleveland has to offer.
@@ -1124,7 +1179,7 @@
       </style>
 
       <p style="font-size:0.92rem;line-height:1.7;color:var(--mid);background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1.25rem;margin-bottom:2rem">
-        <strong>About this page:</strong> "SP Supplements" are free and low-cost community resources available year-round in Cleveland. Select a category below to explore. For time-specific events, visit the <button onclick="showPage('vitamins')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.92rem">SP Vitamins Calendar</button> · <button onclick="showPage('referral-guide')" style="color:var(--mid);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.92rem">← Back to Resource Guide</button>
+        <strong>About this page:</strong> "SP Supplements" are free and low-cost community resources available year-round in Cleveland. Select a category below to explore. For time-specific events, visit the <button onclick="showPage('vitamins')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.92rem">SP Vitamins Calendar</button> · <button onclick="showPage('referral-guide-cle')" style="color:var(--mid);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.92rem">← Back to Resource Guide</button>
       </p>
 
       
@@ -1589,6 +1644,20 @@
         </p>
         <a href="https://www.clevelandymca.org/join/membership-builder/financial-assistance/" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Apply for financial assistance at clevelandymca.org</a>
             </div>
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Island Beats Zumba&reg; and Movement Studio</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Zumba&reg; &amp; Movement</span>
+          <span class="prog-tag" style="background:#5B4A9E">Women's Wellness</span>
+          <span class="prog-tag" style="background:#7A5C2D">Classes and Retreats</span>
+        </div>
+        <p>Island Beats is a Zumba&reg; and movement studio in Cleveland that emboldens women navigating life changes to grow through movement, community, and self-discovery, drawing on island rhythms and over 20 years of combined Zumba&reg; experience from owners Iris and Zoe. Offerings include Zumba and BOUNCE (rebounder/trampoline) classes, a SHINE membership, and special events and retreats.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Address:</strong> 5004 Memphis Ave, Cleveland, OH 44144<br>
+          <strong>Contact:</strong> <a href="mailto:hola@islandbeatstudio.com" style="color:var(--accent)">hola@islandbeatstudio.com</a>
+        </p>
+        <a href="https://islandbeatstudio.com" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit islandbeatstudio.com</a>
+      </div>
       </div>
 
 <div class="cat-section" id="cat-nature">
@@ -1926,7 +1995,9 @@
             <span class="prog-tag" style="background:#3A7CA5">All Interest Areas</span>
           </div>
           <p>Greater Cleveland Volunteers is the region's primary volunteer matching platform, connecting individuals with nonprofits, schools, and community organizations across Northeast Ohio. Search by interest, skill, and schedule. Good for both short-term projects and ongoing roles.</p>
-          <a href="https://www.gcv.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Find opportunities at gcv.org</a>
+          <p style="margin-top:0.5rem">Their <strong>Chat Pals</strong> program pairs adults 55+ with background-checked volunteers 18+ for weekly phone or video calls (FaceTime or Zoom). Participants and volunteers are matched by shared interests so a friendship can form remotely, offering connection, emotional support, companionship, and improved mental and physical well-being.</p>
+          <p style="margin-top:0.5rem;font-size:0.88rem;color:var(--mid)"><strong>Chat Pals contact:</strong> Kirsten Riley, <a href="mailto:kriley@greaterclevelandvolunteers.org" style="color:var(--accent)">kriley@greaterclevelandvolunteers.org</a>, 216-391-9500 x2124</p>
+          <a href="https://greaterclevelandvolunteers.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Find opportunities at greaterclevelandvolunteers.org</a>
         </div>
 
         <div class="resource-card" style="margin-bottom:1.25rem">
@@ -1980,6 +2051,419 @@
   </div>
 </div>
 
+<div id="page-supplements-youngstown" class="page">
+  <div class="hero" style="padding:3rem 2rem 2.5rem">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">🌳 Youngstown SP Supplements</div>
+      <h1>Youngstown SP <em>Supplements</em></h1>
+      <p class="hero-subtitle">A growing catalogue of year-round arts, culture, and nature resources in the Mahoning Valley. Always confirm details with the hosting organization before attending.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-inner">
+
+      <p style="font-size:0.88rem;margin-bottom:1.5rem">
+        <button onclick="showPage('referral-guide')" style="color:var(--mid);font-weight:600;background:none;border:none;cursor:pointer;font-size:0.88rem;padding:0">&#8592; All Regional Guides</button>
+      </p>
+
+      <p style="font-size:0.92rem;line-height:1.7;color:var(--mid);background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1.25rem;margin-bottom:2rem">
+        <strong>About this page:</strong> These are free and low-cost community resources available year-round in the Youngstown / Mahoning Valley area. Select a category below to explore. This guide is newer than the Cleveland guide and will continue to grow.
+      </p>
+
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="supp-search-input-yo"
+          placeholder="Search by keyword, organization, or category (e.g. gardens, theatre, free)…"
+          autocomplete="off" spellcheck="false">
+        <button class="search-clear" id="supp-search-clear-yo" onclick="clearSuppSearchYO()" aria-label="Clear search">✕</button>
+      </div>
+      <div class="search-count" id="supp-search-count-yo" style="display:none"></div>
+      <div id="supp-search-results-yo"></div>
+
+      <div class="cat-grid" id="supp-cat-grid-yo">
+        <div class="cat-tile" onclick="showCatYO('arts')"><div class="cat-icon">🎨</div><div class="cat-label">Arts and Culture</div></div>
+        <div class="cat-tile" onclick="showCatYO('nature')"><div class="cat-icon">🌿</div><div class="cat-label">Nature</div></div>
+      </div>
+
+      <script>
+        function showCatYO(id) {
+          document.querySelectorAll('#page-supplements-youngstown .cat-section').forEach(s => s.classList.remove('cat-visible'));
+          document.querySelectorAll('#page-supplements-youngstown .cat-tile').forEach(t => t.classList.remove('cat-active'));
+          var sec = document.getElementById('cat-yo-' + id);
+          if (sec) sec.classList.add('cat-visible');
+          var tiles = document.querySelectorAll('#page-supplements-youngstown .cat-tile');
+          tiles.forEach(function(t) { if (t.getAttribute('onclick') === "showCatYO('" + id + "')") t.classList.add('cat-active'); });
+          document.getElementById('supp-cat-grid-yo').scrollIntoView({behavior:'smooth', block:'start'});
+        }
+        function hideCatYO() {
+          document.querySelectorAll('#page-supplements-youngstown .cat-section').forEach(s => s.classList.remove('cat-visible'));
+          document.querySelectorAll('#page-supplements-youngstown .cat-tile').forEach(t => t.classList.remove('cat-active'));
+          var grid = document.getElementById('supp-cat-grid-yo');
+          if (grid) grid.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      </script>
+
+      <div class="cat-section" id="cat-yo-arts">
+        <button class="supp-back" onclick="hideCatYO()">&#8592; All Categories</button>
+        <h2 class="cat-h2">🎨 Arts and Culture</h2>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>LOOP Youngstown Arts + Culture Center</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Open Studios</span>
+          <span class="prog-tag" style="background:#5B4A9E">Artist Fellowship</span>
+          <span class="prog-tag" style="background:#7A5C2D">Community Hub</span>
+        </div>
+        <p>Creative space and public programs for artists and residents across the Mahoning Valley. New Arts + Culture Center dedicated June 2026, housing 32 art studios for 28 working artists across painting, photography, ceramics, and weaving; offers gallery openings, markets, classes/workshops, and an Emerging Artist Fellowship.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Address:</strong> 805 Mahoning Ave, Youngstown, OH<br>
+          <strong>Note:</strong> Center opening August 2026
+        </p>
+        <a href="https://loopyoungstown.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit loopyoungstown.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Youngstown Playhouse</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Community Theatre</span>
+          <span class="prog-tag" style="background:#7A5C2D">100+ Years Running</span>
+        </div>
+        <p>Community theatre producing a full season of plays and musicals, in continuous operation over 100 years.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Box office at DeYor PAC, 330-259-9651, Mon–Fri 10am–5pm<br>
+          <strong>Address:</strong> 600 Playhouse Lane, Youngstown, OH 44511<br>
+          <strong>Accessibility:</strong> Mainstage elevator-accessible with designated wheelchair/companion seating; Moyer Room blackbox theatre also wheelchair-accessible
+        </p>
+        <a href="https://youngstownplayhouse.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit youngstownplayhouse.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Youngstown Symphony Orchestra</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Resident Orchestra</span>
+          <span class="prog-tag" style="background:#7A5C2D">DeYor PAC and Stambaugh Auditorium</span>
+        </div>
+        <p>Resident professional orchestra performing its season at DeYor Performing Arts Center (Powers Auditorium) and Stambaugh Auditorium.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Box office 330-259-9651; office 330-744-4269<br>
+          <strong>Address:</strong> 260 W. Federal St, Youngstown, OH 44503<br>
+          <strong>Hours:</strong> Box office Mon–Fri 10am–5pm<br>
+          <strong>Accessibility:</strong> Venue wheelchair accessible; contact box office for special seating
+        </p>
+        <a href="https://youngstownsymphony.com" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit youngstownsymphony.com</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>DeYor Performing Arts Center</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Powers Auditorium</span>
+          <span class="prog-tag" style="background:#5B4A9E">Ford Family Recital Hall</span>
+          <span class="prog-tag" style="background:#7A5C2D">Adler Art Academy</span>
+        </div>
+        <p>Downtown Youngstown performing arts complex housing Powers Auditorium, Ford Family Recital Hall, and the Adler Art Academy; home venue for YSO and touring performances.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Box office 330-259-9651<br>
+          <strong>Address:</strong> 260 W. Federal St, Youngstown, OH 44504<br>
+          <strong>Hours:</strong> Box office Mon–Fri 10am–5pm; facility Mon–Fri 9am–3pm, closed Sat/Sun<br>
+          <strong>Accessibility:</strong> Wheelchair accessible; handicapped parking; ushers/security for special services; contact in advance for special seating
+        </p>
+        <a href="https://deyorpac.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit deyorpac.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Stambaugh Auditorium</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Nonprofit Concert Hall</span>
+          <span class="prog-tag" style="background:#7A5C2D">Historic Touring Venue</span>
+        </div>
+        <p>Historic nonprofit concert hall hosting touring concerts and community performances.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Box office at DeYor PAC, 330-259-9651, Mon–Fri 10am–5pm; online at experienceyourarts.org<br>
+          <strong>Address:</strong> 1000 5th Ave, Youngstown, OH 44504<br>
+          <strong>Accessibility:</strong> Wheelchair accessible, but historic building has no elevator; accommodation requests at ticket purchase
+        </p>
+        <a href="https://stambaughauditorium.com" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit stambaughauditorium.com</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>McDonough Museum of Art (YSU)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#2D7A4F">Free Admission</span>
+          <span class="prog-tag" style="background:#3A7CA5">University Art Museum</span>
+          <span class="prog-tag" style="background:#7A5C2D">Contemporary Art</span>
+        </div>
+        <p>YSU's contemporary art museum offering exhibitions, installations, performances, and lectures, free and open to campus and community.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-941-1400<br>
+          <strong>Cost:</strong> Free<br>
+          <strong>Hours:</strong> Tue–Sat 11am–4pm; closed Sun, Mon, major holidays<br>
+          <strong>Address:</strong> 525 Wick Ave, Youngstown, OH 44502
+        </p>
+        <a href="https://academics.ysu.edu/mcdonough-museum-of-art" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit academics.ysu.edu/mcdonough-museum-of-art</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Dana School of Music (YSU)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#2D7A4F">Free Weekly Concert Series</span>
+          <span class="prog-tag" style="background:#7A5C2D">100+ Public Events/Year</span>
+        </div>
+        <p>YSU's music school presenting 100+ public events annually, including the free weekly "Music at Noon" series at the Butler Institute (Wed 12:15pm during sessions), plus faculty/student recitals, choral, jazz, and opera.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Office of Community Engagement and Events, 330-941-2307<br>
+          <strong>Cost:</strong> Free (Music at Noon); other events vary<br>
+          <strong>Hours:</strong> Music at Noon: Wednesdays 12:15pm during YSU sessions<br>
+          <strong>Address:</strong> Bliss Recital Hall, Bliss Hall, YSU campus; Music at Noon at Butler Institute of American Art<br>
+          <strong>Transportation:</strong> Free parking at the Butler for Music at Noon
+        </p>
+        <a href="https://academics.ysu.edu/dana-school-of-music" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit academics.ysu.edu/dana-school-of-music</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>JCC of Youngstown — Visual Arts &amp; Cultural Arts</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Visual Arts Classes</span>
+          <span class="prog-tag" style="background:#5B4A9E">Jewish Film Festival</span>
+          <span class="prog-tag" style="background:#7A5C2D">Cultural Programming</span>
+        </div>
+        <p>Visual arts classes through the Paul and Yetta Gluck School of Visual Arts, the Thomases Family Endowment Art Gallery, and cultural programming including the Jewish Film Festival, speakers, and community learning events.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Arts &amp; Culture Coordinator, 330-746-3250 ext. 106; <a href="mailto:news@jewishyoungstown.org" style="color:var(--accent)">news@jewishyoungstown.org</a><br>
+          <strong>Address:</strong> 505 Gypsy Ln, Youngstown, OH
+        </p>
+        <a href="https://jccyoungstown.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit jccyoungstown.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>YMCA of Youngstown — Gallery at the Y (GATY)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#7A5C2D">Four Community Art Shows Annually</span>
+          <span class="prog-tag" style="background:#3A7CA5">Invitational / Benefit / Juried</span>
+        </div>
+        <p>Community art gallery at the Davis Family YMCA hosting four art shows a year (invitational, benefit, juried exhibits).</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> Suzanne Gray, Arts &amp; Humanities Coordinator, <a href="mailto:sgray@youngstownymca.org" style="color:var(--accent)">sgray@youngstownymca.org</a>, 330-480-5656 x247<br>
+          <strong>Address:</strong> Davis Family YMCA, 45 McClurg Rd, Boardman, OH 44512
+        </p>
+        <a href="https://ymcayo.org/arts-humanities" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit ymcayo.org/arts-humanities</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>SMARTS (Students Motivated by the Arts)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Arts Education Partnerships</span>
+          <span class="prog-tag" style="background:#5B4A9E">Youth Programming PK–12</span>
+        </div>
+        <p>Community art school bridging arts curriculum gaps during and after school for Youngstown-area youth (PK–12) in visual arts, music, dance, theater, and creative writing.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-574-2787 · Becky Keck, <a href="mailto:bkeck@smartsartschool.org" style="color:var(--accent)">bkeck@smartsartschool.org</a><br>
+          <strong>Address:</strong> Ohio One Building, 25 E. Boardman St, 1st Floor, Youngstown, OH 44503
+        </p>
+        <a href="https://smartsartschool.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit smartsartschool.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>The Public Library of Youngstown &amp; Mahoning County</h3>
+        <p>Public library system with multiple branch locations throughout Mahoning County.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-744-8636<br>
+          <strong>Address:</strong> 305 Wick Ave, Youngstown, OH 44503 (main branch)<br>
+          <strong>Note:</strong> Multiple sites throughout Mahoning County
+        </p>
+        <a href="https://www.libraryvisit.org/" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit libraryvisit.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Butler Institute of American Art</h3>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-743-1107<br>
+          <strong>Address:</strong> 524 Wick Ave, Youngstown, OH 44502
+        </p>
+        <a href="https://butlerart.com/#custom-popup" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit butlerart.com</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>YSU Summer Arts Festival</h3>
+        <p>Annual summer arts festival hosted on YSU's campus.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Note:</strong> The 2026 Summer Festival of the Arts will be held at YSU's campus on July 11 from 10am–5pm and July 12 from 11am–4pm.
+        </p>
+        <a href="https://sfa.ysu.edu" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit sfa.ysu.edu</a>
+      </div>
+
+      </div>
+
+      <div class="cat-section" id="cat-yo-nature">
+        <button class="supp-back" onclick="hideCatYO()">&#8592; All Categories</button>
+        <h2 class="cat-h2">🌿 Nature</h2>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Mill Creek MetroParks — Forest Therapy &amp; Outdoor Yoga</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Guided Forest Therapy</span>
+          <span class="prog-tag" style="background:#5B4A9E">Outdoor Yoga</span>
+          <span class="prog-tag" style="background:#7A5C2D">Registration Required</span>
+        </div>
+        <p>Guided forest therapy programming (e.g., talks at Ford Nature Education Center) and outdoor yoga classes (Yoga Basics Course; Yoga in the Gardens) led by experienced instructors at park sites.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-740-7116 ext. 230; register online at reservations.millcreekmetroparks.org<br>
+          <strong>Cost:</strong> Yoga Basics Course ~$96 (8 sessions); Yoga in the Gardens $15/class; walk-ins welcome for some classes<br>
+          <strong>Hours:</strong> Outdoor yoga: Tuesdays 6–7:15pm, June 30–Aug 18 (seasonal, varies)<br>
+          <strong>Address:</strong> Ford Nature Education Center and other Mill Creek MetroParks sites, Youngstown, OH
+        </p>
+        <a href="https://millcreekmetroparks.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit millcreekmetroparks.org</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Fellows Riverside Gardens</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#2D7A4F">Free 12-Acre Public Garden</span>
+          <span class="prog-tag" style="background:#7A5C2D">Art Gallery in Visitor Center</span>
+        </div>
+        <p>Free public garden within Mill Creek MetroParks; the Davis Education &amp; Visitor Center on-site includes the Weller Gallery (rotating exhibits), Mill Creek Park Museum, and observation tower.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Cost:</strong> Free<br>
+          <strong>Hours:</strong> Davis Visitor Center: Tue–Sun 10am–5pm, closed Mondays &amp; observed holidays; gardens open daily<br>
+          <strong>Address:</strong> 123 McKinley Ave, Youngstown, OH 44509
+        </p>
+        <a href="https://millcreekmetroparks.org/fellows-riverside-gardens" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit millcreekmetroparks.org/fellows-riverside-gardens</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>Ford Nature Center (Mill Creek MetroParks)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#3A7CA5">Nature Education Facility</span>
+          <span class="prog-tag" style="background:#5B4A9E">Guided Hikes</span>
+          <span class="prog-tag" style="background:#7A5C2D">School Programs</span>
+        </div>
+        <p>Nature education facility in the Historic District of Mill Creek Park offering naturalist-led hikes, school programs, workshops, and special events year-round.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-740-7107<br>
+          <strong>Address:</strong> 840 Old Furnace Rd, Youngstown, OH 44511
+        </p>
+        <a href="https://millcreekmetroparks.org/ford-nature-center" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit millcreekmetroparks.org/ford-nature-center</a>
+      </div>
+
+<div class="resource-card" style="margin-bottom:1.25rem">
+        <h3>OSU Extension — Mahoning County</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
+          <span class="prog-tag" style="background:#2D5016">Garden</span>
+          <span class="prog-tag" style="background:#7A5C2D">Agriculture</span>
+          <span class="prog-tag" style="background:#3A7CA5">Education</span>
+        </div>
+        <p>Ohio State University Extension office serving Mahoning County with garden, agriculture, and education programming.</p>
+        <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--mid)">
+          <strong>Contact:</strong> 330-533-5538<br>
+          <strong>Address:</strong> 490 South Broad St, Canfield, OH 44406
+        </p>
+        <a href="https://mahoning.osu.edu" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit mahoning.osu.edu</a>
+      </div>
+
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--mid);margin-top:1rem;padding:1rem;background:var(--cream);border-radius:8px;border:1px solid var(--light-border)">
+          Know a resource that belongs here? <button onclick="showPage('connect')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer">Submit it</button>
+        </p>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var cardDataYO = [];
+
+  function buildSuppIndexYO() {
+    var cats = {
+      'cat-yo-arts': 'Arts and Culture',
+      'cat-yo-nature': 'Nature'
+    };
+    Object.keys(cats).forEach(function(catId) {
+      var sec = document.getElementById(catId);
+      if (!sec) return;
+      sec.querySelectorAll('.resource-card').forEach(function(card) {
+        cardDataYO.push({
+          card: card,
+          catLabel: cats[catId],
+          text: (card.textContent || '').toLowerCase()
+        });
+      });
+    });
+  }
+
+  function doSuppSearchYO(query) {
+    var clearBtn = document.getElementById('supp-search-clear-yo');
+    var countEl = document.getElementById('supp-search-count-yo');
+    var resultsDiv = document.getElementById('supp-search-results-yo');
+    var catGrid = document.getElementById('supp-cat-grid-yo');
+
+    clearBtn.style.display = query ? 'block' : 'none';
+
+    if (!query) {
+      clearSuppSearchYO();
+      return;
+    }
+
+    var terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+
+    var matches = cardDataYO.filter(function(item) {
+      return terms.every(function(t) { return item.text.includes(t); });
+    });
+
+    catGrid.style.display = 'none';
+    document.querySelectorAll('#page-supplements-youngstown .cat-section').forEach(function(s) {
+      s.classList.remove('cat-visible');
+    });
+
+    resultsDiv.innerHTML = '';
+    if (matches.length === 0) {
+      resultsDiv.innerHTML = '<p style="color:var(--mid);font-size:0.9rem;padding:0.75rem 0">No results for <em>"' + query + '"</em>. Try a different keyword.</p>';
+    } else {
+      matches.forEach(function(item) {
+        var wrapper = document.createElement('div');
+        var label = document.createElement('div');
+        label.className = 'result-cat-label';
+        label.textContent = item.catLabel;
+        var clone = item.card.cloneNode(true);
+        wrapper.appendChild(label);
+        wrapper.appendChild(clone);
+        resultsDiv.appendChild(wrapper);
+      });
+    }
+    resultsDiv.classList.add('active');
+    countEl.textContent = matches.length + ' resource' + (matches.length !== 1 ? 's' : '') + ' found';
+    countEl.style.display = 'block';
+  }
+
+  window.clearSuppSearchYO = function() {
+    var input = document.getElementById('supp-search-input-yo');
+    if (input) input.value = '';
+    var clearBtn = document.getElementById('supp-search-clear-yo');
+    if (clearBtn) clearBtn.style.display = 'none';
+    var countEl = document.getElementById('supp-search-count-yo');
+    if (countEl) { countEl.style.display = 'none'; countEl.textContent = ''; }
+    var resultsDiv = document.getElementById('supp-search-results-yo');
+    if (resultsDiv) { resultsDiv.classList.remove('active'); resultsDiv.innerHTML = ''; }
+    var catGrid = document.getElementById('supp-cat-grid-yo');
+    if (catGrid) catGrid.style.display = '';
+    document.querySelectorAll('#page-supplements-youngstown .cat-section').forEach(function(s) {
+      s.classList.remove('cat-visible');
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    buildSuppIndexYO();
+    var input = document.getElementById('supp-search-input-yo');
+    if (!input) return;
+    input.addEventListener('input', function() { doSuppSearchYO(this.value.trim()); });
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') clearSuppSearchYO();
+    });
+  });
+})();
+</script>
+
 <!-- ══ VITAMINS CALENDAR PAGE ══ -->
 
 <div id="page-vitamins" class="page">
@@ -1995,7 +2479,7 @@
     <div class="section-inner">
 
       <p class="body" style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1.25rem;font-size:0.92rem;line-height:1.7;margin-bottom:2rem">
-        <strong>About this page:</strong> "SP Vitamins" are time-specific events. All events listed are free unless noted. <strong>Always confirm details directly with the hosting organization before attending</strong>, as dates, times, and availability can change. For year-round resources, visit the <button onclick="showPage('supplements')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer">SP Supplements list</button> · <button onclick="showPage('referral-guide')" style="color:var(--mid);font-weight:600;background:none;border:none;cursor:pointer">← Back to Resource Guide</button>
+        <strong>About this page:</strong> "SP Vitamins" are time-specific events. All events listed are free unless noted. <strong>Always confirm details directly with the hosting organization before attending</strong>, as dates, times, and availability can change. For year-round resources, visit the <button onclick="showPage('supplements')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer">SP Supplements list</button> · <button onclick="showPage('referral-guide-cle')" style="color:var(--mid);font-weight:600;background:none;border:none;cursor:pointer">← Back to Resource Guide</button>
       </p>
 
       <!-- CALENDAR STYLES -->
@@ -2604,7 +3088,7 @@
           </div>
 
           <div class="resource-card">
-            <span class="resource-tag sp">Grant Writing &amp; Programming Lead</span>
+            <span class="resource-tag sp">Programming Lead</span>
             <h3>Heather Felden</h3>
             <p>Heather Felden is an arts and health professional, educator, and community arts leader whose work explores the intersection of wellness, creativity, and community engagement. She is currently completing a Master of Applied Arts in Health at Ohio University, serves as Nursing Grant Manager at Lakeland Community College, and is an active member of the Ohio Social Prescribing Collaborative. Heather is also completing an internship with Playhouse Square focused on arts, education, health, and community well-being.</p>
             <p>Drawing on a background in occupational therapy, dance, higher education, and grant management, Heather is particularly interested in the role of the arts in promoting health, social connection, and quality of life. Through her work and continued learning, she seeks to expand access to arts-based opportunities that support individual and community well-being.</p>
@@ -2651,8 +3135,10 @@
         <ul style="list-style:none; padding:0; margin-top:1rem; display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:0.5rem 2rem;">
           <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong>Liz Novy</strong><br><span style="color:#666; font-size:0.9rem;">Continuing Education &amp; Corporate Outreach Lead</span></li>
           <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong>Bailey Slattery</strong><br><span style="color:#666; font-size:0.9rem;">External Communications Lead</span></li>
+          <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong>Anne-Marie Berk</strong><br><span style="color:#666; font-size:0.9rem;">Grant Writing Lead</span></li>
           <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong><em>Open</em></strong><br><span style="color:#666; font-size:0.9rem;">Fundraising / Development Lead — <button onclick="showPage('connect')" style="background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:inherit;padding:0;font-family:inherit;">Connect</button> if interested</span></li>
-          <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong><em>Open</em></strong><br><span style="color:#666; font-size:0.9rem;">Asset Map Lead — <button onclick="showPage('connect')" style="background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:inherit;padding:0;font-family:inherit;">Connect</button> if interested</span></li>
+          <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong>Ed Armentrout</strong><br><span style="color:#666; font-size:0.9rem;">Asset Map Lead</span></li>
+          <li style="padding:0.6rem 0; border-bottom:1px solid var(--light-border);"><strong><em>Open</em></strong><br><span style="color:#666; font-size:0.9rem;">Internal Operations Lead — <button onclick="showPage('connect')" style="background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;font-size:inherit;padding:0;font-family:inherit;">Connect</button> if interested</span></li>
         </ul>
 
         <hr class="divider">
@@ -2674,6 +3160,10 @@
           <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Adena Health</span>
           <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Ohio Arts Council</span>
           <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Cleveland Metroparks</span>
+          <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Assembly for the Arts</span>
+          <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Cleveland City Dance</span>
+          <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Healing in Color</span>
+          <span style="background:var(--cream); border:1px solid var(--light-border); border-radius:6px; padding:0.35rem 0.8rem; font-size:0.88rem;">Greater Cleveland Volunteers</span>
         </div>
 
         <hr class="divider">
@@ -2710,11 +3200,11 @@
           <div class="section-label">What You'll Receive</div>
           <div class="card" style="margin-bottom:1rem"><div class="card-icon">📬</div><h3>Email Updates</h3><p>Updates on Ohio social prescribing progress, national news, resource spotlights, and upcoming events.</p></div>
           <div class="card" style="margin-bottom:1rem"><div class="card-icon">🎥</div><h3>Zoom Meeting Links</h3><p>Access to our monthly Monday gatherings, past recordings, and meeting notes, exclusively for mailing list members.</p></div>
-          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🗺️</div><h3>Asset Map Contributions</h3><p>Ability to submit programs to our growing Ohio asset map and access the full directory.</p></div>
+          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🗺️</div><h3>Asset Map Contributions</h3><p>Ability to submit programs to our growing Ohio asset map and access the full directory.</p><p style="margin-top:0.4rem;"><a href="mailto:map@ohiosocialprescribingcollaborative.com">map@ohiosocialprescribingcollaborative.com</a></p></div>
           <div class="card" style="margin-bottom:1rem"><div class="card-icon">🤝</div><h3>Network Directory</h3><p>Connect with social prescribing advocates, practitioners, and organizations across Ohio.</p></div>
           <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1.25rem;font-size:0.85rem;line-height:1.7;color:var(--mid)">
             📧 <strong style="color:var(--charcoal)">Direct Contact:</strong><br>Questions or partnership inquiries:<br>
-            [contact email coming soon]
+            <a href="mailto:info@ohiosocialprescribingcollaborative.com">info@ohiosocialprescribingcollaborative.com</a>
           </div>
 
           <div style="margin-top:1.25rem">
@@ -2782,7 +3272,7 @@
     if (!pageEl) return;
     pageEl.classList.add('active');
     // Supplements and vitamins are sub-pages of the resource guide tab
-    var tabName = (name === 'supplements' || name === 'vitamins') ? 'referral-guide' : name;
+    var tabName = (name === 'supplements' || name === 'vitamins' || name === 'referral-guide-cle' || name === 'supplements-youngstown') ? 'referral-guide' : name;
     var tab = document.getElementById('tab-' + tabName);
     if (tab) tab.classList.add('active');
     window.scrollTo(0, 0);
@@ -2797,7 +3287,7 @@
   // On load, read the hash and show the right page
   function initPageFromHash() {
     var hash = window.location.hash.replace('#', '');
-    var validPages = ['welcome','mission','projects','map','events','referral-guide','resources','connect','supplements','vitamins'];
+    var validPages = ['welcome','mission','projects','map','events','referral-guide','referral-guide-cle','resources','connect','supplements','vitamins','supplements-youngstown'];
     if (hash && validPages.indexOf(hash) !== -1) {
       showPage(hash, false);
     } else {
