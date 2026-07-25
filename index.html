@@ -234,6 +234,34 @@
   .prog-info strong a { color: var(--charcoal); text-decoration: none; font-size: 0.9rem; }
   .prog-info strong a:hover { color: var(--accent); }
   .prog-info span { color: var(--mid); font-size: 0.78rem; line-height: 1.45; }
+  .sp-dir-note { font-size: 0.82rem; color: var(--mid); margin-bottom: 1.25rem; }
+  .sp-dir-filters { padding: 0 0 1rem 0; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+  .sp-dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+  .sp-dir-card { background: white; border: 1px solid var(--light-border); border-radius: 10px; padding: 1.25rem 1.4rem; transition: transform 0.2s, box-shadow 0.2s; }
+  .sp-dir-card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,0.08); }
+  .sp-dir-cats { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.6rem; }
+  .sp-dir-cat { font-size: 0.63rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; }
+  .sp-dir-cat.sp-dir-cat-alt { background: transparent; border: 1px solid var(--light-border); color: var(--mid); }
+  .sp-dir-card h3 { font-family: 'Playfair Display', serif; font-size: 1.02rem; margin-bottom: 0.2rem; line-height: 1.3; }
+  .sp-dir-card h3 a { color: var(--charcoal); text-decoration: none; }
+  .sp-dir-card h3 a:hover { color: var(--accent); }
+  .sp-dir-loc { font-size: 0.76rem; color: var(--accent); font-weight: 600; margin-bottom: 0.5rem; }
+  .sp-dir-desc { font-size: 0.84rem; color: var(--mid); line-height: 1.55; margin-bottom: 0.6rem; }
+  .sp-dir-meta { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.5rem; padding-top: 0.6rem; border-top: 1px solid var(--light-border); }
+  .sp-dir-meta-item { font-size: 0.74rem; color: var(--mid); line-height: 1.4; }
+  .sp-dir-meta-item strong { color: var(--charcoal); font-weight: 600; }
+  .sp-dir-search-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+  .sp-dir-search-input { flex: 1 1 260px; max-width: 420px; padding: 0.6rem 0.9rem; border: 1px solid var(--light-border); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; background: white; color: var(--charcoal); }
+  .sp-dir-search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,97,30,0.1); }
+  .sp-dir-search-hint { font-size: 0.78rem; color: var(--mid); }
+  .sp-dir-search-hint em { color: var(--accent); font-style: normal; font-weight: 600; }
+  .sp-dir-noresults { font-size: 0.88rem; color: var(--mid); padding: 1.5rem; text-align: center; display: none; }
+  .sp-access-block { background: var(--cream); border: 1px solid var(--light-border); border-left: 4px solid var(--forest); border-radius: 8px; padding: 1.5rem 1.75rem; margin-top: 2.5rem; }
+  .sp-access-block h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--charcoal); }
+  .sp-access-block p { font-size: 0.88rem; line-height: 1.7; color: var(--mid); margin-bottom: 0.75rem; }
+  .sp-access-block p:last-child { margin-bottom: 0; }
+  .sp-access-block a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .sp-access-block a:hover { text-decoration: underline; }
   .resource-card { background: white; border: 1px solid var(--light-border); border-radius: 8px; padding: 1.25rem 1.5rem; transition: box-shadow 0.2s; }
   .resource-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
   .resource-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.4rem; color: var(--charcoal); }
@@ -499,444 +527,287 @@
       <p class="lead">Explore programs and organizations across Ohio that can serve as destinations for social prescriptions. Hover a pin to preview, click to visit the program website. Filter by type below.</p>
 
       <div id="map-container">
-        <div class="map-controls">
-          <label>Filter:</label>
-          <button class="filter-btn active" onclick="filterMap('all',this)">All</button>
-          <button class="filter-btn" onclick="filterMap('artsrx',this)">🟠 Active Arts Prescribing</button>
-          <button class="filter-btn" onclick="filterMap('health',this)">🔵 SP-Adjacent Healthcare</button>
-          <button class="filter-btn" onclick="filterMap('arts',this)">🟢 Arts &amp; Culture Assets</button>
-          <button class="filter-btn" onclick="filterMap('nature',this)">🌿 Nature &amp; Green Space</button>
-        </div>
-
-        <div id="ohio-svg-wrap">
-          <!--
-            OHIO MAP — SVG viewBox 0 0 800 620
-            Projection: linear lat/lon → SVG pixels
-              Lon range: -84.82 (west/Indiana border) to -80.52 (east/PA border) → x: 30 to 770 (740px wide)
-              Lat range: 38.40 (south, Ohio River) to 42.00 (north, Lake Erie) → y: 590 to 30 (560px tall, inverted)
-
-            Formula:
-              x = 30 + (lon - (-84.82)) / (4.30) * 740
-              y = 590 - (lat - 38.40) / (3.60) * 560
-
-            Key city SVG coords:
-              Toledo     (-83.56, 41.66) → x=184, y=77
-              Cleveland  (-81.69, 41.50) → x=474, y=100
-              Youngstown (-80.65, 41.10) → x=652, y=162
-              Akron      (-81.52, 41.08) → x=500, y=165
-              Canton     (-81.38, 40.80) → x=521, y=208
-              Columbus   (-82.99, 39.96) → x=268, y=340
-              Dayton     (-84.19, 39.76) → x=100, y=371
-              Cincinnati (-84.51, 39.10) → x=56,  y=464  [SW corner, near Indiana & Ohio River]
-              Athens     (-82.10, 39.33) → x=404, y=429
-              Marietta   (-81.45, 39.42) → x=509, y=414
-              Zanesville (-82.01, 39.94) → x=418, y=344
-              Lima       (-84.10, 40.74) → x=114, y=218
-
-            Note: Cincinnati at x=56 IS correct — it's Ohio's most southwest city, tight against
-            the Indiana border. The Ohio River is the south border (y≈590). Cincinnati is ~130px
-            above that, clearly inside the state.
-          -->
-          <!--
-            SVG MAP — shape and city positions traced from reference map image
-            ViewBox: 0 0 800 620. State fills roughly x:40-760, y:70-570.
-
-            Verified city positions (matched to reference image proportions):
-              Toledo        260, 110  → 32.5%  17.7%
-              Cleveland     574, 150  → 71.7%  24.2%
-              Akron         565, 235  → 70.6%  37.9%
-              Canton        624, 280  → 78.1%  45.2%
-              Youngstown    702, 195  → 87.8%  31.5%
-              Columbus      464, 377  → 58.0%  60.8%
-              Dayton        226, 400  → 28.3%  64.5%
-              Cincinnati    116, 490  → 14.5%  79.0%
-              Athens        544, 410  → 68.0%  66.1%
-              Marietta      652, 445  → 81.5%  71.8%
-              Steubenville  724, 345  → 90.5%  55.6%
-              Kirtland      580, 130  → 72.5%  21.0%
-          -->
-          <svg id="ohio-main-svg" viewBox="0 0 800 620" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
-            <defs>
-              <linearGradient id="ohioFill" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#D8EED2"/>
-                <stop offset="100%" style="stop-color:#BDD9B4"/>
-              </linearGradient>
-              <linearGradient id="lakeFill" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style="stop-color:#B8D8EA"/>
-                <stop offset="100%" style="stop-color:#A0C8DF"/>
-              </linearGradient>
-            </defs>
-
-            <!-- Background (surrounding states / water) -->
-            <rect width="800" height="620" fill="#EEF4F8"/>
-
-            <!--
-              OHIO BORDER — carefully traced from reference map:
-              NW: ~(40, 120) — Indiana meets Lake Erie area (Toledo region)
-              Lake Erie coast dips south notably at Sandusky Bay (~x=310, y=140)
-              then back north before Cleveland (~x=540, y=100)
-              NE: ~(760, 80) — PA meets Lake Erie
-              East: PA border drops straight south to ~(760, 310)
-              then Ohio River winds SW with jags:
-                ~(740, 340) Steubenville area
-                ~(700, 390) WV border turns
-                ~(650, 450) Marietta/Parkersburg
-                ~(570, 500) Gallipolis
-                ~(480, 540) Huntington area (lowest point, Ohio River bulge)
-                ~(430, 555) 
-                ~(370, 535) Portsmouth
-                ~(280, 510) 
-                ~(190, 510) near Cincinnati
-                ~(120, 510) Cincinnati area
-              SW: ~(40, 490) — Indiana border begins
-              West: Indiana border mostly straight north from (40,490) to (40,120)
-            -->
-            <path id="ohio-shape" d="
-              M 40,120
-              L 40,200 L 40,290 L 40,380 L 40,490
-              L 120,510 L 190,510 L 240,510 L 280,510
-              L 330,535 L 370,540 L 395,538
-              L 430,555 L 460,548 L 480,540
-              L 510,525 L 540,510 L 555,500
-              L 570,505 L 600,482 L 625,458
-              L 650,448 L 665,435 L 680,415
-              L 700,395 L 715,370 L 725,345
-              L 738,320 L 748,300 L 755,280
-              L 760,250 L 760,200 L 760,140 L 760,80
-              L 700,78 L 640,76 L 590,82
-              L 565,95 L 540,100 L 520,105
-              L 490,120 L 460,140 L 440,148
-              L 410,152 L 385,160 L 360,155
-              L 335,145 L 310,140 L 285,145
-              L 260,150 L 240,140 L 220,128
-              L 200,120 L 160,116 L 110,115 L 70,118 L 40,120 Z
-            " fill="url(#ohioFill)" stroke="#5A9050" stroke-width="2" stroke-linejoin="round"/>
-
-            <!-- Lake Erie — water above north shore -->
-            <path d="M 40,120 L 70,118 L 110,115 L 160,116 L 200,120 L 220,128 L 240,140
-              L 260,150 L 285,145 L 310,140 L 335,145 L 360,155 L 385,160 L 410,152
-              L 440,148 L 460,140 L 490,120 L 520,105 L 540,100 L 565,95 L 590,82
-              L 640,76 L 700,78 L 760,80 L 760,0 L 40,0 Z"
-              fill="url(#lakeFill)" opacity="0.85"/>
-            <text x="400" y="52" text-anchor="middle" font-size="13" fill="#3A6A8A" font-family="DM Sans,sans-serif" font-style="italic" font-weight="500">Lake Erie</text>
-
-            <!-- Ohio River label -->
-            <text x="420" y="547" text-anchor="middle" font-size="10" fill="#4A78A0" font-family="DM Sans,sans-serif" font-style="italic" transform="rotate(-5,420,547)">Ohio River</text>
-
-            <!-- State watermark -->
-            <text x="340" y="330" text-anchor="middle" font-size="88" fill="rgba(60,110,50,0.06)" font-family="Playfair Display,serif" font-weight="900">OHIO</text>
-
-            <!-- ── CITY REFERENCE DOTS ── -->
-            <circle cx="260" cy="175" r="4" fill="#3A5A30" opacity="0.55"/>
-            <text x="270" y="179" font-size="10" fill="#2A4020" font-family="DM Sans,sans-serif">Toledo</text>
-
-            <circle cx="574" cy="150" r="5" fill="#3A5A30" opacity="0.65"/>
-            <text x="490" y="154" font-size="11" fill="#1A3010" font-family="DM Sans,sans-serif" font-weight="600">Cleveland</text>
-
-            <circle cx="702" cy="195" r="4" fill="#3A5A30" opacity="0.5"/>
-            <text x="650" y="189" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Youngstown</text>
-
-            <circle cx="565" cy="235" r="4" fill="#3A5A30" opacity="0.5"/>
-            <text x="572" y="248" font-size="10" fill="#2A4020" font-family="DM Sans,sans-serif">Akron</text>
-
-            <circle cx="624" cy="280" r="3.5" fill="#3A5A30" opacity="0.45"/>
-            <text x="631" y="277" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Canton</text>
-
-            <circle cx="464" cy="377" r="5" fill="#3A5A30" opacity="0.65"/>
-            <text x="474" y="381" font-size="11" fill="#1A3010" font-family="DM Sans,sans-serif" font-weight="600">Columbus</text>
-
-            <circle cx="226" cy="400" r="4" fill="#3A5A30" opacity="0.5"/>
-            <text x="236" y="404" font-size="10" fill="#2A4020" font-family="DM Sans,sans-serif">Dayton</text>
-
-            <circle cx="116" cy="490" r="5" fill="#3A5A30" opacity="0.65"/>
-            <text x="126" y="494" font-size="11" fill="#1A3010" font-family="DM Sans,sans-serif" font-weight="600">Cincinnati</text>
-
-            <circle cx="544" cy="410" r="3.5" fill="#3A5A30" opacity="0.45"/>
-            <text x="552" y="407" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Athens</text>
-
-            <circle cx="652" cy="445" r="3.5" fill="#3A5A30" opacity="0.45"/>
-            <text x="659" y="442" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Marietta</text>
-
-            <circle cx="724" cy="345" r="3.5" fill="#3A5A30" opacity="0.45"/>
-            <text x="668" y="349" font-size="9" fill="#2A4020" font-family="DM Sans,sans-serif">Steubenville</text>
-
-            <!-- Compass rose -->
-            <text x="745" y="590" font-size="13" fill="rgba(50,90,40,0.25)" font-family="DM Sans,sans-serif">N ↑</text>
-          </svg>
-
-          <!--
-            ALL PINS — positioned as % of SVG canvas (800 wide × 620 tall)
-            Matched to reference map image proportions.
-            left = x/800*100,  top = y/620*100
-
-            City anchors:
-              Toledo        260, 110  → 32.5%  17.7%
-              Cleveland     574, 150  → 71.8%  24.2%
-              Kirtland      580, 130  → 72.5%  21.0%
-              Youngstown    702, 195  → 87.8%  31.5%
-              Akron         565, 235  → 70.6%  37.9%
-              Canton        624, 280  → 78.0%  45.2%
-              Steubenville  724, 345  → 90.5%  55.6%
-              Columbus      464, 377  → 58.0%  60.8%
-              Dayton        226, 400  → 28.3%  64.5%
-              Athens        544, 410  → 68.0%  66.1%
-              Marietta      652, 445  → 81.5%  71.8%
-              Cincinnati    116, 490  → 14.5%  79.0%
-          -->
-
-          <!-- === CLEVELAND 574,150 → 71.8% 24.2% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:71.8%;top:24.2%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Cleveland Museum of Art</strong><span>Free admission; creative aging, community wellness &amp; arts in health programs</span><a href="https://www.clevelandart.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:69.5%;top:27.0%" data-type="artsrx">
-            <div class="pin-dot artsrx"></div>
-            <div class="pin-label"><strong>Playhouse Square — Arts &amp; Minds</strong><span>Dance for Parkinson's &amp; arts programming for neurological disorders; collaboration with Cleveland Clinic</span><a href="https://www.playhousesquare.org/arts-minds" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:74.0%;top:22.0%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>UH Connor Whole Health</strong><span>Integrative medicine including art, music &amp; expressive therapies; whole-person care model</span><a href="https://www.uhhospitals.org/services/integrative-health-network" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:70.5%;top:29.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>MetroHealth — Institute for H.O.P.E.</strong><span>Systematic SDOH screening &amp; referral network; Center for Arts in Health; community health workers</span><a href="https://www.metrohealth.org/institute-for-hope" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:75.5%;top:25.0%" data-type="artsrx">
-            <div class="pin-dot artsrx"></div>
-            <div class="pin-label"><strong>Cleveland Clinic — Arts &amp; Medicine</strong><span>Verified arts prescribing program: art therapy, music therapy, live performances integrated into patient care</span><a href="https://my.clevelandclinic.org/departments/arts-medicine" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === KIRTLAND/HOLDEN ARBORETUM 580,130 → 72.5% 21.0% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:72.5%;top:21.0%" data-type="nature">
-            <div class="pin-dot nature"></div>
-            <div class="pin-label"><strong>Holden Arboretum</strong><span>One of the largest arboreta in the US; nature-based wellness &amp; therapeutic horticulture programs, NE Ohio</span><a href="https://www.holdenarb.org" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === OHIO CONTEMPORARY BALLET — Shaker Heights (near Cleveland) → 73.5% 27.5% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:73.5%;top:27.5%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Ohio Contemporary Ballet</strong><span>35+ year NE Ohio dance company; low-cost/free performances, community outreach &amp; accessible dance classes, Shaker Heights</span><a href="https://ocballet.org" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === GREATER CLEVELAND VOLUNTEERS — CHAT PALS (virtual/phone, statewide-accessible) === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:73.0%;top:24.5%" data-type="social">
-            <div class="pin-dot social"></div>
-            <div class="pin-label"><strong>Greater Cleveland Volunteers — Chat Pals</strong><span>Free phone or video-based (FaceTime/Zoom) friendship-matching program pairing seniors (55+) with background-checked volunteers for weekly calls providing connection, emotional support &amp; companionship; phone-based option available statewide</span><a href="https://greaterclevelandvolunteers.org/chat-pals/" target="_blank">Visit →</a></div>
-          </div>
-
-          
-          <!-- InMotion (Beachwood / Cleveland area) -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:76.5%;top:19.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>InMotion</strong><span>Free wellness programs for people with Parkinson's disease — exercise, arts, education &amp; support, Beachwood</span><a href="https://beinmotion.org" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === YOUNGSTOWN 702,195 → 87.8% 31.5% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:87.8%;top:31.5%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Butler Institute of American Art</strong><span>Free admission; community arts programs serving the Mahoning Valley</span><a href="https://butlerart.com" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === YOUNGSTOWN VA / CREATIVE FORCES === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:89.5%;top:29.0%" data-type="artsrx">
-            <div class="pin-dot artsrx"></div>
-            <div class="pin-label"><strong>VA Northeast Ohio Healthcare System — Creative Forces (Youngstown VA Clinic)</strong><span>Creative Forces: NEA Military Healing Arts Network clinical site at the Youngstown VA; creative arts therapists provide music &amp; art therapy for active-duty military and veterans with TBI/PTSD; also connected to the Rural Veterans TeleRehabilitation Initiative for remote/rural veterans</span><a href="https://www.arts.gov/initiatives/creative-forces" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === AKRON 565,235 → 70.6% 37.9% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:70.6%;top:37.9%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Akron Art Museum</strong><span>Community arts programs &amp; free community days</span><a href="https://www.akronartmuseum.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:72.3%;top:40.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Summa Health — Healing Arts</strong><span>Verified arts-in-health program: visual arts, performing arts &amp; creative arts therapy integrated into patient care</span><a href="https://www.summahealth.org/art" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === CANTON 624,280 → 78.0% 45.2% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:78.0%;top:45.2%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Canton Museum of Art</strong><span>Community arts programs serving Stark County</span><a href="https://www.cantonart.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:79.7%;top:47.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Aultman Health</strong><span>Regional health system serving Canton &amp; Stark County; community health programs</span><a href="https://www.aultman.org" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === STEUBENVILLE 724,345 → 90.5% 55.6% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:88.5%;top:55.6%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Ohio Valley Health Center</strong><span>Free clinic providing primary care to uninsured &amp; underinsured patients in the Ohio Valley, Steubenville</span><a href="https://ovhealthcenter.org" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === TOLEDO 260,175 → 32.5% 28.2% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:32.5%;top:28.2%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Toledo Museum of Art</strong><span>Free general admission; art &amp; wellness programming for the community</span><a href="https://www.toledomuseum.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:34.5%;top:30.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Toledo-Lucas County Health Dept.</strong><span>Public health &amp; SDOH initiatives serving Northwest Ohio</span><a href="https://lucascountyhealth.com" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === COLUMBUS 464,377 → 58.0% 60.8% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:58.0%;top:60.8%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Columbus Museum of Art</strong><span>Wonder Room, creative aging, community wellness programs</span><a href="https://www.columbusmuseum.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:59.8%;top:63.2%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Nationwide Children's Hospital</strong><span>Art therapy &amp; music therapy programs across inpatient &amp; outpatient care; pediatric arts in health</span><a href="https://www.nationwidechildrens.org/specialties/music-therapy" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:55.8%;top:63.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>OSU Wexner Medical Center</strong><span>Academic medical center &amp; potential SP research partner; integrative health initiatives in Columbus</span><a href="https://wexnermedical.osu.edu" target="_blank">Visit →</a></div>
-          </div>
-
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:58.5%;top:58.5%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Short North Arts District</strong><span>Vibrant community arts corridor; galleries, events &amp; cultural programming in Columbus</span><a href="https://www.shortnorth.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:55.5%;top:65.5%" data-type="nature">
-            <div class="pin-dot nature"></div>
-            <div class="pin-label"><strong>Columbus Recreation &amp; Parks</strong><span>City parks, community centers, nature programs &amp; fitness — potential green prescribing partner</span><a href="https://www.columbus.gov/recreationandparks" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:57.2%;top:61.8%" data-type="nature">
-            <div class="pin-dot nature"></div>
-            <div class="pin-label"><strong>Walk with a Doc (Columbus)</strong><span>Free doctor-led community walking groups combining movement, nature, health education, and social connection. Founded in Columbus in 2005; now a global movement in 641 communities across 41 countries, with over 20 chapters in Ohio alone.</span><a href="https://walkwithadoc.org/join-a-walk/locations/ohio/" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === WE THRIVE TOGETHER (statewide / fully virtual — pin placed centrally) === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:61.0%;top:52.0%" data-type="social">
-            <div class="pin-dot social"></div>
-            <div class="pin-label"><strong>We Thrive Together</strong><span>Ohio nonprofit combating social isolation &amp; loneliness through free, fully virtual social, educational &amp; recreational programming (trivia, exercise classes, cooking classes, virtual trips); reaches participants in all 88 Ohio counties via phone or internet-ready device</span><a href="https://wethrivetogether.org/" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === DAYTON 226,400 → 28.3% 64.5% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:28.3%;top:64.5%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Dayton Art Institute</strong><span>Community arts, creative aging &amp; free community events</span><a href="https://www.daytonartinstitute.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:30.0%;top:66.8%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Premier Health</strong><span>Community health system serving greater Dayton; potential SP-adjacent partner</span><a href="https://www.premierhealth.com" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === SPRINGFIELD / CLARK COUNTY HEAL COALITION (interpolated between Dayton &amp; Columbus) → 37.7% 61.5% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:37.7%;top:61.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Community Health Foundation — Clark County HEAL Coalition</strong><span>Healthy Eating Active Living (HEAL) Coalition; for the past year and a half has worked with the School-Based Health Center at Springfield High School to pilot a social prescribing initiative (HEAL Rx &amp; Wellness Rx)</span><a href="https://community-health-foundation.org/heal-clark-county/" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === ATHENS 544,410 → 68.0% 66.1% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:68.0%;top:66.1%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Dairy Barn Arts Center</strong><span>Community arts hub serving Appalachian Ohio; exhibitions, education &amp; community events</span><a href="https://dairybarn.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:69.5%;top:63.8%" data-type="artsrx">
-            <div class="pin-dot artsrx"></div>
-            <div class="pin-label"><strong>Bobcat ArtsCare (Ohio University)</strong><span>Active arts prescribing program connecting OU students &amp; Athens community to arts-based wellness</span><a href="https://www.ohio.edu/well-being/bobcat-artscare" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === MARIETTA 652,445 → 81.5% 71.8% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:81.5%;top:71.8%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Marietta College — Arts Programs</strong><span>Community arts &amp; creative programming in Southeast Ohio</span><a href="https://www.marietta.edu" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === CHILLICOTHE / ADENA HEALTH 464,430 → 58.0% 69.4% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:50.5%;top:71.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>Adena Health System</strong><span>Regional health system serving a nine-county area in south-central Ohio; community health team connecting patients to aging, mental health, food, housing, and social resources across Chillicothe and surrounding Appalachian communities</span><a href="https://www.adena.org/community-health-resources" target="_blank">Visit →</a></div>
-          </div>
-
-          <!-- === CINCINNATI 116,490 → 14.5% 79.0% === -->
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:14.5%;top:79.0%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Cincinnati Art Museum</strong><span>Free Sundays; community arts &amp; wellness programming; potential arts prescribing partner</span><a href="https://www.cincinnatiartmuseum.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:16.2%;top:76.5%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>UC Health</strong><span>Academic medical center; Humanities &amp; Arts in Medicine pathway at UC College of Medicine</span><a href="https://www.uchealth.com" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:18.2%;top:74.0%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>TriHealth</strong><span>Community health system serving greater Cincinnati; SDOH-aware care model</span><a href="https://www.trihealth.com" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:14.5%;top:74.0%" data-type="nature">
-            <div class="pin-dot nature"></div>
-            <div class="pin-label"><strong>Cincinnati Nature Center</strong><span>Nature-based wellness &amp; education programs; green space for community wellbeing</span><a href="https://www.cincynature.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:12.0%;top:76.5%" data-type="nature">
-            <div class="pin-dot nature"></div>
-            <div class="pin-label"><strong>Cincinnati Parks Foundation</strong><span>Supports city parks &amp; green spaces as community health assets across Cincinnati</span><a href="https://www.cincyparks.com" target="_blank">Visit →</a></div>
-          </div>
-
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:76%;top:20%" data-type="health">
-            <div class="pin-dot health"></div>
-            <div class="pin-label"><strong>NAMI Greater Cleveland</strong><span>Free mental health support groups, education programs (Family-to-Family, Peer-to-Peer), and advocacy for individuals and families affected by mental illness.</span><a href="https://namigreatercleveland.org" target="_blank">Visit →</a></div>
-          </div>
-          <div class="pin-wrap" onclick="togglePin(this, event)" style="left:71.0%;top:67.5%" data-type="arts">
-            <div class="pin-dot arts"></div>
-            <div class="pin-label"><strong>Kennedy Museum of Art</strong><span>Ohio University's art museum in Athens; exhibitions, collections &amp; educational programming for all ages. Free admission.</span><a href="https://www.ohio.edu/museum" target="_blank">Visit →</a></div>
-          </div>
-        </div><!-- end ohio-svg-wrap -->
-
-        <div class="map-legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#D9611E"></div>Active Arts Prescribing</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#5B8DB8"></div>SP-Adjacent Healthcare</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#2D7A4F"></div>Arts &amp; Culture Assets</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#6AAB6E"></div>Nature &amp; Green Space</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#8E5B9B"></div>Social Connection</div>
-          <div class="legend-item" style="font-size:0.78rem;color:var(--mid);margin-left:auto">Hover to preview · Click to visit</div>
-        </div>
+        <iframe
+          src="https://www.google.com/maps/d/embed?mid=1f0d-JrnwcVuyD8-kWNeUYZAEPCc5KM0&ehbc=2E312F"
+          style="width:100%;height:550px;border:0;display:block"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
       </div>
 
-      <p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem">📍 Know a program that should be on this map? <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7onfWYhWFP911TNFMMuwMEgnyiYRsYoI71OwfRLmTqIY9ow/viewform?usp=sharing&ouid=104694044191670415748" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Submit a resource →</a></p>
+      <p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem">📍 Know a program that should be on this map? <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgBCu3L-jRwbd-ppb2nkfPN39ocsaDhjqexnVMx9QvXFuitg/viewform" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Submit a resource →</a></p>
 
       <hr class="divider">
       <h2>Programs Directory</h2>
-      <p style="color:var(--mid);font-size:0.88rem;margin-bottom:1.5rem">All 39 programs on the map, listed alphabetically. Click any name to visit.</p>
-      <div class="prog-list">
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.akronartmuseum.org" target="_blank">Akron Art Museum</a></strong><span>Community arts programs &amp; free community days</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.adena.org/community-health-resources" target="_blank">Adena Health System</a></strong><span>Regional health system serving a nine-county area in south-central Ohio; community health team connecting patients to aging, mental health, food, housing, and social resources across Chillicothe and surrounding Appalachian communities</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.aultman.org" target="_blank">Aultman Health</a></strong><span>Regional health system serving Canton &amp; Stark County; community health programs</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.ohio.edu/well-being/bobcat-artscare" target="_blank">Bobcat ArtsCare (Ohio University)</a></strong><span>Active arts prescribing program connecting OU students &amp; Athens community to arts-based wellness</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://butlerart.com" target="_blank">Butler Institute of American Art</a></strong><span>Free admission; community arts programs serving the Mahoning Valley</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.cantonart.org" target="_blank">Canton Museum of Art</a></strong><span>Community arts programs serving Stark County</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.cincinnatiartmuseum.org" target="_blank">Cincinnati Art Museum</a></strong><span>Free Sundays; community arts &amp; wellness programming; potential arts prescribing partner</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.cincynature.org" target="_blank">Cincinnati Nature Center</a></strong><span>Nature-based wellness &amp; education programs; green space for community wellbeing</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.cincyparks.com" target="_blank">Cincinnati Parks Foundation</a></strong><span>Supports city parks &amp; green spaces as community health assets across Cincinnati</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://my.clevelandclinic.org/departments/arts-medicine" target="_blank">Cleveland Clinic — Arts &amp; Medicine</a></strong><span>Verified arts prescribing program: art therapy, music therapy, live performances integrated into patient care</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.clevelandart.org" target="_blank">Cleveland Museum of Art</a></strong><span>Free admission; creative aging, community wellness &amp; arts in health programs</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.columbusmuseum.org" target="_blank">Columbus Museum of Art</a></strong><span>Wonder Room, creative aging, community wellness programs</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.columbus.gov/recreationandparks" target="_blank">Columbus Recreation &amp; Parks</a></strong><span>City parks, community centers, nature programs &amp; fitness — potential green prescribing partner</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://dairybarn.org" target="_blank">Dairy Barn Arts Center</a></strong><span>Community arts hub serving Appalachian Ohio; exhibitions, education &amp; community events</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.daytonartinstitute.org" target="_blank">Dayton Art Institute</a></strong><span>Community arts, creative aging &amp; free community events</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#8E5B9B">Social Connection</span><div class="prog-info"><strong><a href="https://greaterclevelandvolunteers.org/chat-pals/" target="_blank">Greater Cleveland Volunteers — Chat Pals</a></strong><span>Free phone/video friendship-matching program pairing seniors 55+ with background-checked volunteers for weekly calls; companionship &amp; emotional support, statewide-accessible by phone</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://www.holdenarb.org" target="_blank">Holden Arboretum</a></strong><span>One of the largest arboreta in the US; nature-based wellness &amp; therapeutic horticulture programs, NE Ohio</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://beinmotion.org" target="_blank">InMotion</a></strong><span>Free wellness programs for people with Parkinson's disease — exercise, arts, education &amp; support, Beachwood</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.ohio.edu/museum" target="_blank">Kennedy Museum of Art</a></strong><span>Ohio University's art museum in Athens; exhibitions, collections &amp; educational programming for all ages. Free admission.</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.marietta.edu" target="_blank">Marietta College — Arts Programs</a></strong><span>Community arts &amp; creative programming in Southeast Ohio</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.metrohealth.org/institute-for-hope" target="_blank">MetroHealth — Institute for H.O.P.E.</a></strong><span>Systematic SDOH screening &amp; referral network; Center for Arts in Health; community health workers</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://namigreatercleveland.org" target="_blank">NAMI Greater Cleveland</a></strong><span>Free mental health support groups, education programs (Family-to-Family, Peer-to-Peer), and advocacy for individuals and families affected by mental illness.</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.nationwidechildrens.org/specialties/music-therapy" target="_blank">Nationwide Children's Hospital</a></strong><span>Art therapy &amp; music therapy programs across inpatient &amp; outpatient care; pediatric arts in health</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://ocballet.org" target="_blank">Ohio Contemporary Ballet</a></strong><span>35+ year NE Ohio dance company; low-cost/free performances, community outreach &amp; accessible dance classes, Shaker Heights</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://ovhealthcenter.org" target="_blank">Ohio Valley Health Center</a></strong><span>Free clinic providing primary care to uninsured &amp; underinsured patients in the Ohio Valley, Steubenville</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://wexnermedical.osu.edu" target="_blank">OSU Wexner Medical Center</a></strong><span>Academic medical center &amp; potential SP research partner; integrative health initiatives in Columbus</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong>Perennial Movement Group</strong><span>Columbus, OH — Movement-based arts programming for adults 50+, reaching 200+ older adults through participatory dance and movement led by Chloe Napoletano and Sarah Ramey</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.playhousesquare.org/arts-minds" target="_blank">Playhouse Square — Arts &amp; Minds</a></strong><span>Dance for Parkinson's &amp; arts programming for neurological disorders; collaboration with Cleveland Clinic</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.premierhealth.com" target="_blank">Premier Health</a></strong><span>Community health system serving greater Dayton; potential SP-adjacent partner</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.shortnorth.org" target="_blank">Short North Arts District</a></strong><span>Vibrant community arts corridor; galleries, events &amp; cultural programming in Columbus</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.summahealth.org/art" target="_blank">Summa Health — Healing Arts</a></strong><span>Verified arts-in-health program: visual arts, performing arts &amp; creative arts therapy integrated into patient care</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#2D7A4F">Arts &amp; Culture</span><div class="prog-info"><strong><a href="https://www.toledomuseum.org" target="_blank">Toledo Museum of Art</a></strong><span>Free general admission; art &amp; wellness programming for the community</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://lucascountyhealth.com" target="_blank">Toledo-Lucas County Health Dept.</a></strong><span>Public health &amp; SDOH initiatives serving Northwest Ohio</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.trihealth.com" target="_blank">TriHealth</a></strong><span>Community health system serving greater Cincinnati; SDOH-aware care model</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.uchealth.com" target="_blank">UC Health</a></strong><span>Academic medical center; Humanities &amp; Arts in Medicine pathway at UC College of Medicine</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#5B8DB8">SP-Adjacent Healthcare</span><div class="prog-info"><strong><a href="https://www.uhhospitals.org/services/integrative-health-network" target="_blank">UH Connor Whole Health</a></strong><span>Integrative medicine including art, music &amp; expressive therapies; whole-person care model</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#D9611E">Active Arts Prescribing</span><div class="prog-info"><strong><a href="https://www.arts.gov/initiatives/creative-forces" target="_blank">VA Northeast Ohio Healthcare System — Creative Forces (Youngstown VA Clinic)</a></strong><span>Creative Forces clinical site at the Youngstown VA; music &amp; art therapy for veterans with TBI/PTSD; Rural Veterans TeleRehabilitation for remote/rural veterans</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#6AAB6E">Nature &amp; Green Space</span><div class="prog-info"><strong><a href="https://walkwithadoc.org/join-a-walk/locations/ohio/" target="_blank">Walk with a Doc (Columbus)</a></strong><span>Free doctor-led community walking groups combining movement, nature, health education, and social connection. Founded in Columbus in 2005; now a global movement in 641 communities across 41 countries, with over 20 chapters in Ohio alone.</span></div></div>
-        <div class="prog-list-item"><span class="prog-tag" style="background:#8E5B9B">Social Connection</span><div class="prog-info"><strong><a href="https://wethrivetogether.org/" target="_blank">We Thrive Together</a></strong><span>Free, fully virtual social, educational &amp; recreational programming combating isolation &amp; loneliness; reaches all 88 Ohio counties by phone or internet-ready device</span></div></div>
+      <p class="sp-dir-note">All 35 programs from our Statewide Combined Sheet, listed alphabetically. Click any name to visit. <span style="white-space:nowrap">Data sourced from the OSPC asset-mapping spreadsheet.</span></p>
+      <div class="sp-dir-search-row">
+        <input type="text" id="sp-dir-search" class="sp-dir-search-input" placeholder="Search by name, condition, or keyword…" oninput="searchDirectory(this.value)">
+        <span class="sp-dir-search-hint">Try: <em>Parkinson's</em>, <em>Free</em>, <em>Dance</em></span>
+      </div>
+      <div class="sp-dir-filters">
+          <label style="font-size:0.82rem;font-weight:500">Filter:</label>
+          <button class="filter-btn active" onclick="filterDirectory('all',this)">All</button>
+          <button class="filter-btn" onclick="filterDirectory('arts-culture-assets',this)">Arts &amp; Culture Assets</button>
+          <button class="filter-btn" onclick="filterDirectory('nature-green-space',this)">Nature &amp; Green Space</button>
+          <button class="filter-btn" onclick="filterDirectory('sp-adjacent-healthcare',this)">SP-Adjacent Healthcare</button>
+          <button class="filter-btn" onclick="filterDirectory('social-connection',this)">Social Connection</button>
+          <button class="filter-btn" onclick="filterDirectory('movement-fitness',this)">Movement / Fitness</button>
+        </div>
+      <div class="sp-dir-grid">
+
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://www.adena.org/community-health-resources" target="_blank" rel="noopener">Adena Health System</a></h3>
+          <div class="sp-dir-loc">📍 Chillicothe (south-central Ohio)</div>
+          <p class="sp-dir-desc">Regional health system serving a nine-county area in south-central Ohio; community health team connecting patients to aging, mental health, food, housing, and social resources across Chillicothe and surrounding Appalachian communities</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 272 Hospital Rd, Chillicothe, OH 45601</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free community resource referrals; financial assistance available for medical bills (price transparency tools online)</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Mental Health; Seniors / Older Adults; Housing / Homelessness;</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration — browse resource categories or contact community health team directly</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Language assistance in 15 languages incl. Spanish, Nepali, Arabic, Somali, Chinese &amp; more</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Connects patients to transportation assistance resources; specific site transit info not specified</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.akronartmuseum.org" target="_blank" rel="noopener">Akron Art Museum</a></h3>
+          <div class="sp-dir-loc">📍 Akron</div>
+          <p class="sp-dir-desc">Community arts programs &amp; free community days</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 1 S High St, Akron, OH 44308</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free every Thursday 12-9pm; otherwise Adult $12 / Senior $10 / Student $8 / Youth (17 &amp; under) free</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — virtual tour via Bloomberg Connects app</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; military families (free); EBT cardholders (discount)</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required for general admission; groups must book in advance</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> KultureCity Sensory Inclusive certified; ADA entrances, wheelchairs &amp; elevators, large-print materials, sensory bags</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site lot &amp; nearby parking deck ($5/day); no public transit info specified</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://www.aultman.org" target="_blank" rel="noopener">Aultman Health</a></h3>
+          <div class="sp-dir-loc">📍 Canton</div>
+          <p class="sp-dir-desc">Regional health system serving Canton &amp; Stark County; community health programs</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 2600 6th St SW, Canton, OH 44710</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Varies by service; AultCare Medicare Advantage insurance offered</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — AultmanNow app for 24/7 virtual urgent care visits</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Schedule appointment online or via AultmanNow app; walk-ins accepted at Urgent Care/PrimeTime</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://butlerart.com" target="_blank" rel="noopener">Butler Institute of American Art</a></h3>
+          <div class="sp-dir-loc">📍 Youngstown (Mahoning Valley)</div>
+          <p class="sp-dir-desc">Free admission; community arts programs serving the Mahoning Valley</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 524 Wick Ave, Youngstown, OH 44502</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free admission</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required; free general admission</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Aira Access Location (free visual interpreting app for blind/low-vision visitors)</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.cantonart.org" target="_blank" rel="noopener">Canton Museum of Art</a></h3>
+          <div class="sp-dir-loc">📍 Canton</div>
+          <p class="sp-dir-desc">Community arts programs serving Stark County</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 1001 Market Ave N, Canton, OH 44702</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free every Thursday &amp; First Friday; otherwise Adult $8 / Senior &amp; Student $6 / Children 12 &amp; under free</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; Military/Veterans (free); SNAP/EBT (free via Museums for All)</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required; purchase admission at front desk</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> KultureCity Sensory Certified with sensory backpacks &amp; quiet zones; accessible parking, ramp &amp; free wheelchairs</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Free on-site parking off Market Ave N; bus parking available</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.cincinnatiartmuseum.org" target="_blank" rel="noopener">Cincinnati Art Museum</a></h3>
+          <div class="sp-dir-loc">📍 Cincinnati</div>
+          <p class="sp-dir-desc">Free Sundays; community arts &amp; wellness programming; potential arts prescribing partner</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 953 Eden Park Dr, Cincinnati, OH 45202</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free general admission (Rosenthal Family Foundation gift); special exhibitions ticketed</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — online collection &amp; #MuseumFromHome digital content</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required for general admission; special exhibit tickets available online</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Accessibility resources &amp; gallery map/guides available (see website)</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Free on-site parking</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="nature-green-space">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#6AAB6E">Nature &amp; Green Space</span></div>
+          <h3><a href="https://www.cincynature.org" target="_blank" rel="noopener">Cincinnati Nature Center</a></h3>
+          <div class="sp-dir-loc">📍 Cincinnati</div>
+          <p class="sp-dir-desc">Nature-based wellness &amp; education programs; green space for community wellbeing</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 4949 Tealtown Rd, Milford, OH 45150</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Paid daily admission or membership required (see website for current rates)</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required for general admission</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Mashburn Family Discovery Trail (0.72 mi) is all-accessible</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site parking at Rowe Woods</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="nature-green-space">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#6AAB6E">Nature &amp; Green Space</span></div>
+          <h3><a href="https://www.cincinnatiparksfoundation.org" target="_blank" rel="noopener">Cincinnati Parks Foundation</a></h3>
+          <div class="sp-dir-loc">📍 Cincinnati</div>
+          <p class="sp-dir-desc">Supports city parks &amp; green spaces as community health assets across Cincinnati</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 421 Oak St, Cincinnati, OH 45219</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Not applicable (nonprofit partner organization)</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; donors &amp; volunteers</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Not applicable — philanthropic partner org, not a visitor site; contact via website form</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.clevelandart.org" target="_blank" rel="noopener">Cleveland Museum of Art</a></h3>
+          <div class="sp-dir-loc">📍 Cleveland</div>
+          <p class="sp-dir-desc">Free admission; creative aging, community wellness &amp; arts in health programs</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 11150 East Blvd, Cleveland, OH 44106</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> General admission always free; special exhibitions may be ticketed</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — Collection Online &amp; ArtLens digital tools</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Seniors / Older Adults</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration for general admission; groups (incl. self-guided) requested to register in advance</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Monthly Sensory-Friendly Saturdays; ADA accessible with some historic-building exceptions; ArtLens App multilingual guide</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site parking garage (paid) off Jeptha Dr; accessible parking available</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.columbusmuseum.org" target="_blank" rel="noopener">Columbus Museum of Art</a></h3>
+          <div class="sp-dir-loc">📍 Columbus</div>
+          <p class="sp-dir-desc">Wonder Room, creative aging, community wellness programs</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 480 E Broad St, Columbus, OH 43215</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free Thursdays 5-10pm &amp; all Sundays; otherwise Adult $22 / Senior $18 / Student $16 / Age 17-25 &amp; Youth free</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Seniors / Older Adults</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No advance registration for general admission; groups of 8+ should book ahead</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Accessibility info, museum map, all-gender/accessible restrooms (see website)</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site lot $10 (free for members); COTA bus #10 stops directly in front</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="nature-green-space|movement-fitness">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#6AAB6E">Nature &amp; Green Space</span><span class="sp-dir-cat sp-dir-cat-alt">Movement / Fitness</span></div>
+          <h3><a href="https://www.columbus.gov/recreationandparks" target="_blank" rel="noopener">Columbus Recreation &amp; Parks</a></h3>
+          <div class="sp-dir-loc">📍 Columbus</div>
+          <p class="sp-dir-desc">City parks, community centers, nature programs &amp; fitness — potential green prescribing partner</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 1111 E Broad St, Columbus, OH 43205</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Parks free &amp; open to public; recreation center programs vary in cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration for park access; program registration required for classes at recreation centers</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://dairybarn.org" target="_blank" rel="noopener">Dairy Barn Arts Center</a></h3>
+          <div class="sp-dir-loc">📍 Athens (Appalachian Ohio)</div>
+          <p class="sp-dir-desc">Community arts hub serving Appalachian Ohio; exhibitions, education &amp; community events</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 8000 Dairy Ln, Athens, OH 45701</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Gallery admission $10 general / $5 youth (5-12) / free for members &amp; under 4</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No advance registration needed for gallery admission</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Wheelchair accessible, step-free entrance, elevator to upper floor; service animals welcome</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Free on-site parking incl. accessible spaces</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.daytonartinstitute.org" target="_blank" rel="noopener">Dayton Art Institute</a></h3>
+          <div class="sp-dir-loc">📍 Dayton</div>
+          <p class="sp-dir-desc">Community arts, creative aging &amp; free community events</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 456 Belmonte Park N, Dayton, OH 45405</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> 3 free Art for All weekends/yr; otherwise Adult $15 / Senior, Military &amp; Educator $10 / Youth &amp; Student $5 / Children 6 &amp; under free</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Seniors / Older Adults</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Advance tickets recommended, not required; groups of 10+ must register in advance</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Accessibility program in place to reduce barriers (see website for details)</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="social-connection">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#8E5B9B">Social Connection</span></div>
+          <h3><a href="https://greaterclevelandvolunteers.org/chat-pals/" target="_blank" rel="noopener">Greater Cleveland Volunteers — Chat Pals</a></h3>
+          <div class="sp-dir-loc">📍 Cleveland (statewide via virtual/phone)</div>
+          <p class="sp-dir-desc">Chat Pals is a free phone or video-based (FaceTime/Zoom) friendship-matching program from Greater Cleveland Volunteers and AmeriCorps Seniors, pairing seniors (55+) with background-checked volunteers (18+) for weekly calls providing connection, emotional support, companionship, and improved mental/physical well-being; GCV also runs AARP Foundation Experience Corps, AmeriCorps Seniors RSVP, and Group Volunteering</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 4415 Euclid Ave #200, Cleveland, OH 44103</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free / Low-Cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — delivered entirely by phone or video call</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Seniors / Older Adults; Volunteerism</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Contact Kirsten Riley, kriley@greaterclevelandvolunteers.org, 216-391-9500 x2124</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Phone-based option available for those without video/internet access</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not applicable (virtual/phone-based)</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="nature-green-space">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#6AAB6E">Nature &amp; Green Space</span></div>
+          <h3><a href="https://www.holdenarb.org" target="_blank" rel="noopener">Holden Arboretum</a></h3>
+          <div class="sp-dir-loc">📍 Kirtland (NE Ohio)</div>
+          <p class="sp-dir-desc">One of the largest arboreta in the US; nature-based wellness &amp; therapeutic horticulture programs, NE Ohio</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 9550 Sperry Rd, Kirtland, OH 44094</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Paid admission (timed tickets); free for members (see website for current rates)</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Advance tickets recommended for non-members; members need no ticket</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site parking</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.inletdance.org/" target="_blank" rel="noopener">Inlet Dance Theater</a></h3>
+          <div class="sp-dir-loc">📍 Cleveland</div>
+          <p class="sp-dir-desc">Professional contemporary dance company (est. 2001) based in the Pivot Center; offers performances, drop-in classes, and a summer intensive with a focus on personal development through dance</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 2937 W 25th St, Cleveland, OH 44113</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; dancers ages 16+ (Summer Intensive)</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Registration required for classes/intensive via website	Paid: $15/class or $130 10-class card (classes); some free community performances</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site parking at the Pivot Center</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare|movement-fitness">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span><span class="sp-dir-cat sp-dir-cat-alt">Movement / Fitness</span></div>
+          <h3><a href="https://beinmotion.org" target="_blank" rel="noopener">InMotion</a></h3>
+          <div class="sp-dir-loc">📍 Beachwood</div>
+          <p class="sp-dir-desc">Free wellness programs for people with Parkinson&#x27;s disease — exercise, arts, education &amp; support, Beachwood</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 23905 Mercantile Rd, Beachwood, OH 44122</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free / Low-Cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — Pedaling for Parkinson&#x27;s: LIVE online cycling classes</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Parkinson&#x27;s</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Become a client via website; only requirement is a Parkinson&#x27;s diagnosis</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.ohio.edu/museum" target="_blank" rel="noopener">Kennedy Museum of Art</a></h3>
+          <div class="sp-dir-loc">📍 Athens</div>
+          <p class="sp-dir-desc">Ohio University&#x27;s art museum in Athens; exhibitions, collections &amp; educational programming for all ages. Free admission.</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 100 Ridges Cir, Athens, OH 45701</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free — donations appreciated</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; university community</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required; admission always free</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> On-site parking; CATS daily campus shuttle &amp; Athens City Transit bus routes serve the area</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.marietta.edu" target="_blank" rel="noopener">Marietta College — Arts Programs</a></h3>
+          <div class="sp-dir-loc">📍 Marietta</div>
+          <p class="sp-dir-desc">Community arts &amp; creative programming in Southeast Ohio</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 215 5th St, Marietta, OH 45750</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Not specified on website</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; college community</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Not specified on website</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Events held at Hermann Fine Arts Center / Gallery 310 on campus; no transit info specified</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://www.metrohealth.org/institute-for-hope" target="_blank" rel="noopener">MetroHealth — Institute for H.O.P.E.</a></h3>
+          <div class="sp-dir-loc">📍 Cleveland</div>
+          <p class="sp-dir-desc">Systematic SDOH screening &amp; referral network; Center for Arts in Health; community health workers</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 2500 MetroHealth Dr, Cleveland, OH 44109</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Not applicable — integrated into clinical care, not a standalone paid program</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; underserved &amp; vulnerable populations in Cuyahoga County</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Accessed via MetroHealth patient care (SDOH screening); community partners via Unite Ohio</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://namigreatercleveland.org" target="_blank" rel="noopener">NAMI Greater Cleveland</a></h3>
+          <div class="sp-dir-loc">📍 Cleveland</div>
+          <p class="sp-dir-desc">Free mental health support groups, education programs (Family-to-Family, Peer-to-Peer), and advocacy for individuals and families affected by mental illness.</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 4415 Euclid Ave, Suite 203, Cleveland, OH 44103</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free / Low-Cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — virtual support groups (e.g. Thursday Virtual Connection, Arts and Journaling)</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Mental Health; Families / Children;</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration required for support groups; join via online calendar</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not applicable (virtual/phone-based options available)</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare|arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span><span class="sp-dir-cat sp-dir-cat-alt">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.nationwidechildrens.org/specialties/music-therapy" target="_blank" rel="noopener">Nationwide Children&#x27;s Hospital</a></h3>
+          <div class="sp-dir-loc">📍 Columbus</div>
+          <p class="sp-dir-desc">Art therapy &amp; music therapy programs across inpatient &amp; outpatient care; pediatric arts in health</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 700 Children&#x27;s Dr, Columbus, OH 43205</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Not specified on website</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Families / Children</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Registration required for classes (e.g. Giggle &#x27;n Groove); therapy access via clinical referral</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://ocballet.org" target="_blank" rel="noopener">Ohio Contemporary Ballet</a></h3>
+          <div class="sp-dir-loc">📍 Shaker Heights</div>
+          <p class="sp-dir-desc">35+ year NE Ohio dance company; low-cost/free performances, community outreach &amp; accessible dance classes, Shaker Heights</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 3558 Lee Rd, Shaker Heights, OH 44120</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> First class free; paid class packages thereafter; some free/low-cost performances</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Registration via website for classes; first adult drop-in class &amp; youth trial class free</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://ovhealthcenter.org" target="_blank" rel="noopener">Ohio Valley Health Center</a></h3>
+          <div class="sp-dir-loc">📍 Steubenville</div>
+          <p class="sp-dir-desc">Free clinic providing primary care to uninsured &amp; underinsured patients in the Ohio Valley, Steubenville</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free / Low-Cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Uninsured &amp; underinsured patients</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Contact clinic to establish eligibility/enrollment as patient</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://wexnermedical.osu.edu" target="_blank" rel="noopener">OSU Wexner Medical Center</a></h3>
+          <div class="sp-dir-loc">📍 Columbus</div>
+          <p class="sp-dir-desc">Academic medical center &amp; potential SP research partner; integrative health initiatives in Columbus</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 520 W 10th Ave, Columbus, OH 43210</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Varies by service; insurance accepted</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — Telehealth visits available</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Schedule appointment online or via MyChart</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets|movement-fitness">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span><span class="sp-dir-cat sp-dir-cat-alt">Movement / Fitness</span></div>
+          <h3>Perennial Movement Group</h3>
+          <div class="sp-dir-loc">📍 Columbus</div>
+          <p class="sp-dir-desc">Movement-based arts programming for adults 50+, reaching 200+ older adults through participatory dance and movement led by Chloe Napoletano and Sarah Ramey</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Not specified on website</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> Seniors / Older Adults</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Not specified on website</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://www.premierhealth.com" target="_blank" rel="noopener">Premier Health</a></h3>
+          <div class="sp-dir-loc">📍 Dayton</div>
+          <p class="sp-dir-desc">Community health system serving greater Dayton; potential SP-adjacent partner</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 1 Wyoming St, Dayton, OH 45409</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Varies by service; insurance accepted</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — Virtual Urgent Care</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Schedule appointment online or via MyChart</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Hospital parking available on-site</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.shortnorth.org" target="_blank" rel="noopener">Short North Arts District</a></h3>
+          <div class="sp-dir-loc">📍 Columbus</div>
+          <p class="sp-dir-desc">Vibrant community arts corridor; galleries, events &amp; cultural programming in Columbus</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> N. High Street, Columbus, OH</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> District/events mostly free; individual galleries &amp; venues set own admission</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration for district events; Gallery Hop is 1st Saturday monthly</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Walkable district; interactive parking &amp; transit map on website; Ambassador hotline 614-636-5100 for assistance</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#2D7A4F">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.toledomuseum.org" target="_blank" rel="noopener">Toledo Museum of Art</a></h3>
+          <div class="sp-dir-loc">📍 Toledo</div>
+          <p class="sp-dir-desc">Free general admission; art &amp; wellness programming for the community</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 2445 Monroe St, Toledo, OH 43620</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> General admission free; special exhibitions free for members / $10 non-members</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — free digital guide via Bloomberg Connects (usable at home or on-site)</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; active military &amp; families (store discount)</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration for general admission; group tours require request form</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Committed to inclusive access (see Accessibility Guide); backpacks not allowed in galleries</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Free on-site parking; TARTA bus routes 2, 22 &amp; 26 stop nearby; bike racks available</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://lucascountyhealth.com" target="_blank" rel="noopener">Toledo-Lucas County Health Dept.</a></h3>
+          <div class="sp-dir-loc">📍 Toledo</div>
+          <p class="sp-dir-desc">Public health &amp; SDOH initiatives serving Northwest Ohio</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 635 N Erie St, Toledo, OH 43604</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free lead screening; other services vary (see website)</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Walk-ins &amp; appointments accepted; call (419) 213-2013</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://www.trihealth.com" target="_blank" rel="noopener">TriHealth</a></h3>
+          <div class="sp-dir-loc">📍 Cincinnati</div>
+          <p class="sp-dir-desc">Community health system serving greater Cincinnati; SDOH-aware care model</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 625 Eden Park Dr, Cincinnati, OH 45202</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Varies by service; insurance accepted</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — Telehealth/video visit options</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Schedule appointment online or via MyChart</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span></div>
+          <h3><a href="https://www.uchealth.com" target="_blank" rel="noopener">UC Health</a></h3>
+          <div class="sp-dir-loc">📍 Cincinnati</div>
+          <p class="sp-dir-desc">Academic medical center; Humanities &amp; Arts in Medicine pathway at UC College of Medicine</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 231 Albert Sabin Way, Cincinnati, OH 45229</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Varies by service; insurance accepted</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Find a provider &amp; schedule online; call 513-475-8000 for general questions</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not specified on website</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="sp-adjacent-healthcare|arts-culture-assets">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#5B8DB8">SP-Adjacent Healthcare</span><span class="sp-dir-cat sp-dir-cat-alt">Arts &amp; Culture Assets</span></div>
+          <h3><a href="https://www.uhhospitals.org/services/integrative-health-network" target="_blank" rel="noopener">UH Connor Whole Health</a></h3>
+          <div class="sp-dir-loc">📍 Cleveland</div>
+          <p class="sp-dir-desc">Integrative medicine including art, music &amp; expressive therapies; whole-person care model</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 3723 Park East Dr, Beachwood, OH 44122</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Varies by service; insurance accepted</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — virtual health coaching options available</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Schedule online or call 216-545-7041</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Main facility in Beachwood; additional community locations available</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="nature-green-space|movement-fitness">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#6AAB6E">Nature &amp; Green Space</span><span class="sp-dir-cat sp-dir-cat-alt">Movement / Fitness</span></div>
+          <h3><a href="https://walkwithadoc.org/join-a-walk/locations/ohio/" target="_blank" rel="noopener">Walk with a Doc (Columbus)</a></h3>
+          <div class="sp-dir-loc">📍 Columbus (statewide chapters)</div>
+          <p class="sp-dir-desc">Free doctor-led community walking groups combining movement, nature, health education, and social connection. Founded in Columbus in 2005; now a global movement in 641 communities across 41 countries, with over 20 chapters in Ohio alone.</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">🏠 <strong>Address:</strong> 667 Sullivant Ave, Columbus, OH 43215</div><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free / Low-Cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Not specified on website</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> General public; all fitness levels</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> No registration — just show up; find local chapter/time via website</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Not specified on website</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Walks held at local parks/trails; varies by chapter location</div></div>
+        </div>
+        <div class="sp-dir-card" data-cats="social-connection">
+          <div class="sp-dir-cats"><span class="sp-dir-cat" style="background:#8E5B9B">Social Connection</span></div>
+          <h3><a href="https://wethrivetogether.org/" target="_blank" rel="noopener">We Thrive Together</a></h3>
+          <div class="sp-dir-loc">📍 Statewide (virtual)</div>
+          <p class="sp-dir-desc">Ohio nonprofit combating social isolation and loneliness through free virtual social, educational, and recreational programming (trivia, exercise classes, cooking classes, virtual trips, discussion groups); structured into three tracks — Bulldog (developmental disabilities), Warrior (seniors), Storm (students); has hosted 9,000+ virtual events reaching participants in all 88 Ohio counties</p>
+          <div class="sp-dir-meta"><div class="sp-dir-meta-item">💲 <strong>Cost:</strong> Free / Low-Cost</div><div class="sp-dir-meta-item">💻 <strong>Virtual:</strong> Yes — fully virtual, joinable by phone or any internet-ready device</div><div class="sp-dir-meta-item">🧑‍🤝‍🧑 <strong>Serves:</strong> All Abilities; Seniors / Older Adults; Disability / Developmental Disabilities; Students / Youth</div><div class="sp-dir-meta-item">📋 <strong>Registration:</strong> Register at wethrivetogether.org</div><div class="sp-dir-meta-item">♿ <strong>Access:</strong> Designed for individuals of all abilities; phone-in option for those without internet/video access</div><div class="sp-dir-meta-item">🚗 <strong>Transportation:</strong> Not applicable (virtual)</div></div>
+        </div>
+      </div>
+      <p id="sp-dir-noresults" class="sp-dir-noresults">No programs match your search. Try a different keyword or clear the filter.</p>
+
+      <div class="sp-access-block">
+        <h3>♿ Accessibility &amp; Disability Statement</h3>
+        <p>The Ohio Social Prescribing Collaborative is committed to making our programming, events, and resources accessible to people of all abilities. We believe healing spaces, whether clinical or communal, should welcome everyone.</p>
+        <p>Where we can, we note accessibility details (wheelchair access, transit options, sensory considerations) for the events and programs listed on this site. Because these are hosted by partner organizations across the region, availability and accommodations can vary. We encourage you to contact the hosting organization directly ahead of time to confirm what's available and request any accommodations you need. We also encourage you to reference <a href="https://axsmap.com/" target="_blank" rel="noopener">axsmap.com</a> to check for more specific accessibility details.</p>
+        <p>If you have feedback on the accessibility of this website itself, or ideas for how OSPC can better support people with disabilities in social prescribing, please reach out to us at <a href="mailto:info@ohiosocialprescribingcollaborative.com">info@ohiosocialprescribingcollaborative.com</a>.</p>
       </div>
 
     </div>
@@ -965,7 +836,7 @@
         <div class="event-date-box" style="background:var(--forest)"><div class="event-month">Sep</div><div class="event-day">14</div></div>
         <div>
           <h3>Quarterly Working Group — September 2026</h3>
-          <p>Monday, September 14 · 2:00 PM ET · Online via Zoom</p>
+          <p>Monday, September 14 · 2:00-3:15 PM ET · Online via Zoom</p>
         </div>
         <div class="event-badge">Upcoming</div>
       </div>
@@ -976,7 +847,7 @@
 
       <div style="background:linear-gradient(135deg,#2D5016,#3A7CA5);color:white;border-radius:10px;padding:1.5rem 2rem;margin:2rem 0 1.5rem">
         <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:0.5rem">📅 Save the Date: Setting the Stage for Social Prescribing in Ohio</h3>
-        <p style="font-size:0.88rem;color:rgba(255,255,255,0.88);line-height:1.7;margin:0">Three virtual roundtables this October bring together national voices and local champions to shape the future of social prescribing in Ohio. Each is geared toward a specific audience, but everyone's welcome at any or all. Speakers &amp; Q&amp;A run 12:00–1:15 PM ET, with optional networking to follow.</p>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.88);line-height:1.7;margin:0">Three virtual roundtables this October bring together national voices and local champions to shape the future of social prescribing in Ohio. Each is geared toward a specific audience, but everyone's welcome at any or all. Speakers &amp; Q&amp;A run 12:00–1:15 PM ET, with 15 minutes of optional networking to follow.</p>
       </div>
 
       <div class="event-card">
@@ -999,7 +870,7 @@
         <div class="event-date-box" style="background:var(--accent)"><div class="event-month">Oct</div><div class="event-day">9</div></div>
         <div>
           <h3>Roundtable: Payers</h3>
-          <p>Friday, October 9 · 12:00–1:15 PM ET · Hybrid — Midtown Collaboration Center · Foundations, Insurers, Medicaid/Medicare, Government, Hospital Philanthropy</p>
+          <p>Friday, October 9 · 12:00–1:15 PM ET · Hybrid — Midtown Collaboration Center · Foundations, Insurers, Medicaid/Medicare, Government, Hospital Philanthropy · Lunch provided</p>
         </div>
       </div>
 
@@ -3404,7 +3275,7 @@
           <div class="section-label">What You'll Receive</div>
           <div class="card" style="margin-bottom:1rem"><div class="card-icon">📬</div><h3>Quarterly Newsletter/Email Updates</h3><p>Updates on Ohio social prescribing progress, national news, resource spotlights, and upcoming events. Be sure to add "info@ohiosocialprescribingcollaborative.com" to your contacts so our messages aren't delivered to spam.</p></div>
           <div class="card" style="margin-bottom:1rem"><div class="card-icon">🎥</div><h3>Zoom Meeting Links</h3><p>Receive links to our quarterly working group gatherings, past recordings, and meeting notes, exclusively for mailing list members.</p></div>
-          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🗺️</div><h3>Asset Map Contributions</h3><p>Ability to <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7onfWYhWFP911TNFMMuwMEgnyiYRsYoI71OwfRLmTqIY9ow/viewform?usp=sharing&ouid=104694044191670415748" target="_blank" rel="noopener">submit programs</a> to our growing Ohio asset map and access the full directory.</p><p style="margin-top:0.4rem;"><a href="mailto:map@ohiosocialprescribingcollaborative.com">map@ohiosocialprescribingcollaborative.com</a></p></div>
+          <div class="card" style="margin-bottom:1rem"><div class="card-icon">🗺️</div><h3>Asset Map Contributions</h3><p>Ability to <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgBCu3L-jRwbd-ppb2nkfPN39ocsaDhjqexnVMx9QvXFuitg/viewform" target="_blank" rel="noopener">submit programs</a> to our growing Ohio asset map and access the full directory.</p><p style="margin-top:0.4rem;"><a href="mailto:map@ohiosocialprescribingcollaborative.com">map@ohiosocialprescribingcollaborative.com</a></p></div>
           <div class="card" style="margin-bottom:1rem"><div class="card-icon">🤝</div><h3>Network Directory</h3><p>Connect with social prescribing advocates, practitioners, and organizations across Ohio.</p></div>
           <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1.25rem;font-size:0.85rem;line-height:1.7;color:var(--mid)">
             📧 <strong style="color:var(--charcoal)">Direct Contact:</strong><br>Questions or partnership inquiries:<br>
@@ -3536,6 +3407,30 @@
     document.querySelectorAll('.pin-wrap').forEach(function(pin) {
       pin.style.display = (type === 'all' || pin.dataset.type === type) ? '' : 'none';
     });
+  }
+  var spDirState = { cat: 'all', query: '' };
+  function filterDirectory(type, btn) {
+    document.querySelectorAll('.sp-dir-filters .filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    spDirState.cat = type;
+    applySpDirFilters();
+  }
+  function searchDirectory(value) {
+    spDirState.query = (value || '').toLowerCase().trim();
+    applySpDirFilters();
+  }
+  function applySpDirFilters() {
+    var visibleCount = 0;
+    document.querySelectorAll('.sp-dir-card').forEach(function(card) {
+      var cats = (card.dataset.cats || '').split('|');
+      var matchesCat = (spDirState.cat === 'all' || cats.indexOf(spDirState.cat) !== -1);
+      var matchesQuery = !spDirState.query || card.textContent.toLowerCase().indexOf(spDirState.query) !== -1;
+      var show = matchesCat && matchesQuery;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+    var noResults = document.getElementById('sp-dir-noresults');
+    if (noResults) noResults.style.display = visibleCount === 0 ? 'block' : 'none';
   }
   function submitForm() {
     var fname = document.getElementById('fname').value.trim();
