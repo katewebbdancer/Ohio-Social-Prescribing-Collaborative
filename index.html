@@ -363,9 +363,10 @@
     <li><button onclick="showPage('projects')" id="tab-projects">Projects</button></li>
     <li><button onclick="showPage('map')" id="tab-map">Asset Map</button></li>
     <li><button onclick="showPage('events')" id="tab-events">Events</button></li>
-    <li><button onclick="showPage('referral-guide')" id="tab-referral-guide">Regional SP Referral Guides</button></li>
     <li><button onclick="showPage('resources')" id="tab-resources">SP Knowledge Hub</button></li>
     <li><button onclick="showPage('connect')" id="tab-connect">Connect</button></li>
+    <li><button onclick="showPage('merch')" id="tab-merch">Merch</button></li>
+    <li><button onclick="showPage('referral-guide')" id="tab-referral-guide">Referral Guides</button></li>
   </ul>
 </nav>
 
@@ -3269,6 +3270,31 @@
   </div>
 </div>
 
+<!-- MERCH -->
+<div id="page-merch" class="page">
+  <div class="section">
+    <div class="section-inner">
+      <div class="section-label">Shop &amp; Support</div>
+      <h2>OSPC Merch</h2>
+      <p class="lead">Every purchase helps fund OSPC's work advancing and scaling social prescribing across Ohio, and helps us educate and advocate for the movement statewide.</p>
+
+      <div class="mission-block">
+        <h3>Shop the OSPC Store</h3>
+        <p>Our store is hosted on Bonfire, so it opens in a new tab to check out. Proceeds go directly toward OSPC's statewide social prescribing work.</p>
+        <a href="https://www.bonfire.com/store/ohio-social-prescribing-collaborative-1/" target="_blank" class="hero-cta" style="margin-top:0.5rem">Shop the Store &rarr;</a>
+      </div>
+
+      <div class="section-label" style="margin-top:2rem">Why Shop With Us</div>
+      <div class="card-grid">
+        <div class="card"><div class="card-icon">🌻</div><h3>Fund the Mission</h3><p>Every order helps fund OSPC's work building Ohio's statewide social prescribing network.</p></div>
+        <div class="card"><div class="card-icon">👕</div><h3>Wear Your Advocacy</h3><p>OSPC gear is a conversation starter, wear it to help spread the word about social prescribing wherever you go.</p></div>
+        <div class="card"><div class="card-icon">🆕</div><h3>New Pieces Added</h3><p>Check back over time as the collection grows.</p></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <footer><strong>Ohio Social Prescribing Collaborative</strong> · Building healthier communities through connection</footer>
 
 <script>
@@ -3310,7 +3336,7 @@
   // On load, read the hash and show the right page
   function initPageFromHash() {
     var hash = window.location.hash.replace('#', '');
-    var validPages = ['welcome','mission','projects','map','events','referral-guide','referral-guide-cle','resources','connect','supplements','vitamins','supplements-youngstown'];
+    var validPages = ['welcome','mission','projects','map','events','referral-guide','referral-guide-cle','resources','connect','merch','supplements','vitamins','supplements-youngstown'];
     if (hash && validPages.indexOf(hash) !== -1) {
       showPage(hash, false);
     } else {
@@ -3324,7 +3350,7 @@
   // Handle browser back/forward navigation (pushState-based, not hash-based)
   window.addEventListener('popstate', function(e) {
     var hash = window.location.hash.replace('#', '');
-    var validPages = ['welcome','mission','projects','map','events','referral-guide','referral-guide-cle','resources','connect','supplements','vitamins','supplements-youngstown'];
+    var validPages = ['welcome','mission','projects','map','events','referral-guide','referral-guide-cle','resources','connect','merch','supplements','vitamins','supplements-youngstown'];
     if (hash && validPages.indexOf(hash) !== -1) {
       showPage(hash, false);
     } else {
