@@ -36,6 +36,11 @@
   .nav-tabs::-webkit-scrollbar { display: none; }
   .nav-tabs li button { display: block; padding: 0 1rem; line-height: 60px; font-size: 0.8rem; font-weight: 500; color: var(--mid); background: none; border: none; border-bottom: 2px solid transparent; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: color 0.2s, border-bottom 0.2s; white-space: nowrap; }
   .nav-tabs li button:hover, .nav-tabs li button.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-donate-li { display: flex; align-items: center; }
+  .nav-donate { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: #fff !important; padding: 0.5rem 1.15rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; margin: 0 0.25rem; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s; font-family: 'DM Sans', sans-serif; }
+  .nav-donate:hover { color: #fff !important; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(217,97,30,0.45); border-bottom: none; }
+  .donate-card-btn { transition: transform 0.2s, box-shadow 0.2s; }
+  .donate-card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
   .page { display: none; min-height: 100vh; padding-top: 60px; }
   .page.active { display: block; }
@@ -363,9 +368,10 @@
     <li><button onclick="showPage('projects')" id="tab-projects">Projects</button></li>
     <li><button onclick="showPage('map')" id="tab-map">Asset Map</button></li>
     <li><button onclick="showPage('events')" id="tab-events">Events</button></li>
-    <li><button onclick="showPage('resources')" id="tab-resources">SP Knowledge Hub</button></li>
+    <li class="nav-donate-li"><a href="https://www.zeffy.com/en-US/donation-form/fill-the-script-a-fundraiser-to-support-social-prescribing-in-ohio" target="_blank" rel="noopener" id="tab-donate" class="nav-donate">Donate</a></li>
     <li><button onclick="showPage('connect')" id="tab-connect">Connect</button></li>
     <li><button onclick="showPage('merch')" id="tab-merch">Merch</button></li>
+    <li><button onclick="showPage('resources')" id="tab-resources">SP Knowledge Hub</button></li>
     <li><button onclick="showPage('referral-guide')" id="tab-referral-guide">Referral Guides</button></li>
   </ul>
 </nav>
@@ -373,11 +379,24 @@
 <!-- WELCOME -->
 <div id="page-welcome" class="page active">
   <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">🌻 Ohio Social Prescribing Collaborative</div>
-      <h1>Bridging <em>Community</em> and Healthcare across the Buckeye State</h1>
-      <p class="hero-subtitle">Let's connect Ohioans to arts, nature, movement, and social activities as a pathway to better health — working alongside healthcare providers, community organizations, and the people we serve.</p>
-      <button onclick="showPage('connect')" class="hero-cta">Join Our Network →</button>
+    <div class="hero-inner" style="max-width:1140px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap:2.5rem; align-items:center;">
+        <div>
+          <div class="hero-eyebrow">🌻 Ohio Social Prescribing Collaborative</div>
+          <h1>Bridging <em>Community</em> and Healthcare across the Buckeye State</h1>
+          <p class="hero-subtitle">Let's connect Ohioans to arts, nature, movement, and social activities as a pathway to better health — working alongside healthcare providers, community organizations, and the people we serve.</p>
+          <button onclick="showPage('connect')" class="hero-cta">Join Our Network →</button>
+        </div>
+        <div style="background:var(--accent); border-radius:14px; padding:1.85rem; box-shadow:0 12px 32px rgba(0,0,0,0.25);">
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:#fff; font-weight:700; margin-bottom:0.6rem;">💊 Fill the Script</div>
+          <h3 style="font-family:'Playfair Display', serif; font-size:1.35rem; color:white; margin-bottom:0.65rem; line-height:1.25;">A Fundraiser for Social Prescribing in Ohio</h3>
+          <p style="font-size:0.92rem; line-height:1.65; color:rgba(255,255,255,0.95); margin-bottom:0.5rem;">We're writing the script for what social prescribing can look like in Ohio, one conversation and connection at a time. Your gift helps fund our pilot, our asset map, and the everyday infrastructure behind this movement. The first $500 will be matched by a community-oriented philanthropist. Our campaign closes October 10, right behind our fall roundtable series.</p>
+          <p style="font-size:0.92rem; color:rgba(255,255,255,0.95); font-weight:600; margin-bottom:1.15rem;">We need you to help us reach our goal.</p>
+          <div style="text-align:center;">
+            <a href="https://www.zeffy.com/en-US/donation-form/fill-the-script-a-fundraiser-to-support-social-prescribing-in-ohio" target="_blank" rel="noopener" class="donate-card-btn" style="display:inline-flex; align-items:center; background:var(--gold); color:var(--forest); padding:0.85rem 2.25rem; border-radius:4px; font-weight:700; font-size:1.15rem; letter-spacing:0.02em; font-family:'DM Sans', sans-serif; text-decoration:none;">Donate Now!</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
