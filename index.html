@@ -36,6 +36,11 @@
   .nav-tabs::-webkit-scrollbar { display: none; }
   .nav-tabs li button { display: block; padding: 0 1rem; line-height: 60px; font-size: 0.8rem; font-weight: 500; color: var(--mid); background: none; border: none; border-bottom: 2px solid transparent; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: color 0.2s, border-bottom 0.2s; white-space: nowrap; }
   .nav-tabs li button:hover, .nav-tabs li button.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-donate-li { display: flex; align-items: center; }
+  .nav-donate { display: inline-flex; align-items: center; justify-content: center; background: var(--accent); color: #fff !important; padding: 0.5rem 1.15rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; margin: 0 0.25rem; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s; font-family: 'DM Sans', sans-serif; }
+  .nav-donate:hover { color: #fff !important; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(217,97,30,0.45); border-bottom: none; }
+  .donate-card-btn { transition: transform 0.2s, box-shadow 0.2s; }
+  .donate-card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
 
   .page { display: none; min-height: 100vh; padding-top: 60px; }
   .page.active { display: block; }
@@ -337,7 +342,7 @@
     margin-bottom: 0.35rem;
   }
   /* Vitamins: dim non-matching pills */
-  .cal-event.search-dim {
+  .cal-event.search-dim, .vit-ongoing-card.search-dim {
     opacity: 0.1;
     pointer-events: none;
   }
@@ -363,9 +368,10 @@
     <li><button onclick="showPage('projects')" id="tab-projects">Projects</button></li>
     <li><button onclick="showPage('map')" id="tab-map">Asset Map</button></li>
     <li><button onclick="showPage('events')" id="tab-events">Events</button></li>
-    <li><button onclick="showPage('resources')" id="tab-resources">SP Knowledge Hub</button></li>
+    <li class="nav-donate-li"><a href="https://www.zeffy.com/en-US/donation-form/fill-the-script-invest-in-social-prescribing-in-ohio" target="_blank" rel="noopener" id="tab-donate" class="nav-donate">Donate</a></li>
     <li><button onclick="showPage('connect')" id="tab-connect">Connect</button></li>
     <li><button onclick="showPage('merch')" id="tab-merch">Merch</button></li>
+    <li><button onclick="showPage('resources')" id="tab-resources">SP Knowledge Hub</button></li>
     <li><button onclick="showPage('referral-guide')" id="tab-referral-guide">Referral Guides</button></li>
   </ul>
 </nav>
@@ -373,11 +379,23 @@
 <!-- WELCOME -->
 <div id="page-welcome" class="page active">
   <div class="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">🌻 Ohio Social Prescribing Collaborative</div>
-      <h1>Bridging <em>Community</em> and Healthcare across the Buckeye State</h1>
-      <p class="hero-subtitle">Let's connect Ohioans to arts, nature, movement, and social activities as a pathway to better health — working alongside healthcare providers, community organizations, and the people we serve.</p>
-      <button onclick="showPage('connect')" class="hero-cta">Join Our Network →</button>
+    <div class="hero-inner" style="max-width:1140px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap:2.5rem; align-items:center;">
+        <div>
+          <div class="hero-eyebrow">🌻 Ohio Social Prescribing Collaborative</div>
+          <h1>Bridging <em>Community</em> and Healthcare across the Buckeye State</h1>
+          <p class="hero-subtitle">Let's connect Ohioans to arts, nature, movement, and social activities as a pathway to better health — working alongside healthcare providers, community organizations, and the people we serve.</p>
+          <button onclick="showPage('connect')" class="hero-cta">Join Our Network →</button>
+        </div>
+        <div style="background:var(--accent); border-radius:14px; padding:1.85rem; text-align:center; box-shadow:0 12px 32px rgba(0,0,0,0.25);">
+          <h3 style="font-family:'Playfair Display', serif; font-size:1.35rem; color:white; margin-bottom:0.65rem; line-height:1.25; text-align:center;">Fill the Script 💊<br>Invest in Social Prescribing in Ohio</h3>
+          <p style="font-size:0.92rem; line-height:1.65; color:rgba(255,255,255,0.95); margin-bottom:0.5rem;">We're writing the script for what social prescribing can look like in Ohio, one conversation and connection at a time. Your gift helps fund our pilot, our asset map, and the everyday infrastructure behind this movement. Our campaign closes October 11, right behind our fall roundtable series.</p>
+          <p style="font-size:0.92rem; color:rgba(255,255,255,0.95); font-weight:600; margin-bottom:1.15rem;">We need you to help us reach our goal.</p>
+          <div style="text-align:center;">
+            <a href="https://www.zeffy.com/en-US/donation-form/fill-the-script-invest-in-social-prescribing-in-ohio" target="_blank" rel="noopener" class="donate-card-btn" style="display:inline-flex; align-items:center; background:var(--gold); color:var(--forest); padding:0.85rem 2.25rem; border-radius:4px; font-weight:700; font-size:1.15rem; letter-spacing:0.02em; font-family:'DM Sans', sans-serif; text-decoration:none;">Donate Now!</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -481,8 +499,9 @@
         <div class="project-number">02</div>
         <div>
           <span class="tag green">Mapping</span>
-          <h3>Ohio Social Prescribing Asset Map</h3>
+          <h3>Ohio Social Prescribing Asset Map and Regional Referral Guides</h3>
           <p>Building a comprehensive, publicly accessible database of community assets across all 88 Ohio counties that can serve as destinations for social prescriptions: arts programs, cultural institutions, nature spaces, volunteer opportunities, community centers, gardening programs, fitness groups, and more. The asset map will be integrated into clinical workflows and accessible to link workers statewide.</p>
+          <p style="margin-top:0.75rem">In the regions where we are actively piloting, we go a step further and build a regional referral guide: a more curated local guide that includes one-time events alongside year-round programming, so a link worker can hand someone something happening this week. <button onclick="showPage('referral-guide')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer;font-size:inherit;font-family:inherit;padding:0;text-decoration:underline">See the referral guides</button></p>
           <p style="margin-top:0.75rem"><strong>Status:</strong> Initial dataset live. Ongoing community submissions accepted. County-by-county outreach underway.</p>
         </div>
       </div>
@@ -855,11 +874,6 @@
 
       <div class="section-label" style="margin-top:1.5rem">Also Happening</div>
       <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem">
-        <h3 style="font-size:0.92rem;font-weight:700;color:var(--charcoal);margin-bottom:0.35rem">🎨 OSPC Outing: Waterloo Arts Fest</h3>
-        <p style="font-size:0.85rem;color:var(--mid);line-height:1.65;margin:0">Saturday, September 12 · Meet at 15315 Waterloo Rd at 12:00 noon (fest runs to 7pm) · Join OSPC supporters and friends for music, art, and community at Waterloo Arts Fest in North Collinwood — practicing our own mission while connecting with potential partners. <a href="https://www.waterlooartsfest.org/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">Event details</a> · RSVP to <a href="mailto:lzdaigle@gmail.com" style="color:var(--accent);font-weight:600">lzdaigle@gmail.com</a></p>
-      </div>
-
-      <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem">
         <h3 style="font-size:0.92rem;font-weight:700;color:var(--charcoal);margin-bottom:0.35rem">🍽️ Setting the Table for Social Prescribing, Case Medical Student Talk</h3>
         <p style="font-size:0.85rem;color:var(--mid);line-height:1.65;margin:0">Monday, September 28 · 6:00–7:15pm · Room 181 of the HEC · "Food for Thought: An Introduction to Social Prescribing" — dinner and a discussion of how prescriptions for community can improve health and well-being. email info@<a href="https://ohiosocialprescribingcollaborative.com/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">ohiosocialprescribingcollaborative.com</a> to register.</p>
       </div>
@@ -868,6 +882,11 @@
         <h3 style="font-size:0.92rem;font-weight:700;color:var(--forest);margin-bottom:0.35rem">🗺️ NOAH: Mapping Arts in Health in Ohio</h3>
         <p style="font-size:0.85rem;color:var(--mid);line-height:1.65;margin:0 0 0.75rem">Friday, October 9 · 1:45–3:45 PM ET · Hybrid, hosted by Kate Berk &amp; Veronica Thornton. A networking and asset mapping session bringing together artists, healthcare professionals, educators, and community members to map who's doing arts in health work across Ohio and spot where more support is needed. Open to NOAH members and non-members alike. Thanks to Assembly for the Arts and CWRU IPCH for hosting. In-person attendees should head to the MidTown Collaboration Center, 1974 E 66th St, Cleveland, room 306. Lunch provided.</p>
         <a href="https://thenoah.org/event-full-calendar/#!event/2026/10/9/mapping-arts-in-health-in-ohio-a-collaborative-networking-asset-mapping-event" target="_blank" rel="noopener" style="display:inline-block;background:var(--forest);color:white;font-weight:600;padding:0.6rem 1.25rem;border-radius:6px;text-decoration:none;font-size:0.88rem">Register Here →</a>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem">
+        <h3 style="font-size:0.92rem;font-weight:700;color:var(--charcoal);margin-bottom:0.35rem">🥾 OSPC Outing: Farmers Market and Hike in Cuyahoga Valley</h3>
+        <p style="font-size:0.85rem;color:var(--mid);line-height:1.65;margin:0">Sunday, October 18 · Meet at the Cuyahoga Valley Farmers Market at 10:00am (the market is open 9am to noon) · Shop local, find something tasty to munch on, then stretch your legs on a short hike along the trail. A relaxed morning to practice our own mission of connecting through nature and community. RSVP to <a href="mailto:lzdaigle@gmail.com" style="color:var(--accent);font-weight:600">lzdaigle@gmail.com</a></p>
       </div>
 
       <div style="background:var(--cream);border:1px solid var(--light-border);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.5rem">
@@ -2055,7 +2074,6 @@
         <a href="https://butlerart.com/#custom-popup" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit butlerart.com</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Dana School of Music (YSU)</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2072,7 +2090,6 @@
         </p>
         <a href="https://academics.ysu.edu/dana-school-of-music" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit academics.ysu.edu/dana-school-of-music</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>DeYor Performing Arts Center</h3>
@@ -2091,7 +2108,6 @@
         <a href="https://deyorpac.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit deyorpac.org</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Enchanted Reflections by Amanda</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2107,7 +2123,6 @@
         <a href="https://www.facebook.com/p/Enchanted-Reflections-by-Amanda-Huk-100091062932384/" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit Enchanted Reflections on Facebook</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>First Friday's Youngstown</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2118,7 +2133,6 @@
         <p>Monthly community event held the first Friday of each month in downtown Youngstown, featuring local artists, vendors, food trucks, live music, building tours, and cultural programming.</p>
         <a href="https://firstfridaysyoungstown.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit firstfridaysyoungstown.org</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>JCC of Youngstown — Visual Arts &amp; Cultural Arts</h3>
@@ -2134,7 +2148,6 @@
         </p>
         <a href="https://jccyoungstown.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit jccyoungstown.org</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>KCM Crafts</h3>
@@ -2158,7 +2171,6 @@
         <a href="https://www.lifeistheberries.com" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit lifeistheberries.com</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>LOOP Youngstown Arts + Culture Center</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2173,7 +2185,6 @@
         </p>
         <a href="https://loopyoungstown.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit loopyoungstown.org</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>McDonough Museum of Art (YSU)</h3>
@@ -2192,7 +2203,6 @@
         <a href="https://academics.ysu.edu/mcdonough-museum-of-art" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit academics.ysu.edu/mcdonough-museum-of-art</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Mercy Health Stepping Out</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2206,7 +2216,6 @@
         </p>
         <a href="https://www.facebook.com/SteppingOutYoungstown/" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit Stepping Out on Facebook</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>The Public Library of Youngstown &amp; Mahoning County</h3>
@@ -2224,7 +2233,6 @@
         <a href="https://www.libraryvisit.org/" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit libraryvisit.org</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>SMARTS (Students Motivated by the Arts)</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2238,7 +2246,6 @@
         </p>
         <a href="https://smartsartschool.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit smartsartschool.org</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Stambaugh Auditorium</h3>
@@ -2255,7 +2262,6 @@
         <a href="https://stambaughauditorium.com" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit stambaughauditorium.com</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>YMCA of Youngstown — Gallery at the Y (GATY)</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2269,7 +2275,6 @@
         </p>
         <a href="https://ymcayo.org/arts-humanities" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit ymcayo.org/arts-humanities</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Youngstown CityScape</h3>
@@ -2286,7 +2291,6 @@
         <a href="https://youngstowncityscape.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit youngstowncityscape.org</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Youngstown Playhouse</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2301,7 +2305,6 @@
         </p>
         <a href="https://youngstownplayhouse.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit youngstownplayhouse.org</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Youngstown Symphony Orchestra</h3>
@@ -2319,7 +2322,6 @@
         <a href="https://youngstownsymphony.com" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit youngstownsymphony.com</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>YSU Summer Arts Festival</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2333,7 +2335,6 @@
         </p>
         <a href="https://sfa.ysu.edu" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit sfa.ysu.edu</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>YSU Wellness Events</h3>
@@ -2371,7 +2372,6 @@
         <a href="https://millcreekmetroparks.org/fellows-riverside-gardens" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit millcreekmetroparks.org/fellows-riverside-gardens</a>
       </div>
 
-
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Ford Nature Center (Mill Creek MetroParks)</h3>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:0.5rem 0 0.75rem">
@@ -2386,7 +2386,6 @@
         </p>
         <a href="https://millcreekmetroparks.org/ford-nature-center" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit millcreekmetroparks.org/ford-nature-center</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>Mill Creek MetroParks — Forest Therapy &amp; Outdoor Yoga</h3>
@@ -2404,7 +2403,6 @@
         </p>
         <a href="https://millcreekmetroparks.org" target="_blank" style="margin-top:0.75rem;display:inline-block;color:var(--accent);font-weight:600;font-size:0.9rem">Visit millcreekmetroparks.org</a>
       </div>
-
 
 <div class="resource-card" style="margin-bottom:1.25rem">
         <h3>OSU Extension — Mahoning County</h3>
@@ -2561,6 +2559,12 @@
         .cal-event.movement { background:#E8EEF5; color:#1A3A5C; border-left:2px solid #3A7CA5; }
         .cal-event.nature { background:#EDF5ED; color:#1A3D1A; border-left:2px solid #6B8F47; }
         .cal-event.music { background:#FFF0E8; color:#7A2D0A; border-left:2px solid #D9611E; }
+        .cal-event.social { background:#FFF0E8; color:#7A2D0A; border-left:2px solid #D9611E; }
+        .cal-event.volunteer { background:#F0EEF8; color:#33285E; border-left:2px solid #5B4A9E; }
+        .cal-event.essential { background:#FBF3DF; color:#5C4405; border-left:2px solid #B8860B; }
+        .cal-event.other { background:#F0F0EC; color:#3d3d3d; border-left:2px solid #8A8C7A; }
+        .vit-ongoing-card { background:#fff; border:1px solid var(--light-border); border-left:4px solid var(--gold); border-radius:8px; padding:0.85rem 1rem; cursor:pointer; transition:box-shadow .15s; }
+        .vit-ongoing-card:hover { box-shadow:0 3px 12px rgba(0,0,0,.08); }
         .cal-event.community { background:#F3F0FA; color:#2D1A5C; border-left:2px solid #5B4A9E; }
         .cal-event.recurring { background:#F5F0E8; color:#5A4A2D; border-left:2px solid #D4A017; }
 
@@ -2597,326 +2601,33 @@
       </script>
       <div class="event-detail-overlay" id="overlay" onclick="closeEvent()"></div>
 
-      <!-- Event Detail Modals -->      <div class="event-detail" id="detail-inlet-cain"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Inlet Dance Theatre, Free Summer Concert at Cain Park</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Inlet Dance Theatre's annual free summer concert at Cain Park Evans Amphitheater in Cleveland Heights. Features new works created by Inlet company members, Summer Dance Intensive students, and repertory favorites. Kids Matinee available with audience participation.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> July 25–26, 2026 (Kids Matinee July 25 · Evening Concert July 26)<br><strong>Where:</strong> Cain Park Evans Amphitheater, 14591 Superior Rd, Cleveland Heights<br><strong>Cost:</strong> Free<br><strong>Accessibility:</strong> Outdoor amphitheater</p><a href="https://www.inletdance.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>      <div class="event-detail" id="detail-dance-cle-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>DANCECleveland, Dominic Moore-Dunson: Black by Nature</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Ticketed</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">New work by acclaimed Cleveland choreographer Dominic Moore-Dunson. Community and student discount ticket options available. Check dancecleveland.org for community pricing.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> September 19 and 26, 2026 · 1pm and 4pm<br><strong>Where:</strong> Playhouse Square<br><strong>Transit:</strong> RTA accessible<br><strong>Accessibility:</strong> Fully accessible venue</p><a href="https://www.dancecleveland.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Tickets at dancecleveland.org</a></div>
-
-      <div class="event-detail" id="detail-third-fri-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk, September 18</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly art walk at 78th Street Studios. 60+ creative businesses open. Free and open to all.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, September 18 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
-
-      <div class="event-detail" id="detail-third-fri-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk, October 16</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Fall edition of the monthly art walk. Particularly cozy as the building comes alive with seasonal exhibits.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, October 16 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
-
-      <div class="event-detail" id="detail-third-fri-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk, November 20</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly art walk at 78th Street Studios. Indoor warmth plus live music and 60+ galleries open.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, November 20 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
-
-      <div class="event-detail" id="detail-third-fri-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Third Friday Art Walk, December 18</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Holiday edition of the monthly art walk. 60+ galleries with festive energy and gift shopping opportunities.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, December 18 · 5–9pm<br><strong>Where:</strong> 1300 W. 78th St<br><strong>Cost:</strong> Free</p></div>
-
-      <div class="event-detail" id="detail-cma-holiday"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Museum of Art, Holiday Programming</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">CMA's holiday season brings live choral and orchestral performances, family activities, and themed programming in the Ames Family Atrium. Free as part of general admission.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> November through January<br><strong>Where:</strong> 11150 East Blvd, University Circle<br><strong>Transit:</strong> RTA accessible<br><strong>Accessibility:</strong> Fully accessible</p><a href="https://www.clevelandart.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>      <div class="event-detail" id="detail-yoga-summer"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Out Fitness Outdoor Yoga for Every Body</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">LGBTQ+ Inclusive</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Donation-Based</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Daily outdoor yoga classes at Edgewater Park from late May through September 1. Beginner-friendly, donation-based, no registration needed. Morning sessions 7–9am for sunrise yoga on the lake; evening sessions 5–7pm for sunset flow. Inclusive and welcoming for all bodies, ages, and backgrounds. Bring a mat or towel.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Daily, May 25 – September 1 · Morning: 7–9am · Evening: 5–7pm<br><strong>Where:</strong> Edgewater Park, Cleveland<br><strong>Cost:</strong> Donation-based (no one turned away)<br><strong>Transit:</strong> RTA 55 bus to Edgewater Park<br><strong>Accessibility:</strong> Flat accessible park setting · All bodies and abilities welcome</p><a href="https://hang.out.fitness" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at hang.out.fitness</a></div>
-
-      <div class="event-detail" id="detail-cpt-dw"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Public Theatre DanceWorks 2026</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Pay from $1</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">CPT's annual contemporary dance showcase features Northeast Ohio's most adventurous dance companies across multiple weekends. Every ticket is Choose What You Pay starting at $1 with no handling fees. A remarkable and accessible way to see professional dance. 2026 dates typically run April through May.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Typically April–May 2026 (check cptonline.org for 2026 dates)<br><strong>Where:</strong> 6415 Detroit Ave, Gordon Square<br><strong>Cost:</strong> Pay from $1, no handling fees<br><strong>Transit:</strong> RTA 22 bus to W. 65th St<br><strong>Accessibility:</strong> ADA compliant · Ramped entrance · Wheelchair accessible restroom</p><a href="https://www.cptonline.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Tickets at cptonline.org</a></div>
-
-      <div class="event-detail" id="detail-library-sound-bites"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Public Library Sound Bites Summer Music Series</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free lunchtime live music performances at Cleveland Public Library's Main Branch and several neighborhood branches throughout the summer. Genres span jazz, classical, folk, gospel, and more. A beloved and accessible series in the heart of downtown Cleveland.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Thursdays through the summer · Typically 12–1pm<br><strong>Where:</strong> Main Branch, 325 Superior Ave and select neighborhood branches<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> All downtown RTA lines · Fully accessible</p><a href="https://cpl.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Check schedule at cpl.org</a></div>
-
-      <div class="event-detail" id="detail-fairmount-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Fairmount Center Pull Back the Curtain Speaker Series</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Fairmount Center for the Arts' free monthly speaker series resumes in September. "Pull Back the Curtain" features local artists, musicians, chefs, historians, and creative professionals in an intimate setting with audience Q and A. Family-friendly but geared toward adults. Registration encouraged but not required.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Select Sundays, September through April · 3–4pm<br><strong>Where:</strong> 8400 Fairmount Rd, Novelty, OH (Geauga County, ~30 min from Cleveland)<br><strong>Cost:</strong> Free<br><strong>Getting there:</strong> Drive or carpool recommended</p><a href="https://www.fairmountcenter.org/speaker-series" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at fairmountcenter.org</a></div>
-
-      <div class="event-detail" id="detail-cpt-pandemonium"><button class="close-btn" onclick="closeEvent()">✕</button><h4>CPT Pandemonium 2026</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Ticketed Event</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">CPT's annual immersive arts party and fundraiser opening its campus as a labyrinth of theatre, dance, visual arts, music, and performance. This year's theme is "Under Construction." Local food, free valet, and complimentary drinks. One of Cleveland's most creative and unusual community events.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 19, 2026<br><strong>Where:</strong> Cleveland Public Theatre campus, 6415 Detroit Ave<br><strong>Cost:</strong> Ticketed fundraiser (check cptonline.org for pricing)<br><strong>Transit:</strong> RTA 22 bus</p><a href="https://www.cptonline.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at cptonline.org</a></div>
-
-      <div class="event-detail" id="detail-spruce-square"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Spruce Up the Square</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Weekly volunteer beautification series at Public Square. Help prune, trim, weed, and clean downtown Cleveland's central gathering space. Tools, gloves, and supplies provided. Wear clothes you can get dirty. A great low-key outdoor community activity that builds connection and civic pride.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Sundays, May through October · 11am–12pm<br><strong>Where:</strong> Public Square, Downtown Cleveland<br><strong>Cost:</strong> Free · RSVP encouraged at downtowncleveland.com<br><strong>Transit:</strong> All downtown RTA lines</p><a href="https://www.downtowncleveland.com/events" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at downtowncleveland.com</a></div>
-      <div class="event-detail" id="detail-namaste-lakefront"><button class="close-btn" onclick="closeEvent()">✕</button><h4>North Coast Namaste</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free evening yoga sessions on the lakefront at Voinovich Park, presented by Downtown Cleveland, Inc. All levels welcome. Bring a mat or towel and enjoy yoga with Lake Erie views.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Tuesdays, June through September · 6–6:45pm<br><strong>Where:</strong> Voinovich Park / North Coast Harbor, Downtown Cleveland<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA to downtown</p><a href="https://www.downtowncleveland.com/events" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at downtowncleveland.com</a></div>
-      <div class="event-detail" id="detail-psq-concert"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Public Square Concert Series</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Free live music from local artists in Public Square throughout the summer. Evening concerts and pop-up performances covering a wide range of genres. Part of Downtown Cleveland Inc.'s 10-year Public Square anniversary summer programming.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Multiple evenings, June through September (check schedule)<br><strong>Where:</strong> Public Square, Downtown Cleveland<br><strong>Transit:</strong> All downtown RTA lines</p><a href="https://www.downtowncleveland.com/events" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at downtowncleveland.com</a></div>      <div class="event-detail" id="detail-ncyard-soccer"><button class="close-btn" onclick="closeEvent()">✕</button><h4>North Coast Yard: Pick-Up Soccer and Basketball</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">North Coast Yard is a free seasonal lakefront pop-up space at 515 Erieside Ave, open June through September, dawn to dusk daily. Free weekly programming from the 2025 season included pick-up soccer (men's Mondays, women's Tuesdays at 6pm), basketball leagues (Wednesdays 6–9pm), and roller skating (Fridays 5–9pm). The 2026 schedule will be posted at northcoastyard.com/experience as the season approaches. Bar and food available on select evenings.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> June through September · Soccer: Mon/Tue 6pm · Basketball: Wed 6–9pm · Roller Skating: Fri 5–9pm<br><strong>Where:</strong> 515 Erieside Ave, Downtown Cleveland (near Steamship Mather)<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA to downtown, short walk to lakefront</p><a href="https://northcoastyard.com" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at northcoastyard.com</a></div>      <div class="event-detail" id="detail-dancing-wheels"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Dancing Wheels at the CMA</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Adaptive dance classes led by Dancing Wheels, Cleveland's nationally acclaimed mixed-ability dance company. Open to wheelchair users and standing dancers of all skill levels. Held at the Cleveland Museum of Art, free with museum admission.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Thursdays 10:00 am (select Mondays 12:30 pm) · June–August 2026<br><strong>Where:</strong> Cleveland Museum of Art, 11150 East Blvd, University Circle</p><a href="https://www.dancingwheels.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a></div>      <!-- NEW: Sept-Dec 2026 additions -->
-      <div class="event-detail" id="detail-waterloo-walk-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk All Over Waterloo, September 4</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly first-Friday art walk through the Waterloo Arts &amp; Entertainment District in Collinwood. Galleries and studios throw open their doors with new shows, and there's usually live music on the outdoor Tower Stage. Family-friendly and low-key &#8212; a great way to explore Cleveland's East Side gallery scene.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, September 4 · 5:30–9pm (repeats first Friday of every month)<br><strong>Where:</strong> Waterloo Rd, Collinwood (Waterloo Arts &amp; Entertainment District)<br><strong>Cost:</strong> Free</p><a href="https://waterlooarts.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at waterlooarts.org</a></div>
-
-      <div class="event-detail" id="detail-waterloo-walk-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk All Over Waterloo, October 2</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly first-Friday art walk through the Waterloo Arts &amp; Entertainment District in Collinwood. Galleries and studios throw open their doors with new shows, and there's usually live music on the outdoor Tower Stage.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, October 2 · 5:30–9pm (repeats first Friday of every month)<br><strong>Where:</strong> Waterloo Rd, Collinwood (Waterloo Arts &amp; Entertainment District)<br><strong>Cost:</strong> Free</p><a href="https://waterlooarts.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at waterlooarts.org</a></div>
-
-      <div class="event-detail" id="detail-waterloo-walk-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk All Over Waterloo, November 6</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly first-Friday art walk through the Waterloo Arts &amp; Entertainment District in Collinwood. A cozy indoor gallery-hopping option once the weather turns.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, November 6 · 5:30–9pm (repeats first Friday of every month)<br><strong>Where:</strong> Waterloo Rd, Collinwood (Waterloo Arts &amp; Entertainment District)<br><strong>Cost:</strong> Free</p><a href="https://waterlooarts.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at waterlooarts.org</a></div>
-
-      <div class="event-detail" id="detail-waterloo-walk-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk All Over Waterloo, December 4</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Monthly first-Friday art walk through the Waterloo Arts &amp; Entertainment District in Collinwood. Holiday-season edition &#8212; a nice low-cost outing for gift shopping from local makers.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, December 4 · 5:30–9pm (repeats first Friday of every month)<br><strong>Where:</strong> Waterloo Rd, Collinwood (Waterloo Arts &amp; Entertainment District)<br><strong>Cost:</strong> Free</p><a href="https://waterlooarts.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at waterlooarts.org</a></div>
-
-      <div class="event-detail" id="detail-waterloo-arts-fest"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Waterloo Arts Fest</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Collinwood's flagship neighborhood arts festival closes half a mile of Waterloo Rd to traffic for a day of live music across multiple outdoor stages, 90+ local maker booths, 10+ fine art galleries, street performers, and hands-on creativity stations for all ages.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 12 · 12–7pm<br><strong>Where:</strong> Waterloo Rd between Calcutta Ave and E. 161st St, Collinwood<br><strong>Cost:</strong> Free<br><strong>Accessibility:</strong> ADA parking available at Lucknow &amp; E. 156th St</p><a href="https://www.waterlooartsfest.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at waterlooartsfest.org</a></div>
-
-      <div class="event-detail" id="detail-namiwalks-gc"><button class="close-btn" onclick="closeEvent()">✕</button><h4>NAMIWalks Greater Cleveland</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A 2.5-mile family-friendly walk and resource fair supporting NAMI Greater Cleveland's free mental health education and support programs. Includes a resource fair, line dancing, music, and children's activities (face painting, crafts, balloon sculpture). Leashed pets welcome.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 19 · 9–11:30am<br><strong>Where:</strong> Edgewater Park, Cleveland<br><strong>Cost:</strong> Free to attend and walk (fundraising optional)<br><strong>Transit:</strong> RTA 55 bus to Edgewater Park</p><a href="https://www.namiwalks.org/gc" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at namiwalks.org/gc</a></div>
-
-      <div class="event-detail" id="detail-tremont-fest"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Tremont Arts &amp; Cultural Festival</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Now in its 27th year, Tremont's flagship festival fills Lincoln Park with five themed "villages": children's activities, community nonprofits, fair-trade and cultural vendors, 100+ visual artists, and a food court. Free live music and dance performances on the main stage all day.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 19 · 12–7pm<br><strong>Where:</strong> Lincoln Park, 1200 Starkweather Ave, Tremont<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 25 or 51 bus to Tremont</p><a href="https://experiencetremont.com/featured-events/tremont-arts-cultural-festival/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at experiencetremont.com</a></div>
-
-      <div class="event-detail" id="detail-ingenuityfest"><button class="close-btn" onclick="closeEvent()">✕</button><h4>IngenuityFest 2026: America Dreams</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Ticketed</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Cleveland's flagship art-and-technology festival transforms the newly expanded IngenuityLabs warehouse into an immersive, multi-story exploration of "What does America dream about?" Hundreds of artists, six-plus stages of music and performance, maker exhibits, aerial and acrobatic storytelling, and food trucks.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> September 25–27, 2026 (last full weekend of September)<br><strong>Where:</strong> IngenuityLabs, 5401 Hamilton Ave, St. Clair-Superior<br><strong>Cost:</strong> Tickets from $20/day, $30/weekend; kids 12 &amp; under free with a paid adult<br><strong>Transit:</strong> RTA HealthLine to E. 55th, short walk</p><a href="https://www.ingenuitycleveland.org/programs/ingenuityfest/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Tickets at ingenuitycleveland.org</a></div>
-
-      <div class="event-detail" id="detail-foodbank-family-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Bank Family Night Volunteering</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly volunteer shift in the Food Bank's Repack area, sorting and packing donated food. Kids ages 6+ are welcome alongside an adult (one adult required per two kids). Shifts are capped around 30 volunteers and tend to fill up quickly &#8212; register early online.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Monday, September 28 · 6–8pm (fourth Monday of the month)<br><strong>Where:</strong> Greater Cleveland Food Bank, 15500 S. Waterloo Rd, Cleveland<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.greaterclevelandfoodbank.org/give-help/volunteer/opportunities" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at greaterclevelandfoodbank.org</a></div>
-
-      <div class="event-detail" id="detail-foodbank-family-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Bank Family Night Volunteering</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly volunteer shift in the Food Bank's Repack area, sorting and packing donated food. Kids ages 6+ are welcome alongside an adult (one adult required per two kids). Shifts fill quickly &#8212; register early online.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Monday, October 26 · 6–8pm (fourth Monday of the month)<br><strong>Where:</strong> Greater Cleveland Food Bank, 15500 S. Waterloo Rd, Cleveland<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.greaterclevelandfoodbank.org/give-help/volunteer/opportunities" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at greaterclevelandfoodbank.org</a></div>
-
-      <div class="event-detail" id="detail-foodbank-family-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Bank Family Night Volunteering</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly volunteer shift in the Food Bank's Repack area, sorting and packing donated food ahead of the holidays. Kids ages 6+ are welcome alongside an adult (one adult required per two kids). Shifts fill quickly &#8212; register early online.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Monday, November 23 · 6–8pm (fourth Monday of the month)<br><strong>Where:</strong> Greater Cleveland Food Bank, 15500 S. Waterloo Rd, Cleveland<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.greaterclevelandfoodbank.org/give-help/volunteer/opportunities" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at greaterclevelandfoodbank.org</a></div>
-
-      <div class="event-detail" id="detail-foodbank-family-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Bank Family Night Volunteering</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly volunteer shift in the Food Bank's Repack area. Kids ages 6+ are welcome alongside an adult (one adult required per two kids). <strong>Note:</strong> this falls in the week between Christmas and New Year's, so confirm the shift is running before making plans.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Monday, December 28 · 6–8pm (fourth Monday of the month, holiday schedule may vary)<br><strong>Where:</strong> Greater Cleveland Food Bank, 15500 S. Waterloo Rd, Cleveland<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.greaterclevelandfoodbank.org/give-help/volunteer/opportunities" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at greaterclevelandfoodbank.org</a></div>
-
-      <div class="event-detail" id="detail-vegfest"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland VegFest</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The Midwest's largest vegan festival returns to Lincoln Park with plant-based food vendors, cruelty-free makers, and nonprofit and environmental groups tabling. A relaxed, browsable community gathering with something for vegans and the plant-curious alike.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 26 · 12–5pm<br><strong>Where:</strong> Lincoln Park, 1200 Starkweather Ave, Tremont<br><strong>Cost:</strong> Free ($5 donation suggested)</p><a href="https://cleveland-vegfest.square.site/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at Cleveland VegFest</a></div>
-
-      <div class="event-detail" id="detail-moca-reopens"><button class="close-btn" onclick="closeEvent()">✕</button><h4>moCa Cleveland Reopens</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The Museum of Contemporary Art Cleveland reopens after a temporary installation closure. Admission is always free, every day it's open &#8212; a great low-key, low-cost destination in University Circle, especially paired with a walk around Wade Oval or a stop at Rockefeller Park Greenhouse.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Reopens Sunday, October 4; regular hours resume Thursday–Sunday, 11am–5pm<br><strong>Where:</strong> 11400 Euclid Ave, University Circle<br><strong>Cost:</strong> Free, always<br><strong>Transit:</strong> RTA HealthLine or Red Line to University Circle</p><a href="https://www.mocacleveland.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at mocacleveland.org</a></div>
-
-      <div class="event-detail" id="detail-kidsbookbank-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Kids' Book Bank Family Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly shifts sorting, stickering, and boxing donated children's books for distribution across Cuyahoga County. Special family shifts (ages 8-12 with an adult) run roughly twice a month; the Book Bank also welcomes volunteers 13+ for drop-in-style shifts Tuesday through Saturday year-round.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, October 3 (representative date &#8212; check kidsbookbank.org for the full family-shift schedule)<br><strong>Where:</strong> Cleveland Kids' Book Bank, Bellaire-Puritas neighborhood<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.kidsbookbank.org/volunteer/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at kidsbookbank.org</a></div>
-
-      <div class="event-detail" id="detail-kidsbookbank-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Kids' Book Bank Family Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly shifts sorting, stickering, and boxing donated children's books. Special family shifts (ages 8-12 with an adult) run roughly twice a month; volunteers 13+ can also drop in Tuesday through Saturday year-round.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, November 7 (representative date &#8212; check kidsbookbank.org for the full family-shift schedule)<br><strong>Where:</strong> Cleveland Kids' Book Bank, Bellaire-Puritas neighborhood<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.kidsbookbank.org/volunteer/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at kidsbookbank.org</a></div>
-
-      <div class="event-detail" id="detail-kidsbookbank-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Kids' Book Bank Family Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Family-friendly shifts sorting, stickering, and boxing donated children's books, an easy holiday-season volunteering option. Special family shifts (ages 8-12 with an adult) run roughly twice a month; volunteers 13+ can also drop in Tuesday through Saturday year-round.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, December 5 (representative date &#8212; check kidsbookbank.org for the full family-shift schedule)<br><strong>Where:</strong> Cleveland Kids' Book Bank, Bellaire-Puritas neighborhood<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.kidsbookbank.org/volunteer/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at kidsbookbank.org</a></div>
-
-      <div class="event-detail" id="detail-winterland"><button class="close-btn" onclick="closeEvent()">✕</button><h4>WinterLand Tree Lighting Festival</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Downtown Cleveland's nearly 40-year holiday tradition kicks off the season on Public Square: ice skating, live performances, marshmallow roasting, and the lighting of the 50-foot Public Square Christmas tree synced to a new light show. One of Cleveland's biggest free community gatherings of the year.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, November 28 · Festivities from midday, tree lighting after dark<br><strong>Where:</strong> Public Square, Downtown Cleveland<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> All downtown RTA lines</p><a href="https://www.downtowncleveland.com/winterland-partnership" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at downtowncleveland.com</a></div>
-
-      <div class="event-detail" id="detail-foodtruck-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Food Truck Tuesdays, Winter Series</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Downtown Cleveland's lunchtime food truck series continues into December on Public Square &#8212; a cozy, low-key excuse to get downtown, warm up with something to eat, and take in the WinterLand holiday lights.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Tuesdays, December 1–30 · 11:30am–1:30pm<br><strong>Where:</strong> Public Square, Downtown Cleveland<br><strong>Cost:</strong> Free to attend (food for purchase)<br><strong>Transit:</strong> All downtown RTA lines</p><a href="https://www.downtowncleveland.com/food-truck-tuesday" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at downtowncleveland.com</a></div>
-
-
-      <!-- NEW round 2: Sept-Dec 2026 additions -->
-      <div class="event-detail" id="detail-shakerlakes-hikerun"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Shaker Lakes Hike &amp; Run</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Registration Fee</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The Nature Center at Shaker Lakes' annual community tradition: chip-timed 5K and 10K routes plus a 1-mile fun run through the Shaker Parklands, and four guided hikes (1 to 6 miles) on trails not normally open to the public. Proceeds support the Nature Center's environmental education and trail care.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Sunday, September 13 · 7am packet pickup, 8:30am race start<br><strong>Where:</strong> Nature Center at Shaker Lakes, 2600 S. Park Blvd, Shaker Heights<br><strong>Cost:</strong> Registration fee (price increases race day; fundraising incentives available)<br><strong>Accessibility:</strong> ADA-accessible 1-2 mile family hike option</p><a href="https://shakerlakes.org/hikerun/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at shakerlakes.org</a></div>
-
-      <div class="event-detail" id="detail-lakeview-runthroughhistory"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Run Through History, Lake View Cemetery</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Registration Fee</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A 5K race and 2-mile walk/run through the winding roads and historic monuments of Lake View Cemetery, Cleveland's 285-acre "outdoor museum." Dog-friendly. Proceeds support the cemetery's educational programs.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Sunday, September 20 · 5K at 8:50am, 2-mile walk/run at 9am<br><strong>Where:</strong> Lake View Cemetery, 12316 Euclid Ave, Cleveland<br><strong>Cost:</strong> Registration fee<br><strong>Transit:</strong> RTA HealthLine to Euclid Ave</p><a href="https://www.lakeviewcemetery.com/our-events-tours/run-through-history" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at lakeviewcemetery.com</a></div>
-
-      <div class="event-detail" id="detail-walkdoc-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk with a Doc, Cleveland</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A free, community-focused walking program. Each walk opens with a short talk from a local physician on a health topic, then a relaxed group stroll where participants can walk alongside the doctor and ask questions. A welcoming, low-pressure way to combine movement with social connection.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 19 · 10am (third Saturday of the month)<br><strong>Where:</strong> Zelma Watson George Rec Center, 3155 Martin Luther King Jr Dr, Cleveland<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Recommended before your first walk</p><a href="https://walkwithadoc.org/join-a-walk/locations/cleveland-ohio/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at walkwithadoc.org</a></div>
-
-      <div class="event-detail" id="detail-walkdoc-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk with a Doc, Cleveland</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A free, community-focused walking program. Each walk opens with a short talk from a local physician on a health topic, then a relaxed group stroll where participants can walk alongside the doctor and ask questions.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, October 17 · 10am (third Saturday of the month)<br><strong>Where:</strong> Zelma Watson George Rec Center, 3155 Martin Luther King Jr Dr, Cleveland<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Recommended before your first walk</p><a href="https://walkwithadoc.org/join-a-walk/locations/cleveland-ohio/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at walkwithadoc.org</a></div>
-
-      <div class="event-detail" id="detail-walkdoc-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk with a Doc, Cleveland</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A free, community-focused walking program. Each walk opens with a short talk from a local physician on a health topic, then a relaxed group stroll where participants can walk alongside the doctor and ask questions.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, November 21 · 10am (third Saturday of the month)<br><strong>Where:</strong> Zelma Watson George Rec Center, 3155 Martin Luther King Jr Dr, Cleveland<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Recommended before your first walk</p><a href="https://walkwithadoc.org/join-a-walk/locations/cleveland-ohio/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at walkwithadoc.org</a></div>
-
-      <div class="event-detail" id="detail-walkdoc-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walk with a Doc, Cleveland</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A free, community-focused walking program, rain, shine, or snow. Each walk opens with a short talk from a local physician, then a relaxed group stroll and conversation.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, December 19 · 10am (third Saturday of the month)<br><strong>Where:</strong> Zelma Watson George Rec Center, 3155 Martin Luther King Jr Dr, Cleveland<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Recommended before your first walk</p><a href="https://walkwithadoc.org/join-a-walk/locations/cleveland-ohio/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at walkwithadoc.org</a></div>
-
-      <div class="event-detail" id="detail-shakerlakes-plantsale"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Fall Native Plant Sale, Nature Center at Shaker Lakes</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Browse</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Browse native perennials, shrubs, and pollinator-friendly plants grown for Northeast Ohio conditions. Free to attend and browse; plants available for purchase. A relaxed, low-pressure outing paired with the Nature Center's free trails.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Sunday, October 18<br><strong>Where:</strong> Nature Center at Shaker Lakes, 2600 S. Park Blvd, Shaker Heights<br><strong>Cost:</strong> Free to attend; plants for purchase</p><a href="https://shakerlakes.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at shakerlakes.org</a></div>
-
-      <div class="event-detail" id="detail-habitat-restore-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Habitat ReStore Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Volunteer at the Greater Cleveland Habitat for Humanity ReStore, sorting donations, helping shoppers, and prepping items for the sales floor. No experience needed, ages 14+. Come once or make it a regular thing. Sign up for a shift through Habitat's online calendar (dates and times vary week to week; this is a representative Saturday).</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 12 (representative date &#8212; check clevelandhabitat.org for the live shift calendar)<br><strong>Where:</strong> Greater Cleveland Habitat for Humanity ReStore<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.clevelandhabitat.org/how-to-help/volunteer.html" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at clevelandhabitat.org</a></div>
-
-      <div class="event-detail" id="detail-habitat-restore-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Habitat ReStore Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Volunteer at the Greater Cleveland Habitat for Humanity ReStore, sorting donations, helping shoppers, and prepping items for the sales floor. No experience needed, ages 14+. Sign up for a shift through Habitat's online calendar (dates and times vary week to week; this is a representative Saturday).</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, October 10 (representative date &#8212; check clevelandhabitat.org for the live shift calendar)<br><strong>Where:</strong> Greater Cleveland Habitat for Humanity ReStore<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.clevelandhabitat.org/how-to-help/volunteer.html" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at clevelandhabitat.org</a></div>
-
-      <div class="event-detail" id="detail-habitat-restore-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Habitat ReStore Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Volunteer at the Greater Cleveland Habitat for Humanity ReStore ahead of the holidays, sorting donations and helping shoppers. No experience needed, ages 14+. Sign up through Habitat's online calendar (dates and times vary week to week; this is a representative Saturday).</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, November 14 (representative date &#8212; check clevelandhabitat.org for the live shift calendar)<br><strong>Where:</strong> Greater Cleveland Habitat for Humanity ReStore<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.clevelandhabitat.org/how-to-help/volunteer.html" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at clevelandhabitat.org</a></div>
-
-      <div class="event-detail" id="detail-habitat-restore-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Habitat ReStore Volunteer Shift</h4><span class="detail-badge" style="background:#F3F0FA;color:#2D1A5C">Community</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free to Volunteer</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Volunteer at the Greater Cleveland Habitat for Humanity ReStore, a low-key way to give back during the busy holiday season. No experience needed, ages 14+. Sign up through Habitat's online calendar (dates and times vary week to week; this is a representative Saturday).</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, December 12 (representative date &#8212; check clevelandhabitat.org for the live shift calendar)<br><strong>Where:</strong> Greater Cleveland Habitat for Humanity ReStore<br><strong>Cost:</strong> Free to volunteer<br><strong>Registration:</strong> Required in advance online</p><a href="https://www.clevelandhabitat.org/how-to-help/volunteer.html" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Sign up at clevelandhabitat.org</a></div>
-
-      <div class="event-detail" id="detail-hikingclub-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Hiking Club, Guest Hike</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Cleveland's oldest hiking club (est. 1919) leads hundreds of hikes a month across Cleveland Metroparks and beyond, from easy strolls to all-day treks. First-time visitors are welcome to just show up at the listed starting point and try a hike for free before deciding whether to join. A great low-barrier way to combine movement, nature, and new connections.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Check clevelandhikingclub.org for the current week's hike schedule and meeting points (hundreds of hikes run monthly, most weekends and many weekdays)<br><strong>Where:</strong> Varies &#8212; Cleveland Metroparks reservations across the region<br><strong>Cost:</strong> Free to try as a guest</p><a href="https://clevelandhikingclub.org/hiking-with-us/hiking-with-us-hike-schedules/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Hike schedule at clevelandhikingclub.org</a></div>
-
-      <div class="event-detail" id="detail-hikingclub-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Hiking Club, Guest Hike</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Peak fall-color season is one of the best times to try a guest hike. First-time visitors are welcome to just show up at the listed starting point and try a hike for free before deciding whether to join.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Check clevelandhikingclub.org for the current week's hike schedule and meeting points<br><strong>Where:</strong> Varies &#8212; Cleveland Metroparks reservations across the region<br><strong>Cost:</strong> Free to try as a guest</p><a href="https://clevelandhikingclub.org/hiking-with-us/hiking-with-us-hike-schedules/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Hike schedule at clevelandhikingclub.org</a></div>
-
-      <div class="event-detail" id="detail-hikingclub-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Hiking Club, Guest Hike</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Brisk-weather hikes continue through November. First-time visitors are welcome to just show up at the listed starting point and try a hike for free before deciding whether to join.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Check clevelandhikingclub.org for the current week's hike schedule and meeting points<br><strong>Where:</strong> Varies &#8212; Cleveland Metroparks reservations across the region<br><strong>Cost:</strong> Free to try as a guest</p><a href="https://clevelandhikingclub.org/hiking-with-us/hiking-with-us-hike-schedules/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Hike schedule at clevelandhikingclub.org</a></div>
-
-      <div class="event-detail" id="detail-hikingclub-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Hiking Club, Guest Hike</h4><span class="detail-badge" style="background:#EDF5ED;color:#1A3D1A">Nature</span><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Hikes continue through winter for those who want fresh air and company. First-time visitors are welcome to just show up at the listed starting point and try a hike for free before deciding whether to join.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Check clevelandhikingclub.org for the current week's hike schedule and meeting points<br><strong>Where:</strong> Varies &#8212; Cleveland Metroparks reservations across the region<br><strong>Cost:</strong> Free to try as a guest</p><a href="https://clevelandhikingclub.org/hiking-with-us/hiking-with-us-hike-schedules/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Hike schedule at clevelandhikingclub.org</a></div>
-
-
-      <!-- NEW round 3: more free arts + downtown Cleveland -->
-      <div class="event-detail" id="detail-cleveorch-cainpark"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Orchestra Free Community Concert</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">The Cleveland Orchestra, led by conductor Anthony Parnther, performs a free community concert in the intimate outdoor Evans Amphitheatre. Program includes Copland, Dvořák, and John Williams. General admission, first come first served; tickets required but free.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Wednesday, September 2 · evening<br><strong>Where:</strong> Cain Park, Evans Amphitheatre, 14591 Superior Rd, Cleveland Heights<br><strong>Cost:</strong> Free, tickets required (limit 4 per order)<br><strong>Note:</strong> Just outside Cleveland proper in Cleveland Heights</p><a href="https://cainpark.com/event/the-cleveland-orchestra-free-community-concert/cain-park-evans-amphitheater/cleveland-heights-ohio/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at cainpark.com</a></div>
-
-      <div class="event-detail" id="detail-ocballet-beck"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Ohio Contemporary Ballet, Ballet at the Beck</h4><span class="detail-badge" style="background:#E8EEF5;color:#1A3A5C">Movement</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Ohio Contemporary Ballet returns to the Beck Center for a free community performance celebrating the artistry and versatility of contemporary ballet. Please RSVP in advance.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 12 · 7:00pm<br><strong>Where:</strong> Beck Center for the Arts, 17801 Detroit Ave, Lakewood<br><strong>Cost:</strong> Free, please RSVP<br><strong>Note:</strong> Just west of Cleveland proper in Lakewood</p><a href="https://ocballet.org/balletathebeck/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">RSVP at ocballet.org</a></div>
-
-      <div class="event-detail" id="detail-spaces-blackprayer"><button class="close-btn" onclick="closeEvent()">✕</button><h4>SPACES Gallery, "A Black Prayer" Opening</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Opening reception for Yelaine Rodriguez's exhibition "A Black Prayer" at SPACES, a contemporary art gallery in Ohio City's Hingetown neighborhood. Exhibition runs through October 17. Free and open to the public.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, September 11 · 6:00pm<br><strong>Where:</strong> SPACES, 2900 Detroit Ave, Cleveland (Ohio City)<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> RTA 26 or 71 bus stops right out front</p><a href="https://www.spacescle.org" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at spacescle.org</a></div>
-
-      <div class="event-detail" id="detail-walkabout-tremont-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walkabout Tremont</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Tremont's monthly second-Friday art walk: extended hours at galleries and shops, street performers, live music, and restaurant and bar specials along Professor Ave. A different theme each month.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, September 11 · 5–9pm (second Friday of every month, year-round)<br><strong>Where:</strong> Professor Ave, Tremont<br><strong>Cost:</strong> Free</p><a href="https://experiencetremont.com/featured-events/walkabout-tremont/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at experiencetremont.com</a></div>
-
-      <div class="event-detail" id="detail-walkabout-tremont-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walkabout Tremont</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Tremont's monthly second-Friday art walk: extended hours at galleries and shops, street performers, live music, and restaurant and bar specials along Professor Ave.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, October 9 · 5–9pm (second Friday of every month, year-round)<br><strong>Where:</strong> Professor Ave, Tremont<br><strong>Cost:</strong> Free</p><a href="https://experiencetremont.com/featured-events/walkabout-tremont/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at experiencetremont.com</a></div>
-
-      <div class="event-detail" id="detail-walkabout-tremont-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walkabout Tremont</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Tremont's monthly second-Friday art walk continues into fall: galleries, shops, street performers, live music, and restaurant specials along Professor Ave.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, November 13 · 5–9pm (second Friday of every month, year-round)<br><strong>Where:</strong> Professor Ave, Tremont<br><strong>Cost:</strong> Free</p><a href="https://experiencetremont.com/featured-events/walkabout-tremont/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at experiencetremont.com</a></div>
-
-      <div class="event-detail" id="detail-walkabout-tremont-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Walkabout Tremont</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Holiday-season edition of Tremont's monthly art walk: galleries, shops, street performers, and restaurant specials along Professor Ave. A nice low-cost outing for gift browsing.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Friday, December 11 · 5–9pm (second Friday of every month, year-round)<br><strong>Where:</strong> Professor Ave, Tremont<br><strong>Cost:</strong> Free</p><a href="https://experiencetremont.com/featured-events/walkabout-tremont/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at experiencetremont.com</a></div>
-
-      <div class="event-detail" id="detail-psq-tours-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Playhouse Square Free Public Tours</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A 90-minute, history-based tour of Playhouse Square's five fully restored historic theaters, led by volunteer "RedCoat" guides. Learn how the world's largest theater restoration project saved these buildings from the wrecking ball. Involves stairs; guides can adjust for accessibility needs.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, September 19 (third Saturday of the month; some months add select Mondays)<br><strong>Where:</strong> KeyBank State Theatre Lobby, Playhouse Square<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Required, space limited</p><a href="https://www.playhousesquare.org/about-playhousesquare-main/about-playhousesquare/take-a-tour/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at playhousesquare.org</a></div>
-
-      <div class="event-detail" id="detail-psq-tours-oct"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Playhouse Square Free Public Tours</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A 90-minute, history-based tour of Playhouse Square's five fully restored historic theaters, led by volunteer "RedCoat" guides.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, October 17 (third Saturday of the month)<br><strong>Where:</strong> KeyBank State Theatre Lobby, Playhouse Square<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Required, space limited</p><a href="https://www.playhousesquare.org/about-playhousesquare-main/about-playhousesquare/take-a-tour/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at playhousesquare.org</a></div>
-
-      <div class="event-detail" id="detail-psq-tours-nov"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Playhouse Square Free Public Tours</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A 90-minute, history-based tour of Playhouse Square's five fully restored historic theaters, led by volunteer "RedCoat" guides.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, November 21 (third Saturday of the month)<br><strong>Where:</strong> KeyBank State Theatre Lobby, Playhouse Square<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Required, space limited</p><a href="https://www.playhousesquare.org/about-playhousesquare-main/about-playhousesquare/take-a-tour/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at playhousesquare.org</a></div>
-
-      <div class="event-detail" id="detail-psq-tours-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Playhouse Square Free Public Tours</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F5F0E8;color:#5C4A1A">Recurring</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A 90-minute, history-based tour of Playhouse Square's five fully restored historic theaters, dressed for the holidays. Led by volunteer "RedCoat" guides.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Saturday, December 19 (third Saturday of the month)<br><strong>Where:</strong> KeyBank State Theatre Lobby, Playhouse Square<br><strong>Cost:</strong> Free<br><strong>Registration:</strong> Required, space limited</p><a href="https://www.playhousesquare.org/about-playhousesquare-main/about-playhousesquare/take-a-tour/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">Register at playhousesquare.org</a></div>
-
-      <div class="event-detail" id="detail-psq-concerts-sep"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Public Square Concert Series, Season Finale</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Downtown Cleveland's free full-band Wednesday evening concert series on Public Square wraps its 2026 season. High-energy live music under the city skyline, part of Downtown Cleveland Inc.'s 10th-anniversary summer of programming.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Wednesday, September 30 · 5–8pm (final concert of the season)<br><strong>Where:</strong> Public Square, Downtown Cleveland<br><strong>Cost:</strong> Free<br><strong>Transit:</strong> All downtown RTA lines</p><a href="https://www.downtowncleveland.com/public-square-concert-series" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at downtowncleveland.com</a></div>
-
-      <div class="event-detail" id="detail-tubachristmas"><button class="close-btn" onclick="closeEvent()">✕</button><h4>TubaChristmas Cleveland</h4><span class="detail-badge" style="background:#FFF0E8;color:#7A2D0A">Music</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A quirky, beloved Cleveland holiday tradition since 1997: 50+ tuba and euphonium players from around the region fill a gothic-style church with Christmas carols arranged especially for low brass. Free admission, freewill offering accepted.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Typically the Sunday after Thanksgiving, around 5:30pm &#8212; the 2026 date was not yet posted at research time; check tubachristmas-cleveland.org closer to the season to confirm<br><strong>Where:</strong> First Baptist Church of Greater Cleveland, 3630 Fairmount Blvd<br><strong>Cost:</strong> Free (freewill offering)<br><strong>Note:</strong> Just over the Cleveland Heights line</p><a href="https://www.tubachristmas-cleveland.org/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at tubachristmas-cleveland.org</a></div>
-
-      <div class="event-detail" id="detail-bazaar-holiday-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Bazaar Holiday Market</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">Northeast Ohio's longest-running indie handmade market takes over 78th Street Studios for its biggest show of the year: up to 150 local artisan vendors across three floors, plus resident galleries and studios, food trucks, and food service. Free admission.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Second weekend of December (2025's was Dec 13–14; confirm exact 2026 dates at clevelandbazaar.org closer to the season)<br><strong>Where:</strong> 78th Street Studios, 1300 W. 78th St<br><strong>Cost:</strong> Free</p><a href="https://www.clevelandbazaar.org/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at clevelandbazaar.org</a></div>
-
-      <div class="event-detail" id="detail-bazaar-lastminute-dec"><button class="close-btn" onclick="closeEvent()">✕</button><h4>Cleveland Bazaar Last-Minute Market</h4><span class="detail-badge" style="background:#E8F0E8;color:#2D5016">Arts</span><span class="detail-badge" style="background:#F0F5F0;color:#2D5016">Free</span><p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">A smaller encore holiday market at 78th Street Studios timed to December's Third Friday Art Walk, with 50+ vendors on the lower ramp level plus resident artists and food trucks. A good last-chance stop for handmade gifts. Free admission.</p><p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem"><strong>When:</strong> Third Friday weekend in December, paired with the Third Friday Art Walk (confirm exact dates at clevelandbazaar.org closer to the season)<br><strong>Where:</strong> 78th Street Studios, 1300 W. 78th St<br><strong>Cost:</strong> Free</p><a href="https://www.clevelandbazaar.org/" target="_blank" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info at clevelandbazaar.org</a></div>
+      <!-- Event detail modals are generated from the Google Sheet -->
+      <div id="vit-modals"></div>
 
 <!-- LEGEND -->
+      <!-- SEARCH -->
+      <div style="position:relative;max-width:420px;margin-bottom:0.75rem">
+        <input id="vit-search-input" type="search" placeholder="Search events, e.g. yoga, library, free"
+               style="width:100%;padding:0.6rem 2rem 0.6rem 0.85rem;font-size:0.9rem;font-family:inherit;color:var(--charcoal);background:#fff;border:1px solid var(--light-border);border-radius:8px;outline:none"
+               onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--light-border)'">
+        <button id="vit-search-clear" onclick="clearVitSearch()" aria-label="Clear search"
+                style="display:none;position:absolute;right:0.5rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--mid);line-height:1">&#10005;</button>
+      </div>
+      <div id="vit-search-count" class="vit-search-count"></div>
+
       <div class="cal-legend">
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#2D7A4F"></div> Arts and Culture</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#3A7CA5"></div> Movement and Dance</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#6B8F47"></div> Nature</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#D9611E"></div> Music and Community</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#5B4A9E"></div> Special / Adaptive</div>
-        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#D4A017"></div> Recurring Monthly</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#2D7A4F"></div> Arts &amp; Culture</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#3A7CA5"></div> Movement</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#6B8F47"></div> Nature &amp; Green Space</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#D9611E"></div> Social Connection</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#5B4A9E"></div> Volunteering</div>
+        <div class="cal-legend-item"><div class="cal-legend-dot" style="background:#B8860B"></div> Essential Services</div>
       </div>
 
-      <!-- MAY 2026, starts Thu May 1 (day 5, 0-indexed: Thu=4) -->
-      <div class="cal-month">
-        <div class="cal-month-header"><div class="cal-month-name">September 2026</div></div>
-        <div class="cal-grid">
-          <div class="cal-dow">Sun</div>
-          <div class="cal-dow">Mon</div>
-          <div class="cal-dow">Tue</div>
-          <div class="cal-dow">Wed</div>
-          <div class="cal-dow">Thu</div>
-          <div class="cal-dow">Fri</div>
-          <div class="cal-dow">Sat</div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell"><div class="cal-date">1</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event music" onclick="openEvent('cleveorch-cainpark')">🎻 Cleveland Orchestra Free Concert</div></div>
-          <div class="cal-cell"><div class="cal-date">3</div></div>
-          <div class="cal-cell"><div class="cal-date">4</div><div class="cal-event arts recurring" onclick="openEvent('waterloo-walk-sep')">🎨 Walk All Over Waterloo</div></div>
-          <div class="cal-cell"><div class="cal-date">5</div></div>
-          <div class="cal-cell"><div class="cal-date">6</div><div class="cal-event nature recurring" onclick="openEvent('spruce-square')">🌿 Spruce Up the Square</div><div class="cal-event nature recurring" onclick="openEvent('hikingclub-sep')">🥾 Hiking Club Guest Hike</div></div>
-          <div class="cal-cell"><div class="cal-date">7</div></div>
-          <div class="cal-cell"><div class="cal-date">8</div></div>
-          <div class="cal-cell"><div class="cal-date">9</div></div>
-          <div class="cal-cell"><div class="cal-date">10</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div><div class="cal-event arts recurring" onclick="openEvent('walkabout-tremont-sep')">🎨 Walkabout Tremont</div><div class="cal-event arts" onclick="openEvent('spaces-blackprayer')">🖼️ SPACES Gallery Opening</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event arts" onclick="openEvent('waterloo-arts-fest')">🎨 Waterloo Arts Fest</div><div class="cal-event community recurring" onclick="openEvent('habitat-restore-sep')">🏠 Habitat ReStore Volunteering</div><div class="cal-event movement" onclick="openEvent('ocballet-beck')">🩰 Ballet at the Beck (Free)</div></div>
-          <div class="cal-cell"><div class="cal-date">13</div><div class="cal-event nature" onclick="openEvent('shakerlakes-hikerun')">🏃 Shaker Lakes Hike &amp; Run</div></div>
-          <div class="cal-cell"><div class="cal-date">14</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div></div>
-          <div class="cal-cell"><div class="cal-date">18</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-sep')">🎨 3rd Friday Art Walk</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event arts" onclick="openEvent('dance-cle-sep')">💃 DANCECleveland</div><div class="cal-event arts" onclick="openEvent('cpt-pandemonium')">🎭 CPT Pandemonium</div><div class="cal-event community" onclick="openEvent('namiwalks-gc')">💚 NAMIWalks Greater Cleveland</div><div class="cal-event arts" onclick="openEvent('tremont-fest')">🎨 Tremont Arts &amp; Cultural Fest</div><div class="cal-event movement recurring" onclick="openEvent('walkdoc-sep')">🚶 Walk with a Doc</div><div class="cal-event arts recurring" onclick="openEvent('psq-tours-sep')">🎭 Playhouse Square Free Tours</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div><div class="cal-event nature" onclick="openEvent('lakeview-runthroughhistory')">🏃 Run Through History, Lake View</div></div>
-          <div class="cal-cell"><div class="cal-date">21</div></div>
-          <div class="cal-cell"><div class="cal-date">22</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div></div>
-          <div class="cal-cell"><div class="cal-date">24</div></div>
-          <div class="cal-cell"><div class="cal-date">25</div><div class="cal-event arts" onclick="openEvent('ingenuityfest')">⚙️ IngenuityFest begins</div></div>
-          <div class="cal-cell"><div class="cal-date">26</div><div class="cal-event arts" onclick="openEvent('dance-cle-sep')">💃 DANCECleveland</div><div class="cal-event community" onclick="openEvent('vegfest')">🌱 Cleveland VegFest</div></div>
-          <div class="cal-cell"><div class="cal-date">27</div></div>
-          <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event community recurring" onclick="openEvent('foodbank-family-sep')">🥫 Food Bank Family Night</div></div>
-          <div class="cal-cell"><div class="cal-date">29</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div><div class="cal-event music" onclick="openEvent('psq-concerts-sep')">🎵 Public Square Concert Series Finale</div></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-        </div>
-      </div>
-
-      <div class="cal-month">
-        <div class="cal-month-header"><div class="cal-month-name">October 2026</div></div>
-        <div class="cal-grid">
-          <div class="cal-dow">Sun</div>
-          <div class="cal-dow">Mon</div>
-          <div class="cal-dow">Tue</div>
-          <div class="cal-dow">Wed</div>
-          <div class="cal-dow">Thu</div>
-          <div class="cal-dow">Fri</div>
-          <div class="cal-dow">Sat</div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell"><div class="cal-date">1</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div><div class="cal-event arts recurring" onclick="openEvent('waterloo-walk-oct')">🎨 Walk All Over Waterloo</div></div>
-          <div class="cal-cell"><div class="cal-date">3</div><div class="cal-event community recurring" onclick="openEvent('kidsbookbank-oct')">📚 Kids' Book Bank Volunteering</div></div>
-          <div class="cal-cell"><div class="cal-date">4</div><div class="cal-event arts" onclick="openEvent('moca-reopens')">🖼️ moCa Cleveland Reopens</div><div class="cal-event nature recurring" onclick="openEvent('hikingclub-oct')">🥾 Hiking Club Guest Hike</div></div>
-          <div class="cal-cell"><div class="cal-date">5</div></div>
-          <div class="cal-cell"><div class="cal-date">6</div></div>
-          <div class="cal-cell"><div class="cal-date">7</div></div>
-          <div class="cal-cell"><div class="cal-date">8</div></div>
-          <div class="cal-cell"><div class="cal-date">9</div><div class="cal-event arts recurring" onclick="openEvent('walkabout-tremont-oct')">🎨 Walkabout Tremont</div></div>
-          <div class="cal-cell"><div class="cal-date">10</div><div class="cal-event community recurring" onclick="openEvent('habitat-restore-oct')">🏠 Habitat ReStore Volunteering</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div></div>
-          <div class="cal-cell"><div class="cal-date">13</div></div>
-          <div class="cal-cell"><div class="cal-date">14</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-oct')">🎨 3rd Friday Art Walk</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div><div class="cal-event movement recurring" onclick="openEvent('walkdoc-oct')">🚶 Walk with a Doc</div><div class="cal-event arts recurring" onclick="openEvent('psq-tours-oct')">🎭 Playhouse Square Free Tours</div></div>
-          <div class="cal-cell"><div class="cal-date">18</div><div class="cal-event nature" onclick="openEvent('shakerlakes-plantsale')">🌱 Fall Native Plant Sale</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div></div>
-          <div class="cal-cell"><div class="cal-date">21</div></div>
-          <div class="cal-cell"><div class="cal-date">22</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div></div>
-          <div class="cal-cell"><div class="cal-date">24</div></div>
-          <div class="cal-cell"><div class="cal-date">25</div></div>
-          <div class="cal-cell"><div class="cal-date">26</div><div class="cal-event community recurring" onclick="openEvent('foodbank-family-oct')">🥫 Food Bank Family Night</div></div>
-          <div class="cal-cell"><div class="cal-date">27</div></div>
-          <div class="cal-cell"><div class="cal-date">28</div></div>
-          <div class="cal-cell"><div class="cal-date">29</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div></div>
-          <div class="cal-cell"><div class="cal-date">31</div></div>
-        </div>
-      </div>
-
-      <div class="cal-month">
-        <div class="cal-month-header"><div class="cal-month-name">November 2026</div></div>
-        <div class="cal-grid">
-          <div class="cal-dow">Sun</div>
-          <div class="cal-dow">Mon</div>
-          <div class="cal-dow">Tue</div>
-          <div class="cal-dow">Wed</div>
-          <div class="cal-dow">Thu</div>
-          <div class="cal-dow">Fri</div>
-          <div class="cal-dow">Sat</div>
-          <div class="cal-cell"><div class="cal-date">1</div><div class="cal-event nature recurring" onclick="openEvent('hikingclub-nov')">🥾 Hiking Club Guest Hike</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div></div>
-          <div class="cal-cell"><div class="cal-date">3</div></div>
-          <div class="cal-cell"><div class="cal-date">4</div></div>
-          <div class="cal-cell"><div class="cal-date">5</div></div>
-          <div class="cal-cell"><div class="cal-date">6</div><div class="cal-event arts recurring" onclick="openEvent('waterloo-walk-nov')">🎨 Walk All Over Waterloo</div></div>
-          <div class="cal-cell"><div class="cal-date">7</div><div class="cal-event community recurring" onclick="openEvent('kidsbookbank-nov')">📚 Kids' Book Bank Volunteering</div></div>
-          <div class="cal-cell"><div class="cal-date">8</div></div>
-          <div class="cal-cell"><div class="cal-date">9</div></div>
-          <div class="cal-cell"><div class="cal-date">10</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div></div>
-          <div class="cal-cell"><div class="cal-date">13</div><div class="cal-event arts recurring" onclick="openEvent('walkabout-tremont-nov')">🎨 Walkabout Tremont</div></div>
-          <div class="cal-cell"><div class="cal-date">14</div><div class="cal-event community recurring" onclick="openEvent('habitat-restore-nov')">🏠 Habitat ReStore Volunteering</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div></div>
-          <div class="cal-cell"><div class="cal-date">18</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-nov')">🎨 3rd Friday Art Walk</div></div>
-          <div class="cal-cell"><div class="cal-date">21</div><div class="cal-event movement recurring" onclick="openEvent('walkdoc-nov')">🚶 Walk with a Doc</div><div class="cal-event arts recurring" onclick="openEvent('psq-tours-nov')">🎭 Playhouse Square Free Tours</div></div>
-          <div class="cal-cell"><div class="cal-date">22</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div><div class="cal-event community recurring" onclick="openEvent('foodbank-family-nov')">🥫 Food Bank Family Night</div></div>
-          <div class="cal-cell"><div class="cal-date">24</div></div>
-          <div class="cal-cell"><div class="cal-date">25</div></div>
-          <div class="cal-cell"><div class="cal-date">26</div></div>
-          <div class="cal-cell"><div class="cal-date">27</div><div class="cal-event arts" onclick="openEvent('cma-holiday')">🖼️ CMA Holiday Programming begins</div></div>
-          <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event community" onclick="openEvent('winterland')">🎄 WinterLand Tree Lighting</div></div>
-          <div class="cal-cell"><div class="cal-date">29</div><div class="cal-event music" onclick="openEvent('tubachristmas')">🎺 TubaChristmas Cleveland</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div></div>
-        </div>
-      </div>
-
-      <div class="cal-month">
-        <div class="cal-month-header"><div class="cal-month-name">December 2026</div></div>
-        <div class="cal-grid">
-          <div class="cal-dow">Sun</div>
-          <div class="cal-dow">Mon</div>
-          <div class="cal-dow">Tue</div>
-          <div class="cal-dow">Wed</div>
-          <div class="cal-dow">Thu</div>
-          <div class="cal-dow">Fri</div>
-          <div class="cal-dow">Sat</div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell empty"></div>
-          <div class="cal-cell"><div class="cal-date">1</div><div class="cal-event community recurring" onclick="openEvent('foodtruck-dec')">🚚 Food Truck Tuesdays begin</div></div>
-          <div class="cal-cell"><div class="cal-date">2</div></div>
-          <div class="cal-cell"><div class="cal-date">3</div></div>
-          <div class="cal-cell"><div class="cal-date">4</div><div class="cal-event arts recurring" onclick="openEvent('waterloo-walk-dec')">🎨 Walk All Over Waterloo</div></div>
-          <div class="cal-cell"><div class="cal-date">5</div><div class="cal-event community recurring" onclick="openEvent('kidsbookbank-dec')">📚 Kids' Book Bank Volunteering</div></div>
-          <div class="cal-cell"><div class="cal-date">6</div><div class="cal-event nature recurring" onclick="openEvent('hikingclub-dec')">🥾 Hiking Club Guest Hike</div></div>
-          <div class="cal-cell"><div class="cal-date">7</div></div>
-          <div class="cal-cell"><div class="cal-date">8</div></div>
-          <div class="cal-cell"><div class="cal-date">9</div></div>
-          <div class="cal-cell"><div class="cal-date">10</div></div>
-          <div class="cal-cell"><div class="cal-date">11</div><div class="cal-event arts recurring" onclick="openEvent('walkabout-tremont-dec')">🎨 Walkabout Tremont</div></div>
-          <div class="cal-cell"><div class="cal-date">12</div><div class="cal-event community recurring" onclick="openEvent('habitat-restore-dec')">🏠 Habitat ReStore Volunteering</div><div class="cal-event arts" onclick="openEvent('bazaar-holiday-dec')">🎁 Cleveland Bazaar Holiday Market</div></div>
-          <div class="cal-cell"><div class="cal-date">13</div></div>
-          <div class="cal-cell"><div class="cal-date">14</div></div>
-          <div class="cal-cell"><div class="cal-date">15</div></div>
-          <div class="cal-cell"><div class="cal-date">16</div></div>
-          <div class="cal-cell"><div class="cal-date">17</div></div>
-          <div class="cal-cell"><div class="cal-date">18</div><div class="cal-event arts recurring" onclick="openEvent('third-fri-dec')">🎨 3rd Friday Art Walk</div><div class="cal-event arts" onclick="openEvent('bazaar-lastminute-dec')">🎁 Cleveland Bazaar Last-Minute Market</div></div>
-          <div class="cal-cell"><div class="cal-date">19</div><div class="cal-event movement recurring" onclick="openEvent('walkdoc-dec')">🚶 Walk with a Doc</div><div class="cal-event arts recurring" onclick="openEvent('psq-tours-dec')">🎭 Playhouse Square Free Tours</div></div>
-          <div class="cal-cell"><div class="cal-date">20</div></div>
-          <div class="cal-cell"><div class="cal-date">21</div></div>
-          <div class="cal-cell"><div class="cal-date">22</div></div>
-          <div class="cal-cell"><div class="cal-date">23</div></div>
-          <div class="cal-cell"><div class="cal-date">24</div></div>
-          <div class="cal-cell"><div class="cal-date">25</div></div>
-          <div class="cal-cell"><div class="cal-date">26</div></div>
-          <div class="cal-cell"><div class="cal-date">27</div></div>
-          <div class="cal-cell"><div class="cal-date">28</div><div class="cal-event community recurring" onclick="openEvent('foodbank-family-dec')">🥫 Food Bank Family Night</div></div>
-          <div class="cal-cell"><div class="cal-date">29</div></div>
-          <div class="cal-cell"><div class="cal-date">30</div></div>
-          <div class="cal-cell"><div class="cal-date">31</div></div>
-        </div>
-      </div>
+      <!-- Calendar is generated from the "current vitamins" tab of the Google Sheet -->
+      <div id="vit-status" style="padding:2rem;text-align:center;color:var(--mid);font-size:0.92rem">Loading the calendar&hellip;</div>
+      <div id="vit-calendar"></div>
+      <div id="vit-ongoing"></div>
 
       <p style="font-size:0.82rem;color:var(--mid);margin-top:1.5rem;padding:1rem;background:var(--cream);border-radius:8px;border:1px solid var(--light-border)">
         Know a free event that belongs on this calendar? <button onclick="showPage('connect')" style="color:var(--accent);font-weight:600;background:none;border:none;cursor:pointer">Submit it</button> · Information is subject to change. Always verify directly with the hosting organization.
@@ -3105,7 +2816,6 @@
             <p>Heather Felden is an arts and health professional, educator, and community arts leader whose work explores the intersection of wellness, creativity, and community engagement. She is currently completing a Master of Applied Arts in Health at Ohio University, serves as Nursing Grant Manager at Lakeland Community College, and is an active member of the Ohio Social Prescribing Collaborative. Heather is also completing an internship with Playhouse Square focused on arts, education, health, and community well-being.</p>
             <p>Drawing on a background in occupational therapy, dance, higher education, and grant management, Heather is particularly interested in the role of the arts in promoting health, social connection, and quality of life. Through her work and continued learning, she seeks to expand access to arts-based opportunities that support individual and community well-being.</p>
           </div>
-
 
           <div class="resource-card">
             <span class="resource-tag sp">Community Engagement Lead</span>
@@ -3527,6 +3237,7 @@
 // ══ VITAMINS SEARCH ══
 (function() {
   var eventTextCache = {};
+  window.__vitResetSearchCache = function(){ eventTextCache = {}; };
 
   function getEventText(modalId) {
     if (eventTextCache[modalId] !== undefined) return eventTextCache[modalId];
@@ -3539,7 +3250,7 @@
   function doVitSearch(query) {
     var clearBtn = document.getElementById('vit-search-clear');
     var countEl = document.getElementById('vit-search-count');
-    var pills = document.querySelectorAll('#page-vitamins .cal-event');
+    var pills = document.querySelectorAll('#page-vitamins .cal-event, #page-vitamins .vit-ongoing-card');
 
     clearBtn.style.display = query ? 'block' : 'none';
 
@@ -3569,7 +3280,7 @@
       }
     });
 
-    countEl.textContent = matchCount + ' event' + (matchCount !== 1 ? 's' : '') + ' matched across June – August';
+    countEl.textContent = matchCount + ' event' + (matchCount !== 1 ? 's' : '') + ' matched';
     countEl.style.display = 'block';
   }
 
@@ -3580,7 +3291,7 @@
     if (clearBtn) clearBtn.style.display = 'none';
     var countEl = document.getElementById('vit-search-count');
     if (countEl) countEl.style.display = 'none';
-    document.querySelectorAll('#page-vitamins .cal-event').forEach(function(pill) {
+    document.querySelectorAll('#page-vitamins .cal-event, #page-vitamins .vit-ongoing-card').forEach(function(pill) {
       pill.classList.remove('search-dim');
     });
   };
@@ -3595,5 +3306,220 @@
   });
 })();
 </script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SP VITAMINS CALENDAR — driven by the Google Sheet
+     Source: "current vitamins" tab.
+     To point this at your sheet: in Google Sheets go to
+     File > Share > Publish to web, choose the "current vitamins" tab,
+     pick Comma-separated values (.csv), press Publish, then paste the
+     URL Google gives you between the quotes below.
+     ══════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  var VITAMINS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTPJ-IiFrA04oWcNkpfvhzRvHgnnu-wjPP6zZKDv3J3JuvMrscSiWhqE54zBbdbFlgvVc15IHoSMBG9/pub?gid=156876077&single=true&output=csv";
+
+  var CATS = {
+    "arts & culture":      { cls:"arts",      icon:"🎨", badge:"#E8F0E8|#2D5016" },
+    "movement":            { cls:"movement",  icon:"🚶", badge:"#E8EEF5|#1A3A5C" },
+    "nature & green space":{ cls:"nature",    icon:"🌿", badge:"#EDF5ED|#1A3D1A" },
+    "social connection":   { cls:"social",    icon:"🤝", badge:"#FFF0E8|#7A2D0A" },
+    "volunteering":        { cls:"volunteer", icon:"🙌", badge:"#F0EEF8|#33285E" },
+    "essential services":  { cls:"essential", icon:"🥫", badge:"#FBF3DF|#5C4405" }
+  };
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  function parseCSV(text) {
+    var rows = [], row = [], val = "", q = false, i = 0, c;
+    text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    for (; i < text.length; i++) {
+      c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i+1] === '"') { val += '"'; i++; } else q = false; }
+        else val += c;
+      } else if (c === '"') q = true;
+      else if (c === ",") { row.push(val); val = ""; }
+      else if (c === "\n") { row.push(val); rows.push(row); row = []; val = ""; }
+      else val += c;
+    }
+    if (val !== "" || row.length) { row.push(val); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (x) { return x && x.trim(); }); });
+  }
+
+  function cat(raw) {
+    var first = (raw || "").split(";")[0].trim().toLowerCase();
+    return CATS[first] || { cls:"other", icon:"✧", badge:"#F0F0EC|#3d3d3d" };
+  }
+  function esc(t) {
+    return String(t == null ? "" : t).replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+  function parseDate(v) {
+    var m = String(v || "").trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (!m) return null;
+    var d = new Date(+m[3], +m[1]-1, +m[2]);
+    return isNaN(d) ? null : d;
+  }
+  function timeRange(a, b) {
+    a = (a||"").trim(); b = (b||"").trim();
+    if (a && b) return a + " – " + b;
+    return a || b || "";
+  }
+
+  function buildModal(ev) {
+    var c = ev.cat, bg = c.badge.split("|");
+    var h = '<div class="event-detail" id="detail-' + ev.id + '">'
+      + '<button class="close-btn" onclick="closeEvent()">✕</button>'
+      + '<h4>' + esc(ev.org ? ev.org + ", " + ev.name : ev.name) + '</h4>';
+    if (ev.category) h += '<span class="detail-badge" style="background:' + bg[0] + ';color:' + bg[1] + '">' + esc(ev.category) + '</span>';
+    if (ev.cost) h += '<span class="detail-badge" style="background:#F0F5F0;color:#2D5016">' + esc(ev.cost) + '</span>';
+    if (ev.desc) h += '<p style="font-size:0.9rem;line-height:1.7;color:var(--mid);margin-top:0.5rem">' + esc(ev.desc) + '</p>';
+    var meta = [];
+    var when = ev.whenText + (timeRange(ev.start, ev.end) ? " · " + timeRange(ev.start, ev.end) : "");
+    if (when.trim()) meta.push("<strong>When:</strong> " + esc(when));
+    if (ev.address) meta.push("<strong>Where:</strong> " + esc(ev.address));
+    if (ev.cost) meta.push("<strong>Cost:</strong> " + esc(ev.cost));
+    if (ev.who) meta.push("<strong>Who it's for:</strong> " + esc(ev.who));
+    if (ev.access) meta.push("<strong>Accessibility:</strong> " + esc(ev.access));
+    if (ev.transport) meta.push("<strong>Getting there:</strong> " + esc(ev.transport));
+    if (meta.length) h += '<p style="font-size:0.82rem;color:var(--mid);margin-top:0.75rem">' + meta.join("<br>") + '</p>';
+    var link = (ev.register && /^https?:/i.test(ev.register)) ? ev.register
+             : ((ev.website && /^https?:/i.test(ev.website)) ? ev.website : "");
+    if (link) h += '<a href="' + esc(link) + '" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;font-size:0.85rem">More info</a>';
+    return h + '</div>';
+  }
+
+  function renderMonth(y, mo, evs) {
+    var first = new Date(y, mo, 1).getDay();
+    var days = new Date(y, mo + 1, 0).getDate();
+    var byDay = {};
+    evs.forEach(function (e) { (byDay[e.date.getDate()] = byDay[e.date.getDate()] || []).push(e); });
+    var h = '<div class="cal-month"><div class="cal-month-header"><div class="cal-month-name">'
+          + MONTHS[mo] + " " + y + '</div></div><div class="cal-grid">';
+    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(function (d) { h += '<div class="cal-dow">' + d + "</div>"; });
+    for (var i = 0; i < first; i++) h += '<div class="cal-cell empty"></div>';
+    for (var d = 1; d <= days; d++) {
+      h += '<div class="cal-cell"><div class="cal-date">' + d + "</div>";
+      (byDay[d] || []).forEach(function (e) {
+        h += '<div class="cal-event ' + e.cat.cls + '" onclick="openEvent(\'' + e.id + '\')">'
+           + e.cat.icon + " " + esc(e.name) + "</div>";
+      });
+      h += "</div>";
+    }
+    return h + "</div></div>";
+  }
+
+  function render(rows) {
+    var head = rows[0].map(function (x) { return x.trim().toLowerCase(); });
+    function col(name) { return head.indexOf(name.toLowerCase()); }
+    var C = {
+      date: col("Event Date"), start: col("Event Start Time"), end: col("Event End Time"),
+      org: col("Organization Name"), name: col("Event Name"), category: col("Category"),
+      desc: col("Description of Services"), who: col("Population Served"),
+      register: col("How to Register"), cost: col("Cost to attend"),
+      access: col("Relevant Accessibility Information"), transport: col("Known Transportation Options"),
+      website: col("Website"), address: col("Address for Asset Map Pin")
+    };
+    if (C.name < 0 || C.date < 0) throw new Error("Sheet is missing an Event Name or Event Date column.");
+
+    var dated = [], ongoing = [], n = 0;
+    rows.slice(1).forEach(function (r) {
+      function g(k) { return C[k] >= 0 ? (r[C[k]] || "").trim() : ""; }
+      var name = g("name");
+      if (!name) return;
+      var ev = {
+        id: "sheet-" + (n++), name: name, org: g("org"), category: g("category"),
+        desc: g("desc"), who: g("who"), register: g("register"), cost: g("cost"),
+        access: g("access"), transport: g("transport"), website: g("website"),
+        address: g("address"), start: g("start"), end: g("end"),
+        whenText: g("date"), cat: cat(g("category")), date: parseDate(g("date"))
+      };
+      (ev.date ? dated : ongoing).push(ev);
+    });
+
+    document.getElementById("vit-modals").innerHTML =
+      dated.concat(ongoing).map(buildModal).join("");
+
+    var groups = {};
+    dated.forEach(function (e) {
+      var k = e.date.getFullYear() + "-" + e.date.getMonth();
+      (groups[k] = groups[k] || []).push(e);
+    });
+    var keys = Object.keys(groups).sort(function (a, b) {
+      var A = a.split("-").map(Number), B = b.split("-").map(Number);
+      return A[0] - B[0] || A[1] - B[1];
+    });
+    var cal = keys.map(function (k) {
+      var p = k.split("-").map(Number);
+      return renderMonth(p[0], p[1], groups[k]);
+    }).join("");
+    document.getElementById("vit-calendar").innerHTML = cal ||
+      '<p class="body" style="padding:1rem">No dated events in the sheet yet.</p>';
+
+    var og = "";
+    if (ongoing.length) {
+      og = '<div style="margin-top:2.5rem"><div class="cal-month-header"><div class="cal-month-name">Ongoing &amp; Recurring</div></div>'
+         + '<p class="body" style="font-size:0.88rem;margin:-0.5rem 0 1rem">These run on a repeating schedule rather than a single date. Confirm with the host before you go.</p>'
+         + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.75rem">';
+      ongoing.forEach(function (e) {
+        og += '<div class="vit-ongoing-card" onclick="openEvent(\'' + e.id + '\')">'
+            + '<div style="font-size:0.9rem;font-weight:600;color:var(--charcoal);margin-bottom:0.2rem">'
+            + e.cat.icon + " " + esc(e.name) + "</div>"
+            + '<div style="font-size:0.78rem;color:var(--mid)">' + esc(e.whenText)
+            + (timeRange(e.start, e.end) ? " · " + esc(timeRange(e.start, e.end)) : "") + "</div></div>";
+      });
+      og += "</div></div>";
+    }
+    document.getElementById("vit-ongoing").innerHTML = og;
+
+    var st = document.getElementById("vit-status");
+    if (st) st.style.display = "none";
+    if (window.__vitResetSearchCache) window.__vitResetSearchCache();
+  }
+
+  function fail(msg) {
+    var st = document.getElementById("vit-status");
+    if (!st) return;
+    st.innerHTML = '<div style="padding:1.25rem;background:var(--cream);border:1px solid var(--light-border);border-radius:8px;max-width:520px;margin:0 auto">'
+      + '<strong style="color:var(--charcoal)">The calendar could not load right now.</strong><br>'
+      + '<span style="font-size:0.85rem">' + esc(msg) + '</span></div>';
+  }
+
+  var started = false;
+  window.loadVitamins = function () {
+    if (started) return;
+    started = true;
+    if (VITAMINS_CSV_URL.indexOf("PASTE_") === 0) {
+      fail("The calendar is not connected to the Google Sheet yet. Publish the “current vitamins” tab to the web as CSV and paste that URL into VITAMINS_CSV_URL in this file.");
+      return;
+    }
+    if (location.protocol === "file:") {
+      fail("This page is open straight from your computer, and browsers block those pages from loading outside data. Upload the file to your website and the calendar will work there. Nothing is wrong with the sheet or the file.");
+      return;
+    }
+    fetch(VITAMINS_CSV_URL, { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("Google returned " + r.status); return r.text(); })
+      .then(function (t) {
+        var rows = parseCSV(t);
+        if (rows.length < 2) throw new Error("The sheet came back empty.");
+        render(rows);
+      })
+      .catch(function (e) {
+        var m = e && e.message ? e.message : "";
+        if (/Failed to fetch|NetworkError|Load failed/i.test(m)) {
+          fail("The browser could not reach Google Sheets. This is usually an ad blocker or privacy extension, or the sheet no longer being published. Check that File \u203A Share \u203A Publish to web still shows the current vitamins tab as published.");
+        } else if (/returned 4|returned 5/.test(m)) {
+          fail("Google would not serve the sheet (" + m + "). The tab may have been unpublished or renamed.");
+        } else {
+          fail("Please try again in a moment. (" + m + ")");
+        }
+      });
+  };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", window.loadVitamins);
+  else window.loadVitamins();
+})();
+</script>
+
 </body>
 </html>
